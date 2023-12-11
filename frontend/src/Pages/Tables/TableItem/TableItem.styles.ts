@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Icon } from '../../../Components/Icon/Icon';
+import styled from "styled-components";
+import { Icon } from "../../../Components/Icon/Icon";
 
 export const Container = styled.div`
     display: flex;

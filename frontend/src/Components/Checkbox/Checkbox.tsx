@@ -1,5 +1,5 @@
-import { ReactChild } from 'react';
-import { Container, Input, Text } from './Checkbox.styles';
+import { ReactChild } from "react";
+import { Container, Input, Text } from "./Checkbox.styles";
 
 type props = {
     children: ReactChild | ReactChild[];
@@ -8,13 +8,15 @@ type props = {
     disabled?: boolean;
 };
 
-export function Checkbox({ children, value, onChange, disabled }: props) {
+export function Checkbox(
+    { children, value, onChange, disabled }: props,
+) {
     return (
         <Container>
             <Input
-                type='checkbox'
+                type="checkbox"
                 value={String(value)}
-                onChange={e => onChange(e.target.checked)}
+                onChange={(e) => onChange(e.target.checked)}
                 disabled={disabled}
             />
             <Text>{children}</Text>

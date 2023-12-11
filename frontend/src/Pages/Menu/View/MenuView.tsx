@@ -1,27 +1,32 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../../hooks';
-import { UserPageFooter } from '../../../Components/UserPageFooter/UserPageFooter';
-import { AnonimousPageFooter } from '../../../Components/AnonimousPageFooter/AnonimousPageFooter';
-import { menuInfoActions } from '../../../Domains/menuInfo';
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { UserPageFooter } from "../../../Components/UserPageFooter/UserPageFooter";
+import { AnonimousPageFooter } from "../../../Components/AnonimousPageFooter/AnonimousPageFooter";
+import { menuInfoActions } from "../../../Domains/menuInfo";
 import {
-    Title,
-    Link,
     FlexContainer,
-    FlexContent
-} from '../../../Components/Layout';
-import { SearchBar } from './SearchBar';
-import { Container, Content, Edit } from './MenuView.styles';
-import { MostOrdered } from './MostOrdered/MostOrdered';
-import { CategoryList } from './CategoryList/CategoryList';
-import { MenuItemList } from './MenuItemList/MenuItemList';
-import { useGetUserMenu, useGetTableMenu } from '../../../Api/item.api';
+    FlexContent,
+    Link,
+    Title,
+} from "../../../Components/Layout";
+import { SearchBar } from "./SearchBar";
+import { Container, Content, Edit } from "./MenuView.styles";
+import { MostOrdered } from "./MostOrdered/MostOrdered";
+import { CategoryList } from "./CategoryList/CategoryList";
+import { MenuItemList } from "./MenuItemList/MenuItemList";
+import {
+    useGetTableMenu,
+    useGetUserMenu,
+} from "../../../Api/item.api";
 
 export function MenuView() {
     const dispatch = useAppDispatch();
     const { tableId } = useParams<{ tableId: string }>();
     const loaded = useAppSelector(({ menuInfo }) => menuInfo.loaded);
-    const restaurant = useAppSelector(({ menuInfo }) => menuInfo.restaurant);
+    const restaurant = useAppSelector(({ menuInfo }) =>
+        menuInfo.restaurant
+    );
     const logged = useAppSelector(({ user }) => user.logged);
     const { data, mutate } = tableId
         ? useGetTableMenu(tableId)
@@ -35,17 +40,21 @@ export function MenuView() {
         if (data) {
             dispatch(
                 menuInfoActions.loadMenu({
-                    mostOrdered: ['erhfiuefh', 'erfheu', 'erfugeyu'],
+                    mostOrdered: ["erhfiuefh", "erfheu", "erfugeyu"],
                     restaurant: data.restaurant,
                     categories: Array.from(
-                        new Set(data.items.map(({ category }) => category))
-                    ).map(category => ({
+                        new Set(
+                            data.items.map(({ category }) =>
+                                category
+                            ),
+                        ),
+                    ).map((category) => ({
                         name: category,
                         items: data.items.filter(
-                            item => item.category === category
-                        )
-                    }))
-                })
+                            (item) => item.category === category,
+                        ),
+                    })),
+                }),
             );
         }
     }, [dispatch, data]);
@@ -54,16 +63,16 @@ export function MenuView() {
         <FlexContainer>
             <FlexContent>
                 <Container>
-                    {logged ? (
-                        <>
-                            <Title>Meu cardápio</Title>
-                            <Link to='/menu/edit'>
-                                <Edit>editar</Edit>
-                            </Link>
-                        </>
-                    ) : (
-                        <Title>{restaurant.name}</Title>
-                    )}
+                    {logged
+                        ? (
+                            <>
+                                <Title>Meu cardápio</Title>
+                                <Link to="/menu/edit">
+                                    <Edit>editar</Edit>
+                                </Link>
+                            </>
+                        )
+                        : <Title>{restaurant.name}</Title>}
                 </Container>
                 <Content>
                     <SearchBar />
@@ -72,11 +81,9 @@ export function MenuView() {
                     <MenuItemList />
                 </Content>
             </FlexContent>
-            {logged ? (
-                <UserPageFooter current='menu' />
-            ) : (
-                <AnonimousPageFooter selected={false} />
-            )}
+            {logged
+                ? <UserPageFooter current="menu" />
+                : <AnonimousPageFooter selected={false} />}
         </FlexContainer>
     );
 }

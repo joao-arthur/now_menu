@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { PrimaryText } from '../../../Components/Layout';
+import styled from "styled-components";
+import { PrimaryText } from "../../../Components/Layout";
 
 export const OrderAgain = styled(PrimaryText)`
     text-align: center;

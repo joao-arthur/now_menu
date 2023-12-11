@@ -4,7 +4,9 @@ export type payloadType = {
 };
 
 export function getJWTPayload(jwtFromHeader: string): payloadType {
-    const [, content] = jwtFromHeader.split('Bearer ');
-    const [, contentPayload] = content.split('.');
-    return JSON.parse(Buffer.from(contentPayload, 'base64').toString());
+    const [, content] = jwtFromHeader.split("Bearer ");
+    const [, contentPayload] = content.split(".");
+    return JSON.parse(
+        Buffer.from(contentPayload, "base64").toString(),
+    );
 }

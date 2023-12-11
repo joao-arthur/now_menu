@@ -1,5 +1,5 @@
-import { useMutation } from 'react-query';
-import { Fetch } from '../Core/Fetch';
+import { useMutation } from "react-query";
+import { Fetch } from "../Core/Fetch";
 
 export type itemAPI = {
     _id: string;
@@ -28,63 +28,79 @@ type restaurantAPI = {
 };
 
 export function useGetUserMenu() {
-    return useMutation('getUserMenu', () =>
-        Fetch.get<itemAPI[]>('item/menu').then(items => ({
-            restaurant: {
-                address: '',
-                cep: '',
-                city: '',
-                district: '',
-                email: '',
-                name: '',
-                state: '',
-                telephone: ''
-            },
-            items: items.map(
-                ({ _id, name, description, prepareTime, price, category }) => ({
-                    category,
-                    id: _id,
-                    name,
-                    description,
-                    image: '',
-                    prepareTime,
-                    price
-                })
-            )
-        }))
-    );
-}
-
-export function useGetTableMenu(tableId: string) {
-    return useMutation('getTableMenu', () =>
-        Fetch.get<restaurantAPI>(`item/menu/${tableId}`).then(
-            ({ restaurant, items }) => ({
-                restaurant,
+    return useMutation(
+        "getUserMenu",
+        () =>
+            Fetch.get<itemAPI[]>("item/menu").then((items) => ({
+                restaurant: {
+                    address: "",
+                    cep: "",
+                    city: "",
+                    district: "",
+                    email: "",
+                    name: "",
+                    state: "",
+                    telephone: "",
+                },
                 items: items.map(
-                    ({
-                        _id,
-                        name,
-                        description,
-                        prepareTime,
-                        price,
-                        category
-                    }) => ({
+                    (
+                        {
+                            _id,
+                            name,
+                            description,
+                            prepareTime,
+                            price,
+                            category,
+                        },
+                    ) => ({
                         category,
                         id: _id,
                         name,
                         description,
-                        image: '',
+                        image: "",
                         prepareTime,
-                        price
-                    })
-                )
-            })
-        )
+                        price,
+                    }),
+                ),
+            })),
+    );
+}
+
+export function useGetTableMenu(tableId: string) {
+    return useMutation(
+        "getTableMenu",
+        () =>
+            Fetch.get<restaurantAPI>(`item/menu/${tableId}`).then(
+                ({ restaurant, items }) => ({
+                    restaurant,
+                    items: items.map(
+                        ({
+                            _id,
+                            name,
+                            description,
+                            prepareTime,
+                            price,
+                            category,
+                        }) => ({
+                            category,
+                            id: _id,
+                            name,
+                            description,
+                            image: "",
+                            prepareTime,
+                            price,
+                        }),
+                    ),
+                }),
+            ),
     );
 }
 
 export function useDeleteItem(id: string) {
-    return useMutation('deleteItem', () => Fetch.delete(`item/${id}`));
+    return useMutation(
+        "deleteItem",
+        () => Fetch.delete(`item/${id}`),
+    );
 }
 
 type itemToPatch = {
@@ -95,7 +111,10 @@ type itemToPatch = {
 };
 
 export function usePatchItem(id: string, item: itemToPatch) {
-    return useMutation('patchItem', () => Fetch.patch(`item/${id}`, item));
+    return useMutation(
+        "patchItem",
+        () => Fetch.patch(`item/${id}`, item),
+    );
 }
 
 type itemToPost = {
@@ -107,9 +126,12 @@ type itemToPost = {
 };
 
 export function usePostItem(item: itemToPost) {
-    return useMutation('postItem', () => Fetch.post('item', item));
+    return useMutation("postItem", () => Fetch.post("item", item));
 }
 
 export function useGetItem(id: string) {
-    return useMutation('getItem', () => Fetch.get<itemAPI>(`item/${id}`));
+    return useMutation(
+        "getItem",
+        () => Fetch.get<itemAPI>(`item/${id}`),
+    );
 }

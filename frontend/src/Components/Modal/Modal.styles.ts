@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import {
     Button as ButtonBase,
-    SecondaryButton as SecondaryButtonBase
-} from '../../Components/Layout';
+    SecondaryButton as SecondaryButtonBase,
+} from "../../Components/Layout";
 
 export const Block = styled.div`
     position: fixed;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Image = styled.img`
     width: 100%;
@@ -36,9 +36,9 @@ export const AddContainer = styled.div<{ enabled: boolean }>`
     align-items: center;
 
     ${({ enabled }) =>
-        enabled
-            ? `background-color: var(--primary); cursor: pointer;`
-            : `background-color: var(--primaryDisabled);`}
+    enabled
+        ? `background-color: var(--primary); cursor: pointer;`
+        : `background-color: var(--primaryDisabled);`}
 `;
 
 export const Add = styled.span`

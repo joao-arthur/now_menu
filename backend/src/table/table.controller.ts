@@ -1,26 +1,26 @@
 import {
-    Controller,
-    Post,
     Body,
-    UseGuards,
-    Headers,
-    HttpCode,
-    HttpStatus,
+    Controller,
+    Delete,
     Get,
     Header,
-    Response,
-    Query,
+    Headers,
+    HttpCode,
     HttpException,
-    Delete,
-    Param
-} from '@nestjs/common';
-import { Response as ExpressResponse } from 'express';
-import { TableService } from './table.service';
-import { CreateTableDTO } from './table.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { getJWTPayload } from '../auth/getJWTPayload';
+    HttpStatus,
+    Param,
+    Post,
+    Query,
+    Response,
+    UseGuards,
+} from "@nestjs/common";
+import { Response as ExpressResponse } from "express";
+import { TableService } from "./table.service";
+import { CreateTableDTO } from "./table.dto";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
+import { getJWTPayload } from "../auth/getJWTPayload";
 
-@Controller('table')
+@Controller("table")
 export class TableController {
     constructor(private readonly tableService: TableService) {}
 
@@ -29,7 +29,7 @@ export class TableController {
     @Post()
     async createTables(
         @Body() tables: CreateTableDTO[],
-        @Headers('authorization') authorization
+        @Headers("authorization") authorization,
     ) {
         const payload = getJWTPayload(authorization);
         await this.tableService.createTables({ tables, payload });
@@ -37,27 +37,35 @@ export class TableController {
 
     @UseGuards(JwtAuthGuard)
     @Get()
-    async getTables(@Headers('authorization') authorization) {
+    async getTables(@Headers("authorization") authorization) {
         const payload = getJWTPayload(authorization);
         return await this.tableService.getTables(payload);
     }
 
     @UseGuards(JwtAuthGuard)
     @HttpCode(HttpStatus.NO_CONTENT)
-    @Delete(':id')
+    @Delete(":id")
     async deleteTable(@Param() params) {
         await this.tableService.deleteTable(params.id);
     }
 
-    @Header('content-type', 'application/pdf')
-    @Get('qrcode')
+    @Header("content-type", "application/pdf")
+    @Get("qrcode")
     async getPDF(
         @Response() res: ExpressResponse,
-        @Query('userId') userId: string,
-        @Query('origin') origin: string
+        @Query("userId") userId: string,
+        @Query("origin") origin: string,
     ) {
-        if (!userId || !origin)
-            throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
-        return await this.tableService.getPDF({ res, userId, origin });
+        if (!userId || !origin) {
+            throw new HttpException(
+                "Unauthorized",
+                HttpStatus.UNAUTHORIZED,
+            );
+        }
+        return await this.tableService.getPDF({
+            res,
+            userId,
+            origin,
+        });
     }
 }

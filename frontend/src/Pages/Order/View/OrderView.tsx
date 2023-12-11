@@ -1,39 +1,40 @@
-import { useParams, Redirect } from 'react-router-dom';
+import { Redirect, useParams } from "react-router-dom";
 import {
-    Title,
-    Subtitle,
     Button,
     FlexContainer,
     FlexContent,
-    Padding
-} from '../../../Components/Layout';
-import { PageHeader } from '../../../Components/PageHeader/PageHeader';
+    Padding,
+    Subtitle,
+    Title,
+} from "../../../Components/Layout";
+import { PageHeader } from "../../../Components/PageHeader/PageHeader";
 import {
-    Content,
-    OrderItem,
     Client,
-    StatusButton,
+    Content,
     ItemContainer,
     ItemName,
     ItemObservation,
-    Total
-} from './OrderView.styles';
-import { useGetOrder, useOrderDone } from '../../../Api/order.api';
+    OrderItem,
+    StatusButton,
+    Total,
+} from "./OrderView.styles";
+import { useGetOrder, useOrderDone } from "../../../Api/order.api";
 
 export function OrderView() {
     const id = useParams<{ id: string }>().id;
     const { data: order, isLoading: isLoadingGet } = useGetOrder(id);
-    const { isSuccess, isLoading: isLoadingPatch, mutate } = useOrderDone(id);
+    const { isSuccess, isLoading: isLoadingPatch, mutate } =
+        useOrderDone(id);
 
-    if (!order)
+    if (!order) {
         return (
             <FlexContainer>
                 <FlexContent>
-                    <PageHeader goBackLink='/' />
+                    <PageHeader goBackLink="/" />
                     <Title>
                         {isLoadingGet
-                            ? 'Carregando pedido'
-                            : 'Pedido não encontrado!'}
+                            ? "Carregando pedido"
+                            : "Pedido não encontrado!"}
                     </Title>
                     <Content>
                         <Client>
@@ -61,22 +62,25 @@ export function OrderView() {
                 </FlexContent>
             </FlexContainer>
         );
+    }
 
     const { customer, items, tableName, active } = order;
     const now = new Date();
 
-    if (isSuccess) return <Redirect to='/' />;
+    if (isSuccess) return <Redirect to="/" />;
     return (
         <FlexContainer>
             <FlexContent>
-                <PageHeader goBackLink='/' />
+                <PageHeader goBackLink="/" />
                 <Title>Pedido</Title>
                 <Subtitle>
-                    Realizado às {now.toLocaleTimeString()} -{' '}
+                    Realizado às {now.toLocaleTimeString()} -{" "}
                     {now.toLocaleDateString()}
                 </Subtitle>
                 <StatusButton>
-                    {active ? 'Pedido em andamento' : 'Pedido já entregue'}
+                    {active
+                        ? "Pedido em andamento"
+                        : "Pedido já entregue"}
                 </StatusButton>
                 <Content>
                     <Client>
@@ -86,7 +90,15 @@ export function OrderView() {
                 </Content>
                 <Content>
                     {items.map(
-                        ({ itemId, amount, itemName, observation, price }) => (
+                        (
+                            {
+                                itemId,
+                                amount,
+                                itemName,
+                                observation,
+                                price,
+                            },
+                        ) => (
                             <ItemContainer key={itemId}>
                                 <ItemName>
                                     {amount}x {itemName}
@@ -95,18 +107,20 @@ export function OrderView() {
                                             (price * amount) /
                                             100
                                         ).toLocaleString(undefined, {
-                                            style: 'currency',
-                                            currency: 'BRL'
+                                            style: "currency",
+                                            currency: "BRL",
                                         })}
                                     </span>
                                 </ItemName>
-                                {observation ? (
-                                    <ItemObservation>
-                                        {observation}
-                                    </ItemObservation>
-                                ) : null}
+                                {observation
+                                    ? (
+                                        <ItemObservation>
+                                            {observation}
+                                        </ItemObservation>
+                                    )
+                                    : null}
                             </ItemContainer>
-                        )
+                        ),
                     )}
                     <OrderItem>
                         <Total>Total</Total>
@@ -115,16 +129,19 @@ export function OrderView() {
                                 items.reduce(
                                     (sum, { price, amount }) =>
                                         sum + price * amount,
-                                    0
+                                    0,
                                 ) / 100
                             ).toLocaleString(undefined, {
-                                style: 'currency',
-                                currency: 'BRL'
+                                style: "currency",
+                                currency: "BRL",
                             })}
                         </Total>
                     </OrderItem>
                 </Content>
-                <Button onClick={() => mutate()} disabled={isLoadingPatch}>
+                <Button
+                    onClick={() => mutate()}
+                    disabled={isLoadingPatch}
+                >
                     Marcar como entregue
                 </Button>
                 <Padding />

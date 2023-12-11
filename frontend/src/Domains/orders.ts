@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type order = {
     id: string;
@@ -14,10 +14,12 @@ export type order = {
     }[];
 };
 
-export const { reducer: orders, actions: ordersActions } = createSlice({
-    name: 'orders',
-    initialState: [] as order[],
-    reducers: {
-        setOrders: (_, action: PayloadAction<order[]>) => action.payload
-    }
-});
+export const { reducer: orders, actions: ordersActions } =
+    createSlice({
+        name: "orders",
+        initialState: [] as order[],
+        reducers: {
+            setOrders: (_, action: PayloadAction<order[]>) =>
+                action.payload,
+        },
+    });

@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { Modal } from '../Modal/Modal';
+import { useState } from "react";
+import { Modal } from "../Modal/Modal";
 import {
+    AddItemMessage,
+    ButtonIcon,
     Container,
-    TitleContainer,
-    Title,
-    ItemsContainer,
+    DeleteCategory,
+    IconContainer,
     ItemContainer,
     ItemName,
+    ItemsContainer,
     ItemValue,
-    AddItemMessage,
     Line,
-    IconContainer,
-    ButtonIcon,
-    DeleteCategory
-} from './CollapsableList.styles';
+    Title,
+    TitleContainer,
+} from "./CollapsableList.styles";
 
 type item = {
     name: string;
@@ -38,9 +38,10 @@ export function CollapsableList({
     addMessage,
     onDeleteCategory,
     onDeleteItem,
-    onEditItem
+    onEditItem,
 }: props) {
-    const [deleteCategoryVisible, setDeleteCategoryVisible] = useState(false);
+    const [deleteCategoryVisible, setDeleteCategoryVisible] =
+        useState(false);
     const [itemToDelete, setItemToDelete] = useState<item>();
 
     return (
@@ -48,15 +49,18 @@ export function CollapsableList({
             <Container>
                 <TitleContainer>
                     <Title>{name}</Title>
-                    {onDeleteCategory ? (
-                        <DeleteCategory
-                            name='HiTrash'
-                            onClick={() => setDeleteCategoryVisible(true)}
-                        />
-                    ) : null}
+                    {onDeleteCategory
+                        ? (
+                            <DeleteCategory
+                                name="HiTrash"
+                                onClick={() =>
+                                    setDeleteCategoryVisible(true)}
+                            />
+                        )
+                        : null}
                 </TitleContainer>
                 <ItemsContainer>
-                    {items.map(item => (
+                    {items.map((item) => (
                         <Line key={item.id}>
                             <ItemContainer>
                                 <ItemName>{item.name}</ItemName>
@@ -64,12 +68,14 @@ export function CollapsableList({
                             </ItemContainer>
                             <IconContainer>
                                 <ButtonIcon
-                                    name='HiPencil'
-                                    onClick={() => onEditItem(item.id)}
+                                    name="HiPencil"
+                                    onClick={() =>
+                                        onEditItem(item.id)}
                                 />
                                 <ButtonIcon
-                                    name='HiTrash'
-                                    onClick={() => setItemToDelete(item)}
+                                    name="HiTrash"
+                                    onClick={() =>
+                                        setItemToDelete(item)}
                                 />
                             </IconContainer>
                         </Line>
@@ -87,8 +93,8 @@ export function CollapsableList({
                 }}
                 visible={deleteCategoryVisible}
                 validForm
-                cancel='Cancelar'
-                confirm='Excluir'
+                cancel="Cancelar"
+                confirm="Excluir"
             >
                 Essa ação não pode ser desfeita
             </Modal>
@@ -101,8 +107,8 @@ export function CollapsableList({
                 }}
                 visible={!!itemToDelete}
                 validForm
-                cancel='Cancelar'
-                confirm='Excluir'
+                cancel="Cancelar"
+                confirm="Excluir"
             >
                 Essa ação não pode ser desfeita
             </Modal>

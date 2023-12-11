@@ -1,20 +1,23 @@
-import { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { useAppDispatch } from '../../../../hooks';
-import { CollapsableList } from '../../../../Components/CollapsableList/CollapsableList';
-import { PageHeader } from '../../../../Components/PageHeader/PageHeader';
+import { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import { useAppDispatch } from "../../../../hooks";
+import { CollapsableList } from "../../../../Components/CollapsableList/CollapsableList";
+import { PageHeader } from "../../../../Components/PageHeader/PageHeader";
 import {
-    Title,
-    SecondaryButton,
     FlexContainer,
     FlexContent,
-    Padding
-} from '../../../../Components/Layout';
-import { Modal } from '../../../../Components/Modal/Modal';
-import { useDeleteItem, useGetUserMenu } from '../../../../Api/item.api';
-import { Input } from './MenuEditInfo.styles';
-import { item } from '../../../../Domains/menuInfo';
-import { menuRegisterActions } from '../../../../Domains/menuRegister';
+    Padding,
+    SecondaryButton,
+    Title,
+} from "../../../../Components/Layout";
+import { Modal } from "../../../../Components/Modal/Modal";
+import {
+    useDeleteItem,
+    useGetUserMenu,
+} from "../../../../Api/item.api";
+import { Input } from "./MenuEditInfo.styles";
+import { item } from "../../../../Domains/menuInfo";
+import { menuRegisterActions } from "../../../../Domains/menuRegister";
 
 type category = {
     name: string;
@@ -25,16 +28,17 @@ export function MenuEditInfo() {
     const dispatch = useAppDispatch();
     const [categories, setCategories] = useState<category[]>([]);
     const [modalVisible, setModalVisible] = useState(false);
-    const [newCategoryName, setNewCategoryName] = useState('');
-    const [redirectToItem, setRedirectToItem] = useState('');
+    const [newCategoryName, setNewCategoryName] = useState("");
+    const [redirectToItem, setRedirectToItem] = useState("");
     const [redirectToNew, setRedirectToNew] = useState(false);
-    const validForm =
-        !!categories.length &&
-        !!categories.flatMap(category => category.items).length;
+    const validForm = !!categories.length &&
+        !!categories.flatMap((category) => category.items).length;
 
-    const [itemToDelete, setItemToDelete] = useState('');
+    const [itemToDelete, setItemToDelete] = useState("");
     const { isSuccess: isSuccessDelete, mutate: mutateDelete } =
-        useDeleteItem(itemToDelete);
+        useDeleteItem(
+            itemToDelete,
+        );
 
     const { data, mutate } = useGetUserMenu();
 
@@ -45,20 +49,25 @@ export function MenuEditInfo() {
     useEffect(() => {
         if (itemToDelete) {
             mutateDelete();
-            setItemToDelete('');
+            setItemToDelete("");
         }
     }, [itemToDelete]);
 
     useEffect(() => {
-        if (data)
+        if (data) {
             setCategories(
                 Array.from(
-                    new Set(data.items.map(({ category }) => category))
-                ).map(category => ({
+                    new Set(
+                        data.items.map(({ category }) => category),
+                    ),
+                ).map((category) => ({
                     name: category,
-                    items: data.items.filter(item => item.category === category)
-                }))
+                    items: data.items.filter((item) =>
+                        item.category === category
+                    ),
+                })),
             );
+        }
     }, [data]);
 
     function addItem(category: string) {
@@ -77,59 +86,66 @@ export function MenuEditInfo() {
         mutate();
     }
 
-    if (redirectToItem) return <Redirect to={`/menu/edit/${redirectToItem}`} />;
-    if (redirectToNew) return <Redirect to='/menu/new' />;
+    if (redirectToItem) {
+        return <Redirect to={`/menu/edit/${redirectToItem}`} />;
+    }
+    if (redirectToNew) return <Redirect to="/menu/new" />;
     return (
         <FlexContainer>
             <FlexContent>
-                <PageHeader goBackLink='/menu' />
+                <PageHeader goBackLink="/menu" />
                 <Title>Editar seu cardápio</Title>
-                {categories.map(category => (
+                {categories.map((category) => (
                     <CollapsableList
                         key={category.name}
                         name={category.name}
-                        items={category.items.map(item => ({
+                        items={category.items.map((item) => ({
                             name: item.name,
                             value: (item.price / 100).toLocaleString(
                                 undefined,
                                 {
-                                    style: 'currency',
-                                    currency: 'BRL'
-                                }
+                                    style: "currency",
+                                    currency: "BRL",
+                                },
                             ),
-                            id: item.id
+                            id: item.id,
                         }))}
-                        addMessage='Adicionar produto'
+                        addMessage="Adicionar produto"
                         onAddClick={addItem}
                         onDeleteItem={setItemToDelete}
-                        onEditItem={id => {
+                        onEditItem={(id) => {
                             setRedirectToItem(id);
                         }}
                     />
                 ))}
-                <SecondaryButton onClick={() => setModalVisible(true)}>
+                <SecondaryButton
+                    onClick={() => setModalVisible(true)}
+                >
                     Adicionar categoria
                 </SecondaryButton>
                 <Padding />
             </FlexContent>
             <Modal
-                title='Título da nova categoria'
+                title="Título da nova categoria"
                 onCancel={() => setModalVisible(false)}
                 onConfirm={() => {
                     setCategories(
-                        categories.concat({ name: newCategoryName, items: [] })
+                        categories.concat({
+                            name: newCategoryName,
+                            items: [],
+                        }),
                     );
-                    setNewCategoryName('');
+                    setNewCategoryName("");
                     setModalVisible(false);
                 }}
                 visible={modalVisible}
                 validForm={!!newCategoryName}
-                cancel='Cancelar'
-                confirm='Adicionar'
+                cancel="Cancelar"
+                confirm="Adicionar"
             >
                 <Input
-                    name='newCategoryName'
-                    type='text'
+                    name="newCategoryName"
+                    type="text"
                     value={newCategoryName}
                     onChange={setNewCategoryName}
                 />

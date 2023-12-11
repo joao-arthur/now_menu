@@ -1,11 +1,17 @@
-import { useAppDispatch } from '../../../../hooks';
-import { PrimaryText } from '../../../../Components/Layout';
-import { orderRegisterActions } from '../../../../Domains/orderRegister';
-import { item } from '../../../../Domains/menuInfo';
-import { Amount } from '../Amount/Amount';
-import { Container, Image, Content, Title, Price } from './CartItem.styles';
-import { useGetMockedImage } from '../../../../Api/image.api';
-import { useEffect, useState } from 'react';
+import { useAppDispatch } from "../../../../hooks";
+import { PrimaryText } from "../../../../Components/Layout";
+import { orderRegisterActions } from "../../../../Domains/orderRegister";
+import { item } from "../../../../Domains/menuInfo";
+import { Amount } from "../Amount/Amount";
+import {
+    Container,
+    Content,
+    Image,
+    Price,
+    Title,
+} from "./CartItem.styles";
+import { useGetMockedImage } from "../../../../Api/image.api";
+import { useEffect, useState } from "react";
 
 type props = {
     item: item & {
@@ -13,8 +19,10 @@ type props = {
     };
 };
 
-export function CartItem({ item: { id, name, price, amount } }: props) {
-    const [imageURL, setImageURL] = useState('');
+export function CartItem(
+    { item: { id, name, price, amount } }: props,
+) {
+    const [imageURL, setImageURL] = useState("");
     const dispatch = useAppDispatch();
     const { data, mutate } = useGetMockedImage();
 
@@ -33,20 +41,20 @@ export function CartItem({ item: { id, name, price, amount } }: props) {
                 <PrimaryText>
                     <Price>
                         {(price / 100).toLocaleString(undefined, {
-                            style: 'currency',
-                            currency: 'BRL'
+                            style: "currency",
+                            currency: "BRL",
                         })}
                     </Price>
                 </PrimaryText>
             </Content>
             <Amount
                 value={amount}
-                onChange={newAmount => {
+                onChange={(newAmount) => {
                     dispatch(
                         orderRegisterActions.setAmount({
                             id,
-                            amount: newAmount
-                        })
+                            amount: newAmount,
+                        }),
                     );
                 }}
             />

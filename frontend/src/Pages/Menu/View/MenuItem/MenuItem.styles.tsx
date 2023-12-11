@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;
@@ -15,7 +15,7 @@ export const Image = styled.img<imageProps>`
     width: 70px;
     height: 70px;
     border-radius: 7px;
-    ${({ disabled }) => (disabled ? 'opacity: 0.4;' : '')}
+    ${({ disabled }) => (disabled ? "opacity: 0.4;" : "")}
     object-fit: cover;
 `;
 

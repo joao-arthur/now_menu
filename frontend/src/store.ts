@@ -1,10 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { signUp } from './Domains/signUp';
-import { user } from './Domains/user';
-import { menuRegister } from './Domains/menuRegister';
-import { menuInfo } from './Domains/menuInfo';
-import { orders } from './Domains/orders';
-import { orderRegister } from './Domains/orderRegister';
+import { configureStore } from "@reduxjs/toolkit";
+import { signUp } from "./Domains/signUp";
+import { user } from "./Domains/user";
+import { menuRegister } from "./Domains/menuRegister";
+import { menuInfo } from "./Domains/menuInfo";
+import { orders } from "./Domains/orders";
+import { orderRegister } from "./Domains/orderRegister";
 
 export const store = configureStore({
     reducer: {
@@ -13,8 +13,8 @@ export const store = configureStore({
         menuInfo,
         menuRegister,
         orders,
-        orderRegister
-    }
+        orderRegister,
+    },
 });
 
 export type appDispatch = typeof store.dispatch;

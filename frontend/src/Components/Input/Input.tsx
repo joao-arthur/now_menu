@@ -1,6 +1,6 @@
-import { CustomInput, TextArea } from './Input.styles';
-import InputMask from 'react-input-mask';
-import { MoneyInput } from '../MoneyInput';
+import { CustomInput, TextArea } from "./Input.styles";
+import InputMask from "react-input-mask";
+import { MoneyInput } from "../MoneyInput";
 
 export type props = {
     type: string;
@@ -27,9 +27,9 @@ export function Input({
     min,
     max,
     className,
-    mask
+    mask,
 }: props) {
-    if (type === 'money')
+    if (type === "money") {
         return (
             <MoneyInput
                 name={name}
@@ -37,29 +37,32 @@ export function Input({
                 onChange={onChange as any}
             />
         );
+    }
 
-    if (type === 'mask')
+    if (type === "mask") {
         return (
             <InputMask
                 mask={mask as string}
                 value={value}
-                onChange={e => onChange?.(e.target.value)}
+                onChange={(e) => onChange?.(e.target.value)}
             >
-                {() => <CustomInput type='tel' />}
+                {() => <CustomInput type="tel" />}
             </InputMask>
         );
+    }
 
-    if (type === 'textarea')
+    if (type === "textarea") {
         return (
             <TextArea
                 name={name}
                 required={required}
                 value={value}
-                onChange={e => onChange?.(e.target.value)}
+                onChange={(e) => onChange?.(e.target.value)}
                 disabled={disabled}
                 className={className}
             />
         );
+    }
 
     return (
         <CustomInput
@@ -68,7 +71,7 @@ export function Input({
             name={name}
             required={required}
             value={value}
-            onChange={e => onChange?.(e.target.value)}
+            onChange={(e) => onChange?.(e.target.value)}
             min={min}
             max={max}
             disabled={disabled}

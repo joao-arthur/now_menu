@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { SecondaryButton } from '../../../Components/Layout';
+import styled from "styled-components";
+import { SecondaryButton } from "../../../Components/Layout";
 
 export const Content = styled.div`
     padding: 10px 0;

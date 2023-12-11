@@ -1,5 +1,5 @@
-import { Icon } from '../../../../Components/Icon/Icon';
-import { Container, Button, Content } from './Amount.styles';
+import { Icon } from "../../../../Components/Icon/Icon";
+import { Button, Container, Content } from "./Amount.styles";
 
 type props = {
     value: number;
@@ -19,11 +19,11 @@ export function Amount({ value, onChange }: props) {
     return (
         <Container>
             <Button onClick={clickMinus} selectable={value > 0}>
-                <Icon name='AiOutlineMinus' />
+                <Icon name="AiOutlineMinus" />
             </Button>
-            <Content> {value}</Content>
+            <Content>{value}</Content>
             <Button onClick={clickPlus} selectable>
-                <Icon name='AiOutlinePlus' />
+                <Icon name="AiOutlinePlus" />
             </Button>
         </Container>
     );

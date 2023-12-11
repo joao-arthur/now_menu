@@ -1,5 +1,5 @@
-import { memo } from 'react';
-import * as Icons from './Icons';
+import { memo } from "react";
+import * as Icons from "./Icons";
 
 type names = keyof typeof Icons;
 

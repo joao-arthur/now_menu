@@ -1,4 +1,4 @@
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 type messages<T> = {
     loading: string;
@@ -9,7 +9,7 @@ type messages<T> = {
 export function Toast<T>(promise: Promise<T>, messages: messages<T>) {
     return toast.promise(promise, messages, {
         style: {
-            minWidth: '250px'
-        }
+            minWidth: "250px",
+        },
     });
 }

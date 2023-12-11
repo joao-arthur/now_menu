@@ -1,6 +1,6 @@
-import { ComponentType } from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { useAppSelector } from '../hooks';
+import { ComponentType } from "react";
+import { Redirect, Route } from "react-router-dom";
+import { useAppSelector } from "../hooks";
 
 type props = {
     path: string;
@@ -10,12 +10,10 @@ type props = {
 
 export function UserRoute({ exact, path, component }: props) {
     const shouldLogin = useAppSelector(
-        ({ user }) => !user.logged && user.verified
+        ({ user }) => !user.logged && user.verified,
     );
 
-    return !shouldLogin ? (
-        <Route exact={exact} path={path} component={component} />
-    ) : (
-        <Redirect to='/signin' />
-    );
+    return !shouldLogin
+        ? <Route exact={exact} path={path} component={component} />
+        : <Redirect to="/signin" />;
 }

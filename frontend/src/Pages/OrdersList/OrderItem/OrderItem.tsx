@@ -1,20 +1,20 @@
-import { Link, PrimaryText } from '../../../Components/Layout';
-import { order } from '../../../Domains/orders';
+import { Link, PrimaryText } from "../../../Components/Layout";
+import { order } from "../../../Domains/orders";
 import {
     Body,
     Container,
     Footer,
     ItemContainer,
     ItemName,
-    ItemObservation
-} from './OrderItem.styles';
+    ItemObservation,
+} from "./OrderItem.styles";
 
 type props = {
     order: order;
 };
 
 export function OrderItem({
-    order: { id, createdAt, customer, tableName, items }
+    order: { id, createdAt, customer, tableName, items },
 }: props) {
     return (
         <Container>
@@ -28,16 +28,20 @@ export function OrderItem({
             </Body>
             <Body>
                 <div>
-                    {items.map(({ itemId, amount, itemName, observation }) => (
+                    {items.map((
+                        { itemId, amount, itemName, observation },
+                    ) => (
                         <ItemContainer key={itemId}>
                             <ItemName>
                                 {amount}x {itemName}
                             </ItemName>
-                            {observation ? (
-                                <ItemObservation>
-                                    Observação: {observation}
-                                </ItemObservation>
-                            ) : null}
+                            {observation
+                                ? (
+                                    <ItemObservation>
+                                        Observação: {observation}
+                                    </ItemObservation>
+                                )
+                                : null}
                         </ItemContainer>
                     ))}
                 </div>

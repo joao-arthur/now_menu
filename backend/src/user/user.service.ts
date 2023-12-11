@@ -1,14 +1,24 @@
-import { Model } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { CreateUserDTO, LoginUserDTO, UpdateUserDTO } from './user.dto';
-import { User, UserDocument } from './user.entity';
-import { getHash, getSalt } from 'src/authorization/authorization';
+import { Model } from "mongoose";
+import { InjectModel } from "@nestjs/mongoose";
+import {
+    HttpException,
+    HttpStatus,
+    Injectable,
+} from "@nestjs/common";
+import {
+    CreateUserDTO,
+    LoginUserDTO,
+    UpdateUserDTO,
+} from "./user.dto";
+import { User, UserDocument } from "./user.entity";
+import { getHash, getSalt } from "src/authorization/authorization";
 
 @Injectable()
 export class UserService {
     constructor(
-        @InjectModel(User.name) private userModel: Model<UserDocument>
+        @InjectModel(User.name) private userModel: Model<
+            UserDocument
+        >,
     ) {}
 
     async create({
@@ -21,7 +31,7 @@ export class UserService {
         city,
         state,
         email,
-        password
+        password,
     }: CreateUserDTO) {
         const salt = getSalt();
 
@@ -36,7 +46,7 @@ export class UserService {
             state,
             email,
             hash: getHash({ salt, password }),
-            salt
+            salt,
         });
         return await createdUser.save();
     }
@@ -45,13 +55,16 @@ export class UserService {
         try {
             const user = await this.userModel.findOne({ email });
             if (!user) throw new Error();
-            if (user.hash !== getHash({ password, salt: user.salt }))
+            if (
+                user.hash !== getHash({ password, salt: user.salt })
+            ) {
                 throw new Error();
+            }
             return user;
         } catch {
             throw new HttpException(
-                'Usuário ou senha incorretos!',
-                HttpStatus.UNAUTHORIZED
+                "Usuário ou senha incorretos!",
+                HttpStatus.UNAUTHORIZED,
             );
         }
     }
@@ -66,7 +79,7 @@ export class UserService {
             district,
             city,
             state,
-            email
+            email,
         } = await this.userModel.findById(id);
         return {
             cnpj,
@@ -77,7 +90,7 @@ export class UserService {
             district,
             city,
             state,
-            email
+            email,
         };
     }
 

@@ -1,14 +1,14 @@
-import { ReactChild } from 'react';
+import { ReactChild } from "react";
 import {
     Block,
+    Button,
     Container,
     Content,
     Footer,
     Header,
-    Title,
     SecondaryButton,
-    Button
-} from './Modal.styles';
+    Title,
+} from "./Modal.styles";
 
 export type modalProps = {
     children: ReactChild;
@@ -27,7 +27,7 @@ export function ModalComponent({
     onConfirm,
     validForm,
     cancel,
-    confirm
+    confirm,
 }: modalProps) {
     return (
         <Block>

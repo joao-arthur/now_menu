@@ -1,21 +1,21 @@
 import {
-    Controller,
-    Post,
     Body,
-    UseGuards,
+    Controller,
+    Get,
     Headers,
     HttpCode,
     HttpStatus,
-    Get,
     Param,
-    Patch
-} from '@nestjs/common';
-import { OrderService } from './order.service';
-import { CreateOrderDTO } from './order.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { getJWTPayload } from '../auth/getJWTPayload';
+    Patch,
+    Post,
+    UseGuards,
+} from "@nestjs/common";
+import { OrderService } from "./order.service";
+import { CreateOrderDTO } from "./order.dto";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
+import { getJWTPayload } from "../auth/getJWTPayload";
 
-@Controller('order')
+@Controller("order")
 export class OrderController {
     constructor(private readonly orderService: OrderService) {}
 
@@ -27,20 +27,20 @@ export class OrderController {
 
     @UseGuards(JwtAuthGuard)
     @Get()
-    async getOrders(@Headers('authorization') authorization) {
+    async getOrders(@Headers("authorization") authorization) {
         const payload = getJWTPayload(authorization);
         return await this.orderService.getOrders(payload);
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get(':id')
+    @Get(":id")
     async getOrder(@Param() params) {
         return await this.orderService.getOrder(params.id);
     }
 
     @HttpCode(HttpStatus.NO_CONTENT)
     @UseGuards(JwtAuthGuard)
-    @Patch(':id')
+    @Patch(":id")
     async setDone(@Param() params) {
         await this.orderService.setDone(params.id);
     }

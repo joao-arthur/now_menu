@@ -1,5 +1,5 @@
-import { ReactChild, FormEvent } from 'react';
-import { CustomForm } from './Form.styles';
+import { FormEvent, ReactChild } from "react";
+import { CustomForm } from "./Form.styles";
 
 type props = {
     children: ReactChild | ReactChild[];
@@ -12,5 +12,6 @@ export function Form({ children, onSubmit }: props) {
         onSubmit();
     }
 
-    return <CustomForm onSubmit={handleSubmit}>{children}</CustomForm>;
+    return <CustomForm onSubmit={handleSubmit}>{children}
+    </CustomForm>;
 }

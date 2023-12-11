@@ -1,7 +1,7 @@
-import { useMutation } from 'react-query';
-import { Fetch } from '../../Core/Fetch';
-import { decodeJWT } from '../../Core/DecodeJWT';
-import { Toast } from '../../Components/Toast';
+import { useMutation } from "react-query";
+import { Fetch } from "../../Core/Fetch";
+import { decodeJWT } from "../../Core/DecodeJWT";
+import { Toast } from "../../Components/Toast";
 
 type tokenAPI = {
     token: string;
@@ -13,11 +13,14 @@ type userType = {
 };
 
 export function useSignIn(user: userType) {
-    return useMutation('signIn', () =>
-        Toast(Fetch.post<tokenAPI>('user/login', user), {
-            loading: 'Entrando...',
-            error: 'Usuário ou senha incorretos!',
-            success: res => `Bem-vindo "${decodeJWT(res.token).name}"!`
-        })
+    return useMutation(
+        "signIn",
+        () =>
+            Toast(Fetch.post<tokenAPI>("user/login", user), {
+                loading: "Entrando...",
+                error: "Usuário ou senha incorretos!",
+                success: (res) =>
+                    `Bem-vindo "${decodeJWT(res.token).name}"!`,
+            }),
     );
 }

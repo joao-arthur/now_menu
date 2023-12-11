@@ -1,21 +1,21 @@
 import {
-    Controller,
-    Post,
     Body,
-    UseGuards,
+    Controller,
+    Delete,
+    Get,
     Headers,
     HttpCode,
-    HttpStatus,
-    Get,
     HttpException,
+    HttpStatus,
     Param,
-    Delete,
-    Patch
-} from '@nestjs/common';
-import { ItemService } from './item.service';
-import { CreateItemDTO } from './item.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { getJWTPayload } from '../auth/getJWTPayload';
+    Patch,
+    Post,
+    UseGuards,
+} from "@nestjs/common";
+import { ItemService } from "./item.service";
+import { CreateItemDTO } from "./item.dto";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
+import { getJWTPayload } from "../auth/getJWTPayload";
 
 type updateItemType = {
     name: string;
@@ -24,36 +24,45 @@ type updateItemType = {
     price: number;
 };
 
-@Controller('item')
+@Controller("item")
 export class ItemController {
     constructor(private readonly itemService: ItemService) {}
 
     @UseGuards(JwtAuthGuard)
     @HttpCode(HttpStatus.NO_CONTENT)
-    @Post('menu')
+    @Post("menu")
     async createMenu(
         @Body() items: CreateItemDTO[],
-        @Headers('authorization') authorization
+        @Headers("authorization") authorization,
     ) {
         const payload = getJWTPayload(authorization);
         await this.itemService.createMenu({ items, payload });
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('menu')
-    async getMenu(@Headers('authorization') authorization) {
+    @Get("menu")
+    async getMenu(@Headers("authorization") authorization) {
         const payload = getJWTPayload(authorization);
         return await this.itemService.getMenu(payload);
     }
 
-    @Get('menu/:tableId')
+    @Get("menu/:tableId")
     async getRestaurantMenu(@Param() params) {
-        if (!params.tableId)
-            throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+        if (!params.tableId) {
+            throw new HttpException(
+                "Unauthorized",
+                HttpStatus.UNAUTHORIZED,
+            );
+        }
         try {
-            return await this.itemService.getRestaurantMenu(params.tableId);
+            return await this.itemService.getRestaurantMenu(
+                params.tableId,
+            );
         } catch (e) {
-            throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+            throw new HttpException(
+                "Unauthorized",
+                HttpStatus.UNAUTHORIZED,
+            );
         }
     }
 
@@ -62,7 +71,7 @@ export class ItemController {
     @Post()
     async createItem(
         @Body() item: CreateItemDTO,
-        @Headers('authorization') authorization
+        @Headers("authorization") authorization,
     ) {
         const payload = getJWTPayload(authorization);
         await this.itemService.createItem({ item, payload });
@@ -70,20 +79,26 @@ export class ItemController {
 
     @UseGuards(JwtAuthGuard)
     @HttpCode(HttpStatus.NO_CONTENT)
-    @Delete(':id')
+    @Delete(":id")
     async deleteItem(@Param() params) {
         await this.itemService.deleteItem(params.id);
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get(':id')
+    @Get(":id")
     async getItem(@Param() params) {
         return await this.itemService.getItem(params.id);
     }
 
     @UseGuards(JwtAuthGuard)
-    @Patch(':id')
-    async updateItem(@Param() params, @Body() itemToUpdate: updateItemType) {
-        return await this.itemService.updateItem(params.id, itemToUpdate);
+    @Patch(":id")
+    async updateItem(
+        @Param() params,
+        @Body() itemToUpdate: updateItemType,
+    ) {
+        return await this.itemService.updateItem(
+            params.id,
+            itemToUpdate,
+        );
     }
 }

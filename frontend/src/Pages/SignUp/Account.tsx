@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { Checkbox } from '../../Components/Checkbox/Checkbox';
-import { Field } from '../../Components/Field/Field';
-import { PageHeader } from '../../Components/PageHeader/PageHeader';
+import { useState } from "react";
+import { Redirect } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { Checkbox } from "../../Components/Checkbox/Checkbox";
+import { Field } from "../../Components/Field/Field";
+import { PageHeader } from "../../Components/PageHeader/PageHeader";
 import {
-    Title,
-    Subtitle,
     Button,
+    FlexContainer,
+    FlexContent,
     Link,
     PrimaryText,
     SecondaryAction,
-    FlexContainer,
-    FlexContent
-} from '../../Components/Layout';
-import { signUpActions } from '../../Domains/signUp';
-import { Form } from '../../Components/Form/Form';
-import { useSignUp } from '../../Api/user.api';
+    Subtitle,
+    Title,
+} from "../../Components/Layout";
+import { signUpActions } from "../../Domains/signUp";
+import { Form } from "../../Components/Form/Form";
+import { useSignUp } from "../../Api/user.api";
 
 export function SignUpAccount() {
     const dispatch = useAppDispatch();
@@ -33,11 +33,10 @@ export function SignUpAccount() {
         email,
         password,
         passwordMatch,
-        success
+        success,
     } = useAppSelector(({ signUp }) => signUp);
 
-    const validForm =
-        email &&
+    const validForm = email &&
         password &&
         passwordMatch &&
         password === passwordMatch &&
@@ -53,7 +52,7 @@ export function SignUpAccount() {
         city,
         state,
         email,
-        password
+        password,
     });
 
     function submit() {
@@ -63,51 +62,56 @@ export function SignUpAccount() {
 
     if (isSuccess) {
         window.localStorage.setItem(
-            '@NOW_MENU/user/token',
-            JSON.stringify(data)
+            "@NOW_MENU/user/token",
+            JSON.stringify(data),
         );
         dispatch(signUpActions.setSuccess(true));
     }
 
-    if (success) return <Redirect to='/signup/success' />;
+    if (success) return <Redirect to="/signup/success" />;
     return (
         <FlexContainer>
             <FlexContent>
-                <PageHeader goBackLink='/signup/address' />
+                <PageHeader goBackLink="/signup/address" />
                 <Title>Informações de login</Title>
                 <Subtitle>Por favor preencha para continuar</Subtitle>
                 <Form onSubmit={submit}>
                     <Field
-                        title='E-mail'
-                        name='email'
-                        type='email'
+                        title="E-mail"
+                        name="email"
+                        type="email"
                         required
                         value={email}
-                        onChange={newValue =>
-                            dispatch(signUpActions.setEmail(newValue))
-                        }
+                        onChange={(newValue) =>
+                            dispatch(
+                                signUpActions.setEmail(newValue),
+                            )}
                         disabled={isLoading}
                     />
                     <Field
-                        title='Senha'
-                        name='password'
-                        type='password'
+                        title="Senha"
+                        name="password"
+                        type="password"
                         required
                         value={password}
-                        onChange={newValue =>
-                            dispatch(signUpActions.setPassword(newValue))
-                        }
+                        onChange={(newValue) =>
+                            dispatch(
+                                signUpActions.setPassword(newValue),
+                            )}
                         disabled={isLoading}
                     />
                     <Field
-                        title='Digite a senha novamente'
-                        name='passwordMatch'
-                        type='password'
+                        title="Digite a senha novamente"
+                        name="passwordMatch"
+                        type="password"
                         required
                         value={passwordMatch}
-                        onChange={newValue =>
-                            dispatch(signUpActions.setPasswordMatch(newValue))
-                        }
+                        onChange={(newValue) =>
+                            dispatch(
+                                signUpActions.setPasswordMatch(
+                                    newValue,
+                                ),
+                            )}
                         disabled={isLoading}
                     />
                     <Checkbox
@@ -115,17 +119,20 @@ export function SignUpAccount() {
                         onChange={setAcceptedTerm}
                         disabled={isLoading}
                     >
-                        Li e aceito os{' '}
-                        <PrimaryText>termos de privacidade</PrimaryText> e{' '}
-                        <PrimaryText>termos de uso</PrimaryText>
+                        Li e aceito os{" "}
+                        <PrimaryText>
+                            termos de privacidade
+                        </PrimaryText>{" "}
+                        e <PrimaryText>termos de uso</PrimaryText>
                     </Checkbox>
                     <Button disabled={!validForm || isLoading}>
                         Cadastrar
                     </Button>
                 </Form>
                 <SecondaryAction>
-                    <Link to='/signin'>
-                        Já possui uma conta? <PrimaryText>Entrar!</PrimaryText>
+                    <Link to="/signin">
+                        Já possui uma conta?{" "}
+                        <PrimaryText>Entrar!</PrimaryText>
                     </Link>
                 </SecondaryAction>
             </FlexContent>

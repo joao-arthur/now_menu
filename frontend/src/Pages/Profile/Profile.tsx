@@ -1,20 +1,20 @@
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from "../../hooks";
 import {
-    PrimaryText,
     AloneTitle,
-    Link,
     FlexContainer,
-    FlexContent
-} from '../../Components/Layout';
-import { userActions } from '../../Domains/user';
-import { UserPageFooter } from '../../Components/UserPageFooter/UserPageFooter';
-import { List, Item } from './Profile.styles';
+    FlexContent,
+    Link,
+    PrimaryText,
+} from "../../Components/Layout";
+import { userActions } from "../../Domains/user";
+import { UserPageFooter } from "../../Components/UserPageFooter/UserPageFooter";
+import { Item, List } from "./Profile.styles";
 
 export function Profile() {
     const dispatch = useAppDispatch();
 
     function signOut() {
-        window.localStorage.removeItem('@NOW_MENU/user/token');
+        window.localStorage.removeItem("@NOW_MENU/user/token");
         dispatch(userActions.setLogged(false));
     }
 
@@ -23,16 +23,16 @@ export function Profile() {
             <FlexContent>
                 <AloneTitle>Perfil</AloneTitle>
                 <List>
-                    <Link to='/profile/info'>
+                    <Link to="/profile/info">
                         <Item>Informações pessoais</Item>
                     </Link>
-                    <Link to='/profile/address'>
+                    <Link to="/profile/address">
                         <Item>Endereço</Item>
                     </Link>
-                    <Link to='/tables/edit'>
+                    <Link to="/tables/edit">
                         <Item>Mesas</Item>
                     </Link>
-                    <Link to='/qrcode'>
+                    <Link to="/qrcode">
                         <Item>Visualizar QR Code</Item>
                     </Link>
                     <Item onClick={signOut}>
@@ -40,7 +40,7 @@ export function Profile() {
                     </Item>
                 </List>
             </FlexContent>
-            <UserPageFooter current='profile' />
+            <UserPageFooter current="profile" />
         </FlexContainer>
     );
 }

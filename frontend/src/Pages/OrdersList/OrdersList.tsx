@@ -1,16 +1,16 @@
-import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
-    Text,
     AloneTitle,
     FlexContainer,
     FlexContent,
-    Padding
-} from '../../Components/Layout';
-import { UserPageFooter } from '../../Components/UserPageFooter/UserPageFooter';
-import { ordersActions } from '../../Domains/orders';
-import { useGetOrders } from '../../Api/order.api';
-import { OrderItem } from './OrderItem/OrderItem';
+    Padding,
+    Text,
+} from "../../Components/Layout";
+import { UserPageFooter } from "../../Components/UserPageFooter/UserPageFooter";
+import { ordersActions } from "../../Domains/orders";
+import { useGetOrders } from "../../Api/order.api";
+import { OrderItem } from "./OrderItem/OrderItem";
 
 export function OrdersList() {
     const dispatch = useAppDispatch();
@@ -19,7 +19,6 @@ export function OrdersList() {
 
     useEffect(() => {
         mutate();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -32,17 +31,17 @@ export function OrdersList() {
                 <AloneTitle>Pedidos</AloneTitle>
                 <Text>
                     {new Date().toLocaleDateString(undefined, {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
                     })}
                 </Text>
-                {orders.map(order => (
+                {orders.map((order) => (
                     <OrderItem key={order.id} order={order} />
                 ))}
                 <Padding />
             </FlexContent>
-            <UserPageFooter current='orders' />
+            <UserPageFooter current="orders" />
         </FlexContainer>
     );
 }

@@ -1,6 +1,6 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import { item } from './order.dto';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
+import { item } from "./order.dto";
 
 @Schema({ timestamps: true })
 export class Order {
@@ -26,8 +26,8 @@ export class Order {
             amount: Number,
             observation: String,
             prepareTime: Number,
-            price: Number
-        }
+            price: Number,
+        },
     ])
     items: item[];
 

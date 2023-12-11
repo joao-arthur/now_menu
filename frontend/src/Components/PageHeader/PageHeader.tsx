@@ -1,4 +1,4 @@
-import { Container, Link } from './PageHeader.styles';
+import { Container, Link } from "./PageHeader.styles";
 
 type props = {
     goBackLink?: string;
@@ -8,8 +8,14 @@ type props = {
 export function PageHeader({ goBackLink, showSkipLink }: props) {
     return (
         <Container>
-            <div>{goBackLink ? <Link to={goBackLink}>voltar</Link> : null}</div>
-            <div>{showSkipLink ? <Link to='/'>pular</Link> : null}</div>
+            <div>
+                {goBackLink
+                    ? <Link to={goBackLink}>voltar</Link>
+                    : null}
+            </div>
+            <div>
+                {showSkipLink ? <Link to="/">pular</Link> : null}
+            </div>
         </Container>
     );
 }

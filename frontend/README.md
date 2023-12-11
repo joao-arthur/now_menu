@@ -1,4 +1,5 @@
 # NowMenu-Frontend
+
 ## Sobre o projeto
 
 Frontend do projeto de cardápio digital desenvolvido em _React_.

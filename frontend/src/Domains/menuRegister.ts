@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit';
+import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 
 type item = {
     name: string;
@@ -20,46 +20,58 @@ type state = {
 
 export const { reducer: menuRegister, actions: menuRegisterActions } =
     createSlice({
-        name: 'menuRegister',
+        name: "menuRegister",
         initialState: {
             categories: [
-                { name: 'Pratos', items: [] },
-                { name: 'Bebidas', items: [] }
+                { name: "Pratos", items: [] },
+                { name: "Bebidas", items: [] },
             ],
             currentCategory: undefined,
-            currentItemId: undefined
+            currentItemId: undefined,
         } as state,
         reducers: {
             addCategory: (state, action: PayloadAction<string>) => {
-                state.categories.push({ name: action.payload, items: [] });
+                state.categories.push({
+                    name: action.payload,
+                    items: [],
+                });
             },
-            setCurrentCategory: (state, action: PayloadAction<string>) => {
+            setCurrentCategory: (
+                state,
+                action: PayloadAction<string>,
+            ) => {
                 state.currentCategory = action.payload;
             },
             addCategoryItem: (state, action: PayloadAction<item>) => {
-                for (const category of state.categories)
+                for (const category of state.categories) {
                     if (category.name === state.currentCategory) {
                         category.items.push({
                             ...action.payload,
-                            id: nanoid()
+                            id: nanoid(),
                         });
                         break;
                     }
+                }
                 state.currentCategory = undefined;
             },
             setCurrentItem: (
                 state,
-                action: PayloadAction<string | undefined>
+                action: PayloadAction<string | undefined>,
             ) => {
                 state.currentItemId = action.payload;
             },
-            editCategoryItem: (state, action: PayloadAction<item>) => {
+            editCategoryItem: (
+                state,
+                action: PayloadAction<item>,
+            ) => {
                 for (const category of state.categories) {
                     for (const item of category.items) {
                         if (item.id === state.currentItemId) {
-                            item.description = action.payload.description;
+                            item.description =
+                                action.payload.description;
                             item.name = action.payload.name;
-                            item.prepareTime = action.payload.prepareTime;
+                            item.prepareTime =
+                                action.payload.prepareTime;
                             item.price = action.payload.price;
                             break;
                         }
@@ -67,9 +79,12 @@ export const { reducer: menuRegister, actions: menuRegisterActions } =
                 }
                 state.currentItemId = undefined;
             },
-            deleteCategory: (state, action: PayloadAction<string>) => {
+            deleteCategory: (
+                state,
+                action: PayloadAction<string>,
+            ) => {
                 state.categories = state.categories.filter(
-                    ({ name }) => name !== action.payload
+                    ({ name }) => name !== action.payload,
                 );
             },
             deleteItem: (state, action: PayloadAction<string>) => {
@@ -78,11 +93,12 @@ export const { reducer: menuRegister, actions: menuRegisterActions } =
                         category.items
                             .map(({ id }) => id)
                             .includes(action.payload)
-                    )
+                    ) {
                         category.items = category.items.filter(
-                            ({ id }) => id !== action.payload
+                            ({ id }) => id !== action.payload,
                         );
+                    }
                 }
-            }
-        }
+            },
+        },
     });

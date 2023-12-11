@@ -1,12 +1,12 @@
 import {
-    Title,
-    Subtitle,
     ButtonLink,
     FlexContainer,
-    FlexContent
-} from '../../../../Components/Layout';
-import { Image } from '../../../../Components/Image/Image';
-import { PageHeader } from '../../../../Components/PageHeader/PageHeader';
+    FlexContent,
+    Subtitle,
+    Title,
+} from "../../../../Components/Layout";
+import { Image } from "../../../../Components/Image/Image";
+import { PageHeader } from "../../../../Components/PageHeader/PageHeader";
 
 export function MenuRegisterSuccess() {
     return (
@@ -15,11 +15,13 @@ export function MenuRegisterSuccess() {
                 <PageHeader showSkipLink />
                 <Title>Cardápio criado!</Title>
                 <Subtitle>
-                    Parabéns! seu cardápio está pronto, agora só gerar os QR
-                    codes e começar a vender
+                    Parabéns! seu cardápio está pronto, agora só gerar
+                    os QR codes e começar a vender
                 </Subtitle>
-                <Image name='menuSuccess' />
-                <ButtonLink to='/tables/register'>Cadastrar mesas</ButtonLink>
+                <Image name="menuSuccess" />
+                <ButtonLink to="/tables/register">
+                    Cadastrar mesas
+                </ButtonLink>
             </FlexContent>
         </FlexContainer>
     );

@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
-import { Link } from '../Layout';
-import { Container, Icon } from './AnonimousPageFooter.styles';
+import { useParams } from "react-router-dom";
+import { useAppSelector } from "../../hooks";
+import { Link } from "../Layout";
+import { Container, Icon } from "./AnonimousPageFooter.styles";
 
 type props = {
     selected: boolean;
@@ -10,7 +10,7 @@ type props = {
 export function AnonimousPageFooter({ selected }: props) {
     const { tableId } = useParams<{ tableId: string }>();
     const hasItems = !!useAppSelector(
-        ({ orderRegister }) => orderRegister.length
+        ({ orderRegister }) => orderRegister.length,
     );
 
     return (
@@ -18,7 +18,7 @@ export function AnonimousPageFooter({ selected }: props) {
             <Link to={`/table/${tableId}/cart`}>
                 <Icon
                     selected={selected}
-                    name='MdShoppingBasket'
+                    name="MdShoppingBasket"
                     hasColor={hasItems}
                 />
             </Link>

@@ -1,15 +1,15 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export const { reducer: user, actions: userActions } = createSlice({
-    name: 'user',
+    name: "user",
     initialState: {
         logged: false,
-        verified: false
+        verified: false,
     },
     reducers: {
         setLogged: (state, action: PayloadAction<boolean>) => {
             state.logged = action.payload;
             state.verified = true;
-        }
-    }
+        },
+    },
 });

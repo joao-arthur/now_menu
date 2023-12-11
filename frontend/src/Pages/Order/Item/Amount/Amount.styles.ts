@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
     background-color: var(--backgroundGray);
@@ -12,7 +12,7 @@ type buttonProps = {
 
 export const Button = styled.div<buttonProps>`
     padding: 10px 8px;
-    ${({ selectable }) => (selectable ? 'cursor: pointer;' : '')}
+    ${({ selectable }) => (selectable ? "cursor: pointer;" : "")}
 `;
 
 export const Content = styled.div`

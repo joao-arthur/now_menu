@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;
@@ -14,7 +14,7 @@ export const Button = styled.div<buttonProps>`
     background-color: var(--backgroundGray);
     border-radius: 7px;
     padding: 10px 8px;
-    ${({ selectable }) => (selectable ? 'cursor: pointer;' : '')}
+    ${({ selectable }) => (selectable ? "cursor: pointer;" : "")}
 `;
 
 export const Content = styled.div`

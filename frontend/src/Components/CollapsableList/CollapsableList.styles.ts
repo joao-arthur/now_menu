@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Icon } from '../Icon/Icon';
+import styled from "styled-components";
+import { Icon } from "../Icon/Icon";
 
 export const Container = styled.div`
     background-color: var(--backgroundGray);

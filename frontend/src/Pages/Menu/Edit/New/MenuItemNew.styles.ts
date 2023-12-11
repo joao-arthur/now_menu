@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Field } from '../../../../Components/Field/Field';
+import styled from "styled-components";
+import { Field } from "../../../../Components/Field/Field";
 
 export const FieldsContainer = styled.div`
     display: flex;
