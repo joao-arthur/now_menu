@@ -15,10 +15,10 @@ import {
     UseGuards,
 } from "@nestjs/common";
 import { Response as ExpressResponse } from "express";
-import { TableService } from "./table.service";
-import { CreateTableDTO } from "./table.dto";
-import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { getJWTPayload } from "../auth/getJWTPayload";
+import { TableService } from "./table.service.js";
+import { CreateTableDTO } from "./table.dto.js";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard.js";
+import { getJWTPayload } from "../auth/getJWTPayload.js";
 
 @Controller("table")
 export class TableController {

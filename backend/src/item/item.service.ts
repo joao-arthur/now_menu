@@ -1,11 +1,11 @@
 import { Model } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
 import { Injectable } from "@nestjs/common";
-import { payloadType } from "../auth/getJWTPayload";
-import { CreateItemDTO } from "./item.dto";
-import { Item, ItemDocument } from "./item.entity";
-import { Table, TableDocument } from "../table/table.entity";
-import { User, UserDocument } from "../user/user.entity";
+import { payloadType } from "../auth/getJWTPayload.js";
+import { CreateItemDTO } from "./item.dto.js";
+import { Item, ItemDocument } from "./item.entity.js";
+import { Table, TableDocument } from "../table/table.entity.js";
+import { User, UserDocument } from "../user/user.entity.js";
 
 type createMenuType = {
     items: CreateItemDTO[];

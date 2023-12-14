@@ -9,9 +9,9 @@ import {
     CreateUserDTO,
     LoginUserDTO,
     UpdateUserDTO,
-} from "./user.dto";
-import { User, UserDocument } from "./user.entity";
-import { getHash, getSalt } from "src/authorization/authorization";
+} from "./user.dto.js";
+import { User, UserDocument } from "./user.entity.js";
+import { getHash, getSalt } from "../authorization/authorization.js";
 
 @Injectable()
 export class UserService {

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
-import { item } from "./order.dto";
+import { item } from "./order.dto.js";
 
 @Schema({ timestamps: true })
 export class Order {

@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
-import { TableController } from "./table.controller";
-import { TableService } from "./table.service";
-import { Table, TableSchema } from "./table.entity";
-import { AuthModule } from "../auth/auth.module";
+import { TableController } from "./table.controller.js";
+import { TableService } from "./table.service.js";
+import { Table, TableSchema } from "./table.entity.js";
+import { AuthModule } from "../auth/auth.module.js";
 
 @Module({
     imports: [

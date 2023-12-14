@@ -1,11 +1,11 @@
 import { Model } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
 import { Injectable } from "@nestjs/common";
-import { payloadType } from "../auth/getJWTPayload";
-import { User, UserDocument } from "../user/user.entity";
-import { Table, TableDocument } from "../table/table.entity";
-import { CreateOrderDTO } from "./order.dto";
-import { Order, OrderDocument } from "./order.entity";
+import { payloadType } from "../auth/getJWTPayload.js";
+import { User, UserDocument } from "../user/user.entity.js";
+import { Table, TableDocument } from "../table/table.entity.js";
+import { CreateOrderDTO } from "./order.dto.js";
+import { Order, OrderDocument } from "./order.entity.js";
 
 @Injectable()
 export class OrderService {

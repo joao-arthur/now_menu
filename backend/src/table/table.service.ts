@@ -2,11 +2,11 @@ import { Model } from "mongoose";
 import { Response as ExpressResponse } from "express";
 import { InjectModel } from "@nestjs/mongoose";
 import * as QRCode from "qrcode";
-import * as PDFDocument from "pdfkit";
+import PDFDocument from "pdfkit";
 import { Injectable } from "@nestjs/common";
-import { payloadType } from "../auth/getJWTPayload";
-import { CreateTableDTO } from "./table.dto";
-import { Table, TableDocument } from "./table.entity";
+import { payloadType } from "../auth/getJWTPayload.js";
+import { CreateTableDTO } from "./table.dto.js";
+import { Table, TableDocument } from "./table.entity.js";
 
 type createTableType = {
     tables: CreateTableDTO[];

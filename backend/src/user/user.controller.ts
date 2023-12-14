@@ -9,15 +9,15 @@ import {
     Post,
     UseGuards,
 } from "@nestjs/common";
-import { UserService } from "./user.service";
+import { UserService } from "./user.service.js";
 import {
     CreateUserDTO,
     LoginUserDTO,
     UpdateUserDTO,
-} from "./user.dto";
-import { AuthService } from "../auth/auth.service";
-import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
-import { getJWTPayload } from "src/auth/getJWTPayload";
+} from "./user.dto.js";
+import { AuthService } from "../auth/auth.service.js";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard.js";
+import { getJWTPayload } from "../auth/getJWTPayload.js";
 
 @Controller("user")
 export class UserController {

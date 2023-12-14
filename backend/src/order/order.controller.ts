@@ -10,10 +10,10 @@ import {
     Post,
     UseGuards,
 } from "@nestjs/common";
-import { OrderService } from "./order.service";
-import { CreateOrderDTO } from "./order.dto";
-import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { getJWTPayload } from "../auth/getJWTPayload";
+import { OrderService } from "./order.service.js";
+import { CreateOrderDTO } from "./order.dto.js";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard.js";
+import { getJWTPayload } from "../auth/getJWTPayload.js";
 
 @Controller("order")
 export class OrderController {

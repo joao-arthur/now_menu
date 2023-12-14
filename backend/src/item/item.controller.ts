@@ -12,10 +12,10 @@ import {
     Post,
     UseGuards,
 } from "@nestjs/common";
-import { ItemService } from "./item.service";
-import { CreateItemDTO } from "./item.dto";
-import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { getJWTPayload } from "../auth/getJWTPayload";
+import { ItemService } from "./item.service.js";
+import { CreateItemDTO } from "./item.dto.js";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard.js";
+import { getJWTPayload } from "../auth/getJWTPayload.js";
 
 type updateItemType = {
     name: string;
