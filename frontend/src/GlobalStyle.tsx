@@ -1,4 +1,3 @@
-import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     html {
@@ -10,9 +9,5 @@ export const GlobalStyle = createGlobalStyle`
         
         color: #162437;
         font-family: 'Nunito Sans', sans-serif;
-    }
-
-    body {
-        margin: 0;
     }
 `;
