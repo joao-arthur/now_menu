@@ -1,37 +1,37 @@
 import { useMutation } from "@tanstack/react-query";
-import { Fetch } from "../Core/Fetch";
-import { Toast } from "../Components/Toast";
+import { req } from "../core/req";
+import { Toast } from "../components/Toast";
 
-type userType = {
-    cnpj: string;
-    name: string;
-    telephone: string;
-    cep: string;
-    address: string;
-    district: string;
-    city: string;
-    state: string;
-    email: string;
-    password: string;
+type UserType = {
+    readonly cnpj: string;
+    readonly name: string;
+    readonly telephone: string;
+    readonly cep: string;
+    readonly address: string;
+    readonly district: string;
+    readonly city: string;
+    readonly state: string;
+    readonly email: string;
+    readonly password: string;
 };
 
-type userFromAPI = {
-    cnpj: string;
-    name: string;
-    telephone: string;
-    cep: string;
-    address: string;
-    district: string;
-    city: string;
-    state: string;
-    email: string;
+type UserFromAPI = {
+    readonly cnpj: string;
+    readonly name: string;
+    readonly telephone: string;
+    readonly cep: string;
+    readonly address: string;
+    readonly district: string;
+    readonly city: string;
+    readonly state: string;
+    readonly email: string;
 };
 
-export function useSignUp(user: userType) {
+export function useSignUp(user: UserType) {
     return useMutation({
         mutationKey: ["signUp"],
         mutationFn: () =>
-            Toast(Fetch.post("user", user), {
+            Toast(req.post("user", user), {
                 loading: "Cadastrando...",
                 error: "Não foi possível cadastrar sua conta!",
                 success: `Bem-vindo "${user.name}"!`,
@@ -42,15 +42,15 @@ export function useSignUp(user: userType) {
 export function useGetUser() {
     return useMutation({
         mutationKey: ["getUser"],
-        mutationFn: () => Fetch.get<userFromAPI>("user"),
+        mutationFn: () => req.get<UserFromAPI>("user"),
     });
 }
 
-export function usePatchUser(user: Partial<userFromAPI>) {
+export function usePatchUser(user: Partial<UserFromAPI>) {
     return useMutation({
         mutationKey: ["patchUser"],
         mutationFn: () =>
-            Toast(Fetch.patch("user", user), {
+            Toast(req.patch("user", user), {
                 loading: "Atualizando suas informações...",
                 error: "Não foi possível atualizar seus dados!",
                 success: "Dados atualizados com sucesso!",

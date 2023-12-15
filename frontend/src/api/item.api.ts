@@ -1,29 +1,29 @@
 import { useMutation } from "@tanstack/react-query";
-import { Fetch } from "../Core/Fetch";
+import { req } from "../core/req";
 
-export type itemAPI = {
-    _id: string;
-    userId: string;
-    name: string;
-    description: string;
-    prepareTime: number;
-    price: number;
-    category: string;
-    createdAt: string;
-    updatedAt: string;
+export type ItemAPI = {
+    readonly _id: string;
+    readonly userId: string;
+    readonly name: string;
+    readonly description: string;
+    readonly prepareTime: number;
+    readonly price: number;
+    readonly category: string;
+    readonly createdAt: string;
+    readonly updatedAt: string;
 };
 
-type restaurantAPI = {
-    items: itemAPI[];
-    restaurant: {
-        address: string;
-        cep: string;
-        city: string;
-        district: string;
-        email: string;
-        name: string;
-        state: string;
-        telephone: string;
+type RestaurantAPI = {
+    readonly items: readonly ItemAPI[];
+    readonly restaurant: {
+        readonly address: string;
+        readonly cep: string;
+        readonly city: string;
+        readonly district: string;
+        readonly email: string;
+        readonly name: string;
+        readonly state: string;
+        readonly telephone: string;
     };
 };
 
@@ -31,7 +31,7 @@ export function useGetUserMenu() {
     return useMutation({
         mutationKey: ["getUserMenu"],
         mutationFn: () =>
-            Fetch.get<itemAPI[]>("item/menu").then((items) => ({
+            req.get<ItemAPI[]>("item/menu").then((items) => ({
                 restaurant: {
                     address: "",
                     cep: "",
@@ -70,7 +70,7 @@ export function useGetTableMenu(tableId: string) {
     return useMutation({
         mutationKey: ["getTableMenu"],
         mutationFn: () =>
-            Fetch.get<restaurantAPI>(`item/menu/${tableId}`).then(
+            req.get<RestaurantAPI>(`item/menu/${tableId}`).then(
                 ({ restaurant, items }) => ({
                     restaurant,
                     items: items.map(
@@ -99,42 +99,42 @@ export function useGetTableMenu(tableId: string) {
 export function useDeleteItem(id: string) {
     return useMutation({
         mutationKey: ["deleteItem"],
-        mutationFn: () => Fetch.delete(`item/${id}`),
+        mutationFn: () => req.delete(`item/${id}`),
     });
 }
 
-type itemToPatch = {
-    name: string;
-    description: string;
-    prepareTime: number;
-    price: number;
+type ItemToPatch = {
+    readonly name: string;
+    readonly description: string;
+    readonly prepareTime: number;
+    readonly price: number;
 };
 
-export function usePatchItem(id: string, item: itemToPatch) {
+export function usePatchItem(id: string, item: ItemToPatch) {
     return useMutation({
         mutationKey: ["patchItem"],
-        mutationFn: () => Fetch.patch(`item/${id}`, item),
+        mutationFn: () => req.patch(`item/${id}`, item),
     });
 }
 
-type itemToPost = {
-    name: string;
-    description: string;
-    prepareTime: number;
-    price: number;
-    category: string;
+type ItemToPost = {
+    readonly name: string;
+    readonly description: string;
+    readonly prepareTime: number;
+    readonly price: number;
+    readonly category: string;
 };
 
-export function usePostItem(item: itemToPost) {
+export function usePostItem(item: ItemToPost) {
     return useMutation({
         mutationKey: ["postItem"],
-        mutationFn: () => Fetch.post("item", item),
+        mutationFn: () => req.post("item", item),
     });
 }
 
 export function useGetItem(id: string) {
     return useMutation({
         mutationKey: ["getItem"],
-        mutationFn: () => Fetch.get<itemAPI>(`item/${id}`),
+        mutationFn: () => req.get<ItemAPI>(`item/${id}`),
     });
 }

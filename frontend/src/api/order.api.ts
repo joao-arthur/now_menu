@@ -1,35 +1,35 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Fetch } from "../Core/Fetch";
-import { Toast } from "../Components/Toast";
+import { req } from "../core/req";
+import { Toast } from "../components/Toast";
 
-type orderFromAPI = {
-    _id: string;
-    items: {
-        itemId: string;
-        itemName: string;
-        amount: number;
-        observation: string;
-        prepareTime: number;
-        price: number;
+type OrderFromAPI = {
+    readonly _id: string;
+    readonly items: readonly {
+        readonly itemId: string;
+        readonly itemName: string;
+        readonly amount: number;
+        readonly observation: string;
+        readonly prepareTime: number;
+        readonly price: number;
     }[];
-    tableId: string;
-    tableName: string;
-    customer: string;
-    active: boolean;
-    createdAt: string;
-    updatedAt: string;
+    readonly tableId: string;
+    readonly tableName: string;
+    readonly customer: string;
+    readonly active: boolean;
+    readonly createdAt: string;
+    readonly updatedAt: string;
 };
 
-type orderToAPI = {
-    tableId: string;
-    customer: string;
-    items: {
-        itemId: string;
-        itemName: string;
-        amount: number;
-        observation: string;
-        prepareTime: number;
-        price: number;
+type OrderToAPI = {
+    readonly tableId: string;
+    readonly customer: string;
+    readonly items: readonly {
+        readonly itemId: string;
+        readonly itemName: string;
+        readonly amount: number;
+        readonly observation: string;
+        readonly prepareTime: number;
+        readonly price: number;
     }[];
 };
 
@@ -37,7 +37,7 @@ export function useGetOrders() {
     return useMutation({
         mutationKey: ["ordersList"],
         mutationFn: () =>
-            Fetch.get<orderFromAPI[]>("order").then((orders) =>
+            req.get<OrderFromAPI[]>("order").then((orders) =>
                 orders.map(
                     (
                         {
@@ -64,15 +64,15 @@ export function useGetOrders() {
 export function useGetOrder(id: string) {
     return useQuery({
         queryKey: ["getOrder", id],
-        queryFn: () => Fetch.get<orderFromAPI>(`order/${id}`),
+        queryFn: () => req.get<OrderFromAPI>(`order/${id}`),
     });
 }
 
-export function usePostOrder(order: orderToAPI) {
+export function usePostOrder(order: OrderToAPI) {
     return useMutation({
         mutationKey: ["registerOrder"],
         mutationFn: () =>
-            Toast(Fetch.post("order", order), {
+            Toast(req.post("order", order), {
                 loading: "Realizando o pedido...",
                 error: "Não foi possível fazer o pedido!",
                 success: "Pedido realizado com sucesso!",
@@ -83,6 +83,6 @@ export function usePostOrder(order: orderToAPI) {
 export function useOrderDone(id: string) {
     return useMutation({
         mutationKey: ["patchOrder", id],
-        mutationFn: () => Fetch.patch(`order/${id}`),
+        mutationFn: () => req.patch(`order/${id}`),
     });
 }

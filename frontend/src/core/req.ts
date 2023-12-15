@@ -1,6 +1,6 @@
 type method = "GET" | "POST" | "PATCH" | "DELETE";
 
-const baseURL = import.meta.env.VITE_BACKEND_URL;
+const baseURL = "http://localhost:8080";
 
 function customFetch<T>(
     method: method,
@@ -50,7 +50,7 @@ function deleteFetch<T>(resource: string, content?: object) {
     return customFetch<T>("DELETE", resource, content);
 }
 
-export const Fetch = {
+export const req = {
     get: getFetch,
     post: postFetch,
     patch: patchFetch,
