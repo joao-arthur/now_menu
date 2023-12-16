@@ -1,16 +1,32 @@
-import { ReactChild } from "react";
+import { ReactNode } from "react";
 import { Input, props as InputProps } from "../Input/Input";
-import { Container, Observation, Title } from "./Field.styles";
-export { Title as FieldTitle } from "./Field.styles";
+import styled from "styled-components";
 
-type props = {
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0;
+`;
+
+export const Title = styled.span`
+    font-size: 0.8rem;
+`;
+
+export const Observation = styled.div`
+    display: flex;
+    justify-content: end;
+    margin-top: 5px;
+`;
+
+
+type Props = {
     title: string;
-    observation?: ReactChild;
+    observation?: ReactNode;
     className?: string;
 } & InputProps;
 
 export function Field(
-    { title, observation, className, ...inputProps }: props,
+    { title, observation, className, ...inputProps }: Props,
 ) {
     return (
         <Container className={className}>

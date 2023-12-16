@@ -1,12 +1,12 @@
 import { CustomInput } from "./Input/Input.styles";
 
-export type props = {
-    name: string;
-    value: string | undefined;
-    onChange: (newValue: string) => void;
+type Props = {
+    readonly name: string;
+    readonly value: string | undefined;
+    readonly onChange: (newValue: string) => void;
 };
 
-export function MoneyInput({ name, value, onChange }: props) {
+export function MoneyInput({ name, value, onChange }: Props) {
     function handleChange(newValue: string) {
         const treatedNewValue = newValue.slice(3);
         if (/[^0-9|^,]/.test(treatedNewValue)) return;

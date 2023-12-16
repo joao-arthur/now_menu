@@ -1,19 +1,38 @@
-import { CustomInput, TextArea } from "./Input.styles";
+import styled from "styled-components";
 import InputMask from "react-input-mask";
 import { MoneyInput } from "../MoneyInput";
 
-export type props = {
-    type: string;
-    name: string;
-    placeholder?: string;
-    required?: boolean;
-    disabled?: boolean;
-    value?: string | number | readonly string[] | undefined;
-    onChange?: (newValue: string) => void;
-    min?: number;
-    max?: number;
-    className?: string;
-    mask?: string;
+
+export const CustomInput = styled.input`
+    border: none;
+    background-color: whitesmoke;
+    padding: 8px 20px;
+    border-radius: 5px;
+`;
+
+export const TextArea = styled.textarea`
+    border: none;
+    background-color: whitesmoke;
+    padding: 8px 20px;
+    border-radius: 5px;
+    resize: none;
+    font-family: inherit;
+    font-size: 0.8rem;
+    height: 100px;
+`;
+
+export type Props = {
+    readonly type: string;
+    readonly name: string;
+    readonly placeholder?: string;
+    readonly required?: boolean;
+    readonly disabled?: boolean;
+    readonly value?: string | number | readonly string[] | undefined;
+    readonly onChange?: (newValue: string) => void;
+    readonly min?: number;
+    readonly max?: number;
+    readonly className?: string;
+    readonly mask?: string;
 };
 
 export function Input({
@@ -28,7 +47,7 @@ export function Input({
     max,
     className,
     mask,
-}: props) {
+}: Props) {
     if (type === "money") {
         return (
             <MoneyInput

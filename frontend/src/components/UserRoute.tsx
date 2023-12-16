@@ -2,13 +2,13 @@ import { ComponentType } from "react";
 import { redirect, Route } from "react-router-dom";
 import { useAppSelector } from "../hooks";
 
-type props = {
-    path: string;
-    exact: true;
-    component: ComponentType;
+type Props = {
+    readonly path: string;
+    readonly exact: true;
+    readonly component: ComponentType;
 };
 
-export function UserRoute({ exact, path, component }: props) {
+export function UserRoute({ exact, path, component }: Props) {
     const shouldLogin = useAppSelector(
         ({ user }) => !user.logged && user.verified,
     );

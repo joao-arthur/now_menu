@@ -1,12 +1,18 @@
-import { FormEvent, ReactChild } from "react";
-import { CustomForm } from "./Form.styles";
+import { FormEvent, ReactNode } from "react";
+import styled from "styled-components";
 
-type props = {
-    children: ReactChild | ReactChild[];
-    onSubmit: () => void;
+export const CustomForm = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
+
+
+type Props = {
+    readonly children: ReactNode | ReactNode[];
+    readonly onSubmit: () => void;
 };
 
-export function Form({ children, onSubmit }: props) {
+export function Form({ children, onSubmit }: Props) {
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         onSubmit();

@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom";
-import { ModalComponent, modalProps } from "./ModalComponent";
+import { ModalComponent, ModalProps } from "./ModalComponent";
 
-export type managerProps = modalProps & {
-    visible: boolean;
+type ManagerProps = ModalProps & {
+    readonly visible: boolean;
 };
 
-export function Modal({ children, visible, ...props }: managerProps) {
+export function Modal({ children, visible, ...props }: ManagerProps) {
     if (!visible) return null;
     const modalRoot = document.getElementById("modal");
     if (!modalRoot) return null;

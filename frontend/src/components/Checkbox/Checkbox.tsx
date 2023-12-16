@@ -1,15 +1,28 @@
-import { ReactChild } from "react";
-import { Container, Input, Text } from "./Checkbox.styles";
+import { ReactNode } from "react";
+import styled from "styled-components";
 
-type props = {
-    children: ReactChild | ReactChild[];
-    value: boolean;
-    onChange: (newValue: boolean) => void;
-    disabled?: boolean;
+export const Input = styled.input`
+    cursor: pointer;
+`;
+
+export const Container = styled.div`
+    margin-top: 20px;
+    margin-bottom: 10px;
+`;
+
+export const Text = styled.span`
+    font-size: 0.9rem;
+`;
+
+type Props = {
+    readonly children: ReactNode | ReactNode[];
+    readonly value: boolean;
+    readonly onChange: (newValue: boolean) => void;
+    readonly disabled?: boolean;
 };
 
 export function Checkbox(
-    { children, value, onChange, disabled }: props,
+    { children, value, onChange, disabled }: Props,
 ) {
     return (
         <Container>

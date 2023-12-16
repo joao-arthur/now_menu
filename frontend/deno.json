@@ -5,9 +5,6 @@
         "indentWidth": 4
     },
     "lint": {
-        "include": ["src/"],
-        "rules": {
-            "include": ["explicit-function-return-type"]
-        }
+        "include": ["src/"]
     }
 }

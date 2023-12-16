@@ -1,16 +1,20 @@
 import { memo } from "react";
 import { Images } from "./Images";
-import { IMG } from "./Image.styles";
+import styled from "styled-components";
 
-type names = keyof typeof Images;
+export const IMG = styled.img`
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+`;
 
-type props = {
-    name: names;
-    width?: number;
-    height?: number;
+type Props = {
+    readonly name: keyof typeof Images;
+    readonly width?: number;
+    readonly height?: number;
 };
 
-export const Image = memo(({ name, height, width }: props) => {
+export const Image = memo(({ name, height, width }: Props) => {
     const selectedImage = Images[name];
 
     return (

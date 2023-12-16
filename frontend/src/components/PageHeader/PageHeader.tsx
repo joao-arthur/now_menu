@@ -1,11 +1,24 @@
-import { Container, Link } from "./PageHeader.styles";
+import styled from "styled-components";
+import { Link as BaseLink } from "../Layout";
 
-type props = {
-    goBackLink?: string;
-    showSkipLink?: boolean;
+export const Container = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+`;
+
+export const Link = styled(BaseLink)`
+    font-size: 0.8rem;
+`;
+
+
+type Props = {
+    readonly goBackLink?: string;
+    readonly showSkipLink?: boolean;
 };
 
-export function PageHeader({ goBackLink, showSkipLink }: props) {
+export function PageHeader({ goBackLink, showSkipLink }: Props) {
     return (
         <Container>
             <div>
