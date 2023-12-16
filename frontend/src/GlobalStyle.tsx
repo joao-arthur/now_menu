@@ -1,4 +1,3 @@
-
 export const GlobalStyle = createGlobalStyle`
     html {
         --primary: #ff4060;
