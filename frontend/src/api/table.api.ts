@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { req } from "../core/req";
-import { Toast } from "../components/Toast";
+import { req } from "@/core/req";
+import { Toast } from "@/components/Toast";
 
 export type TableAPI = {
     readonly _id: string;

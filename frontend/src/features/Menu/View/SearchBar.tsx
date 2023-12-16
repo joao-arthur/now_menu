@@ -1,5 +1,5 @@
-import { Input } from "../../../components/Input/Input";
-import { menuInfoActions } from "../../../Domains/menuInfo";
+import { Input } from "@/components/Input/Input";
+import { menuInfoActions } from "@/domains/menuInfo";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 
 export function SearchBar() {

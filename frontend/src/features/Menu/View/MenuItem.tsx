@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../../hooks";
-import { PrimaryText } from "../../../../components/Layout";
-import { item } from "../../../../Domains/menuInfo";
-import { Link } from "../../../../components/Layout";
-import { useGetMockedImage } from "../../../../api/image.api";
+import { PrimaryText } from "@/components/Layout";
+import { item } from "@/domains/menuInfo";
+import { Link } from "@/components/Layout";
+import { useGetMockedImage } from "@/api/image.api";
 import styled from "styled-components";
 
 export const Container = styled.div`

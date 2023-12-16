@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import { PrimaryText } from "../../../../components/Layout";
-import { menuInfoActions } from "../../../../Domains/menuInfo";
+import { PrimaryText } from "@/components/Layout";
+import { menuInfoActions } from "@/domains/menuInfo";
 import styled from "styled-components";
 
 export const Container = styled.div`

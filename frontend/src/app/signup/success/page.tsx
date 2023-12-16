@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { redirect } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Image } from "../../components/Image/Image";
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+import { Image } from "@/components/Image/Image";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     ButtonLink,
     FlexContainer,
     FlexContent,
     Subtitle,
     Title,
-} from "../../components/Layout";
-import { userActions } from "../../Domains/user";
-import { signUpActions } from "../../Domains/signUp";
+} from "@/components/Layout";
+import { userActions } from "@/domains/user";
+import { signUpActions } from "@/domains/signUp";
 
 export function SignUpSuccess() {
     const dispatch = useAppDispatch();

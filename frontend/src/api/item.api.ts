@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { req } from "../core/req";
+import { req } from "@/core/req";
 
 export type ItemAPI = {
     readonly _id: string;

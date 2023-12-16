@@ -4,9 +4,9 @@ import {
     FlexContent,
     Subtitle,
     Title,
-} from "../../../../components/Layout";
-import { Image } from "../../../../components/Image/Image";
-import { PageHeader } from "../../../../components/PageHeader/PageHeader";
+} from "@/components/Layout";
+import { Image } from "@/components/Image/Image";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 
 export function MenuRegisterSuccess() {
     return (

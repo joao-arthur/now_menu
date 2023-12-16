@@ -6,11 +6,11 @@ import {
     Padding,
     Subtitle,
     Title,
-} from "../../../components/Layout";
-import { PageHeader } from "../../../components/PageHeader/PageHeader";
-import { useGetOrder, useOrderDone } from "../../../api/order.api";
+} from "@/components/Layout";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
+import { useGetOrder, useOrderDone } from "@/api/order.api";
 import styled from "styled-components";
-import { SecondaryButton } from "../../../components/Layout";
+import { SecondaryButton } from "@/components/Layout";
 
 export const Content = styled.div`
     padding: 10px 0;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { TableAPI, useDeleteTable } from "../../../api/table.api";
-import { Modal } from "../../../components/Modal/Modal";
+import { TableAPI, useDeleteTable } from "@/api/table.api";
+import { Modal } from "@/components/Modal/Modal";
 import styled from "styled-components";
-import { Icon } from "../../../components/Icon/Icon";
+import { Icon } from "@/components/Icon/Icon";
 
 export const Container = styled.div`
     display: flex;

@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
 import { useAppDispatch } from "../../../../hooks";
-import { CollapsableList } from "../../../../components/CollapsableList/CollapsableList";
-import { PageHeader } from "../../../../components/PageHeader/PageHeader";
+import { CollapsableList } from "@/components/CollapsableList/CollapsableList";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     FlexContainer,
     FlexContent,
     Padding,
     SecondaryButton,
     Title,
-} from "../../../../components/Layout";
-import { Modal } from "../../../../components/Modal/Modal";
+} from "@/components/Layout";
+import { Modal } from "@/components/Modal/Modal";
 import {
     useDeleteItem,
     useGetUserMenu,
-} from "../../../../api/item.api";
-import { item } from "../../../../Domains/menuInfo";
-import { menuRegisterActions } from "../../../../Domains/menuRegister";
+} from "@/api/item.api";
+import { item } from "@/domains/menuInfo";
+import { menuRegisterActions } from "@/domains/menuRegister";
 import styled from "styled-components";
-import { Input as BaseInput } from "../../../../components/Input/Input";
+import { Input as BaseInput } from "@/components/Input/Input";
 
 export const Category = styled.span`
     margin-bottom: 5px;

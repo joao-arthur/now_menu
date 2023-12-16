@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { redirect, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { Field } from "../../../components/Field/Field";
-import { Form } from "../../../components/Form/Form";
+import { Field } from "@/components/Field/Field";
+import { Form } from "@/components/Form/Form";
 import {
     FlexContainer,
     FlexContent,
     Padding,
-} from "../../../components/Layout";
-import { PageHeader } from "../../../components/PageHeader/PageHeader";
-import { orderRegisterActions } from "../../../Domains/orderRegister";
+} from "@/components/Layout";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
+import { orderRegisterActions } from "@/domains/orderRegister";
 import { Amount } from "./Amount/Amount";
-import { useGetMockedImage } from "../../../api/image.api";
+import { useGetMockedImage } from "@/api/image.api";
 import styled from "styled-components";
 
 export const Image = styled.img`

@@ -1,9 +1,9 @@
 import { useAppDispatch } from "../../../../hooks";
-import { PrimaryText } from "../../../../components/Layout";
-import { orderRegisterActions } from "../../../../Domains/orderRegister";
-import { item } from "../../../../Domains/menuInfo";
+import { PrimaryText } from "@/components/Layout";
+import { orderRegisterActions } from "@/domains/orderRegister";
+import { item } from "@/domains/menuInfo";
 import { Amount } from "../Amount/Amount";
-import { useGetMockedImage } from "../../../../api/image.api";
+import { useGetMockedImage } from "@/api/image.api";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 

@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
-import { Image } from "../../../components/Image/Image";
+import { Image } from "@/components/Image/Image";
 import {
     FlexContainer,
     FlexContent,
     Link,
     Subtitle,
     Title,
-} from "../../../components/Layout";
-import { PageHeader } from "../../../components/PageHeader/PageHeader";
+} from "@/components/Layout";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 import { OrderAgain } from "./OrderSuccess.styles";
 import styled from "styled-components";
-import { PrimaryText } from "../../../components/Layout";
+import { PrimaryText } from "@/components/Layout";
 
 export const OrderAgain = styled(PrimaryText)`
     text-align: center;

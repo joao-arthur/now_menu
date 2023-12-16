@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAppDispatch } from "../../hooks";
-import { Field } from "../../components/Field/Field";
-import { Form } from "../../components/Form/Form";
-import { Image } from "../../components/Image/Image";
+import { Field } from "@/components/Field/Field";
+import { Form } from "@/components/Form/Form";
+import { Image } from "@/components/Image/Image";
 import {
     Button,
     FlexContainer,
@@ -14,9 +14,9 @@ import {
     SecondaryAction,
     Subtitle,
     Title,
-} from "../../components/Layout";
-import { userActions } from "../../Domains/user";
-import { signUpActions } from "../../Domains/signUp";
+} from "@/components/Layout";
+import { userActions } from "@/domains/user";
+import { signUpActions } from "@/domains/signUp";
 import { useSignIn } from "./useSignIn";
 
 export function SignIn() {

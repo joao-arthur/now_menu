@@ -1,9 +1,9 @@
-import { decodeJWT } from "../../Core/DecodeJWT";
-import { UserPageFooter } from "../../components/UserPageFooter/UserPageFooter";
+import { decodeJWT } from "@/core/decodeJWT";
+import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
 import {
     FlexContainer,
     FlexContentMax,
-} from "../../components/Layout";
+} from "@/components/Layout";
 import styled from "styled-components";
 
 export const Iframe = styled.iframe`

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useAppDispatch } from "../../hooks";
-import { userActions } from "../../Domains/user";
+import { userActions } from "@/domains/user";
 import styled from "styled-components";
 
 type ContainerProps = {

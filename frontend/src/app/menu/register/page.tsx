@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import { req } from "../../../../core/req";
-import { CollapsableList } from "../../../../components/CollapsableList/CollapsableList";
-import { PageHeader } from "../../../../components/PageHeader/PageHeader";
+import { req } from "@/core/req";
+import { CollapsableList } from "@/components/CollapsableList/CollapsableList";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     Button,
     FlexContainer,
@@ -14,13 +14,12 @@ import {
     Subtitle,
     Text,
     Title,
-} from "../../../../components/Layout";
-import { menuRegisterActions } from "../../../../Domains/menuRegister";
-import { Toast } from "../../../../components/Toast";
-import { Modal } from "../../../../components/Modal/Modal";
-import { Category, Input } from "./MenuRegisterInfo.styles";
+} from "@/components/Layout";
+import { menuRegisterActions } from "@/domains/menuRegister";
+import { Toast } from "@/components/Toast";
+import { Modal } from "@/components/Modal/Modal";
 import styled from "styled-components";
-import { Input as BaseInput } from "../../../../components/Input/Input";
+import { Input as BaseInput } from "@/components/Input/Input";
 
 export const Category = styled.span`
     margin-bottom: 5px;

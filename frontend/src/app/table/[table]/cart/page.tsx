@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { redirect, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { AnonimousPageFooter } from "../../../components/AnonimousPageFooter/AnonimousPageFooter";
-import { Field } from "../../../components/Field/Field";
-import { Form } from "../../../components/Form/Form";
+import { AnonimousPageFooter } from "@/components/AnonimousPageFooter/AnonimousPageFooter";
+import { Field } from "@/components/Field/Field";
+import { Form } from "@/components/Form/Form";
 import {
     Button,
     FlexContainer,
@@ -11,12 +11,12 @@ import {
     Padding,
     PrimaryText,
     Title,
-} from "../../../components/Layout";
-import { PageHeader } from "../../../components/PageHeader/PageHeader";
-import { orderRegisterActions } from "../../../Domains/orderRegister";
+} from "@/components/Layout";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
+import { orderRegisterActions } from "@/domains/orderRegister";
 import { CartItem } from "./CartItem/CartItem";
-import { item } from "../../../Domains/menuInfo";
-import { usePostOrder } from "../../../api/order.api";
+import { item } from "@/domains/menuInfo";
+import { usePostOrder } from "@/api/order.api";
 import styled from "styled-components";
 
 export const ValueContainer = styled.div`

@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
+
 import { redirect, useParams } from "react-router-dom";
 import {
     Field,
-    FieldTitle,
-} from "../../../../components/Field/Field";
-import { PageHeader } from "../../../../components/PageHeader/PageHeader";
+    Title as FieldTitle,
+} from "@/components/Field/Field";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     Button,
     FlexContainer,
     FlexContent,
     Padding,
     Title,
-} from "../../../../components/Layout";
-import { Form } from "../../../../components/Form/Form";
-import { useGetItem, usePatchItem } from "../../../../api/item.api";
+} from "@/components/Layout";
+import { Form } from "@/components/Form/Form";
+import { useGetItem, usePatchItem } from "@/api/item.api";
 import styled from "styled-components";
-import { Field } from "../../../../components/Field/Field";
 
 export const FieldsContainer = styled.div`
     display: flex;

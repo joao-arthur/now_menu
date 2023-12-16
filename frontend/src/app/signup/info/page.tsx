@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { redirect } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Field } from "../../components/Field/Field";
-import { Form } from "../../components/Form/Form";
-import { Image } from "../../components/Image/Image";
+import { Field } from "@/components/Field/Field";
+import { Form } from "@/components/Form/Form";
+import { Image } from "@/components/Image/Image";
 import {
     Button,
     FlexContainer,
@@ -14,8 +14,8 @@ import {
     SecondaryAction,
     Subtitle,
     Title,
-} from "../../components/Layout";
-import { signUpActions } from "../../Domains/signUp";
+} from "@/components/Layout";
+import { signUpActions } from "@/domains/signUp";
 
 export function SignUpGeneralInfo() {
     const dispatch = useAppDispatch();

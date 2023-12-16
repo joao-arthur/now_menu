@@ -6,9 +6,9 @@ import {
     FlexContent,
     Link,
     PrimaryText,
-} from "../../components/Layout";
-import { userActions } from "../../Domains/user";
-import { UserPageFooter } from "../../components/UserPageFooter/UserPageFooter";
+} from "@/components/Layout";
+import { userActions } from "@/domains/user";
+import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
 
 export const List = styled.ul`
     list-style: none;

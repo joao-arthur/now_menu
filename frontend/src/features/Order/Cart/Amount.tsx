@@ -1,4 +1,4 @@
-import { Icon } from "../../../../components/Icon/Icon";
+import { Icon } from "@/components/Icon/Icon";
 import styled from "styled-components";
 
 export const Container = styled.div`

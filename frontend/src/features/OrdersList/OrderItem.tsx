@@ -1,5 +1,5 @@
-import { Link, PrimaryText } from "../../../components/Layout";
-import { order } from "../../../Domains/orders";
+import { Link, PrimaryText } from "@/components/Layout";
+import { order } from "@/domains/orders";
 import styled from "styled-components";
 
 export const Container = styled.div`

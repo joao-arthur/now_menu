@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { UserPageFooter } from "../../../components/UserPageFooter/UserPageFooter";
-import { AnonimousPageFooter } from "../../../components/AnonimousPageFooter/AnonimousPageFooter";
-import { menuInfoActions } from "../../../Domains/menuInfo";
+import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
+import { AnonimousPageFooter } from "@/components/AnonimousPageFooter/AnonimousPageFooter";
+import { menuInfoActions } from "@/domains/menuInfo";
 import {
     FlexContainer,
     FlexContent,
     Link,
     Title,
-} from "../../../components/Layout";
+} from "@/components/Layout";
 import { SearchBar } from "./SearchBar";
 import { MostOrdered } from "./MostOrdered/MostOrdered";
 import { CategoryList } from "./CategoryList/CategoryList";
@@ -17,7 +17,7 @@ import { MenuItemList } from "./MenuItemList/MenuItemList";
 import {
     useGetTableMenu,
     useGetUserMenu,
-} from "../../../api/item.api";
+} from "@/api/item.api";
 import styled from "styled-components";
 
 export const Container = styled.div`

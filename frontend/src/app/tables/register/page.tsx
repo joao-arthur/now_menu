@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
-import { Field } from "../../components/Field/Field";
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+import { Field } from "@/components/Field/Field";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     Button,
     FlexContainer,
@@ -9,13 +9,13 @@ import {
     Padding,
     Subtitle,
     Title,
-} from "../../components/Layout";
-import { Form } from "../../components/Form/Form";
+} from "@/components/Layout";
+import { Form } from "@/components/Form/Form";
 import {
     TableAPI,
     useGetTables,
     usePostTable,
-} from "../../api/table.api";
+} from "@/api/table.api";
 import { TableItem } from "./TableItem/TableItem";
 import styled from "styled-components";
 

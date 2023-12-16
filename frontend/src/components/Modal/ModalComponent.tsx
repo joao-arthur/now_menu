@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {
     Button as ButtonBase,
     SecondaryButton as SecondaryButtonBase,
-} from "../../components/Layout";
+} from "@/components/Layout";
 
 export const Block = styled.div`
     position: fixed;

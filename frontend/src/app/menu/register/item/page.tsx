@@ -1,22 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
-import { useAppSelector } from "../../../../hooks";
-import {
-    Field,
-    FieldTitle,
-} from "../../../../components/Field/Field";
-import { PageHeader } from "../../../../components/PageHeader/PageHeader";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { Field, FieldTitle } from "@/components/Field/Field";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     Button,
     FlexContainer,
     FlexContent,
     Padding,
+    Subtitle,
     Title,
-} from "../../../../components/Layout";
-import { Form } from "../../../../components/Form/Form";
-import { usePostItem } from "../../../../api/item.api";
+} from "@/components/Layout";
+import { Form } from "@/components/Form/Form";
+import { menuRegisterActions } from "@/domains/menuRegister";
 import styled from "styled-components";
-import { Field } from "../../../../components/Field/Field";
+import { Field } from "@/components/Field/Field";
 
 export const FieldsContainer = styled.div`
     display: flex;
@@ -29,40 +27,88 @@ export const CustomField = styled(Field)`
 `;
 
 
-export function MenuItemNew() {
+export function MenuItemRegister() {
+    const dispatch = useAppDispatch();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [prepareHours, setPrepareHours] = useState(0);
     const [prepareMinutes, setPrepareMinutes] = useState(0);
     const [prepareSeconds, setPrepareSeconds] = useState(0);
     const [price, setPrice] = useState("");
-    const category = useAppSelector(
-        ({ menuRegister }) => menuRegister.currentCategory,
+    const [submitted, setSubmitted] = useState(false);
+    const editingItem = useAppSelector(
+        ({ menuRegister }) => menuRegister.currentItemId,
     );
-    const { isSuccess, mutate } = usePostItem({
-        name,
-        description,
-        prepareTime: prepareHours * 3600 + prepareMinutes * 60 +
-            prepareSeconds,
-        price: Number(price.replace(",", ".")) * 100,
-        category: category as string,
-    });
+    const items = useAppSelector(({ menuRegister }) =>
+        menuRegister.categories.flatMap(({ items }) => items)
+    );
     const validForm = name &&
         description &&
         (prepareHours || prepareMinutes || prepareSeconds) &&
         price;
 
+    useEffect(() => {
+        if (!editingItem) return;
+        const currentItem = items.find(({ id }) =>
+            id === editingItem
+        );
+        if (!currentItem) return;
+
+        const hours = Math.floor(currentItem.prepareTime / 3600);
+        const minutes = Math.floor(
+            (currentItem.prepareTime - hours * 3600) / 60,
+        );
+        const seconds = Math.floor(
+            currentItem.prepareTime - hours * 3600 - minutes * 60,
+        );
+
+        setName(currentItem.name);
+        setDescription(currentItem.description);
+        setPrepareHours(hours);
+        setPrepareMinutes(minutes);
+        setPrepareSeconds(seconds);
+        setPrice(
+            (currentItem.price / 100).toString().replace(".", ","),
+        );
+    }, []);
+
     function submit() {
         if (!validForm) return;
-        mutate();
+        if (editingItem) {
+            dispatch(
+                menuRegisterActions.editCategoryItem({
+                    name,
+                    description,
+                    prepareTime: prepareHours * 3600 +
+                        prepareMinutes * 60 +
+                        prepareSeconds,
+                    price: Number(price.replace(",", ".")) * 100,
+                }),
+            );
+        } else {
+            dispatch(
+                menuRegisterActions.addCategoryItem({
+                    name,
+                    description,
+                    prepareTime: prepareHours * 3600 +
+                        prepareMinutes * 60 +
+                        prepareSeconds,
+                    price: Number(price.replace(",", ".")) * 100,
+                }),
+            );
+        }
+        setSubmitted(true);
     }
 
-    if (isSuccess) redirect("/menu/edit");
+    if (submitted) {
+        redirect("/menu/register");
+    }
     return (
         <FlexContainer>
             <FlexContent>
-                <PageHeader goBackLink="/menu/edit" />
+                <PageHeader goBackLink="/menu/register" />
                 <Title>Adicionar produto</Title>
+                <Subtitle>Por favor preencha para continuar</Subtitle>
                 <Form onSubmit={submit}>
                     <Field
                         title="Nome"
@@ -148,10 +194,12 @@ export function MenuItemNew() {
                     />
                     <Field title="Foto" name="picture" type="file" />
                     <Button disabled={!validForm}>
-                        Adicionar produto
+                        {editingItem
+                            ? "Salvar edição"
+                            : "Adicionar produto"}
                     </Button>
-                    <Padding />
                 </Form>
+                <Padding />
             </FlexContent>
         </FlexContainer>
     );

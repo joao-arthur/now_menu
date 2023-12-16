@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { Fetch } from "../../core/req";
-import { decodeJWT } from "../../Core/DecodeJWT";
-import { Toast } from "../../components/Toast";
+import { req } from "@/core/req";
+import { decodeJWT } from "@/core/decodeJWT";
+import { Toast } from "@/components/Toast";
 
 type TokenAPI = {
     readonly token: string;

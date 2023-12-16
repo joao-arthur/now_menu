@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { redirect } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Checkbox } from "../../components/Checkbox/Checkbox";
-import { Field } from "../../components/Field/Field";
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+import { Checkbox } from "@/components/Checkbox/Checkbox";
+import { Field } from "@/components/Field/Field";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     Button,
     FlexContainer,
@@ -13,10 +13,10 @@ import {
     SecondaryAction,
     Subtitle,
     Title,
-} from "../../components/Layout";
-import { signUpActions } from "../../Domains/signUp";
-import { Form } from "../../components/Form/Form";
-import { useSignUp } from "../../api/user.api";
+} from "@/components/Layout";
+import { signUpActions } from "@/domains/signUp";
+import { Form } from "@/components/Form/Form";
+import { useSignUp } from "@/api/user.api";
 
 export function SignUpAccount() {
     const dispatch = useAppDispatch();

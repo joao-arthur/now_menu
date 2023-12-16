@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
-import { useGetUser, usePatchUser } from "../../api/user.api";
-import { Field } from "../../components/Field/Field";
-import { Form } from "../../components/Form/Form";
+import { useGetUser, usePatchUser } from "@/api/user.api";
+import { Field } from "@/components/Field/Field";
+import { Form } from "@/components/Form/Form";
 import {
     Button,
     FlexContainer,
     FlexContent,
     Title,
-} from "../../components/Layout";
-import { PageHeader } from "../../components/PageHeader/PageHeader";
+} from "@/components/Layout";
+import { PageHeader } from "@/components/PageHeader/PageHeader";
 
 export function EditPersonalInfo() {
     const [cnpj, setCNPJ] = useState("");

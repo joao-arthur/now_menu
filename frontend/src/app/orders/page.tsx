@@ -6,10 +6,10 @@ import {
     FlexContent,
     Padding,
     Text,
-} from "../../components/Layout";
-import { UserPageFooter } from "../../components/UserPageFooter/UserPageFooter";
-import { ordersActions } from "../../Domains/orders";
-import { useGetOrders } from "../../api/order.api";
+} from "@/components/Layout";
+import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
+import { ordersActions } from "@/domains/orders";
+import { useGetOrders } from "@/api/order.api";
 import { OrderItem } from "./OrderItem/OrderItem";
 
 export function OrdersList() {
