@@ -1,6 +1,28 @@
 import styled from "styled-components";
 import BaseLink from "next/link";
 
+
+
+export const FlexContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+`;
+
+export const FlexContent = styled.div`
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    overflow: auto;
+    height: 100%;
+`;
+
+
+
+
 export const Link = styled(BaseLink)`
     text-decoration: none;
     color: inherit;
@@ -90,22 +112,8 @@ export const SecondaryAction = styled.div`
     padding-bottom: 2rem;
 `;
 
-export const FlexContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-`;
 
-export const FlexContent = styled.div`
-    padding-left: 10%;
-    padding-right: 10%;
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    overflow: auto;
-    height: 100%;
-`;
+
 
 export const Padding = styled.div`
     padding-bottom: 2rem;
