@@ -1,12 +1,12 @@
-import ImageNext from "next/image";
+import Image from "next/image";
 
 export function LogoImg() {
-  return (
-    <ImageNext
-      src="/logo.svg"
-      height={250}
-      width={250}
-      alt=""
-    />
-  );
+    return (
+        <Image
+            src="/logo.svg"
+            height={250}
+            width={250}
+            alt=""
+        />
+    );
 }

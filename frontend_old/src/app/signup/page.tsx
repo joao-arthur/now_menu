@@ -3,9 +3,20 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSignUpStore } from "@/lib/session/useSignUpStore";
-
+import { Field } from "@/components/Field/Field";
+import { Form } from "@/components/Form/Form";
+import {
+    Button,
+    FlexContainer,
+    FlexContent,
+    Link,
+    LogoContainer,
+    PrimaryText,
+    SecondaryAction,
+    Subtitle,
+    Title,
+} from "@/components/Layout";
 import { LogoImg } from "@/components/Image/LogoImg";
-import { Layout } from "@/components/layout/Layout";
 
 export default function SignUpPage() {
     const router = useRouter();
@@ -27,16 +38,52 @@ export default function SignUpPage() {
     }
 
     return (
-        <Layout.Container>
-            <Layout.Content>
-            <LogoImg/>
-            <div className="">
-            <p className="">eriueriuh</p>
-            <p className="bg-blue-100">eriueriuh</p>
-            <p className="">eriueriuh</p>
-
-            </div>
-            </Layout.Content>
-        </Layout.Container>
+        <FlexContainer>
+            <FlexContent>
+                <LogoContainer>
+                    <LogoImg />
+                </LogoContainer>
+                <Title>Cadastrar</Title>
+                <Subtitle>
+                    Por favor cadastre-se para continuar
+                </Subtitle>
+                <Form onSubmit={submit}>
+                    <Field
+                        title="CNPJ"
+                        name="cnpj"
+                        type="mask"
+                        mask="99.999.999/9999-99"
+                        required
+                        value={values.cnpj}
+                        onChange={(newValue) => setCNPJ(newValue)}
+                    />
+                    <Field
+                        title="Nome do estabelecimento"
+                        name="name"
+                        type="text"
+                        required
+                        value={values.name}
+                        onChange={(newValue) => setName(newValue)}
+                    />
+                    <Field
+                        title="Telefone"
+                        name="telephone"
+                        type="mask"
+                        mask="(99) 9 9999-9999"
+                        required
+                        value={values.telephone}
+                        onChange={(newValue) =>
+                            setTelephone(newValue)}
+                    />
+                    <Button disabled={!validForm}>continuar</Button>
+                </Form>
+                <SecondaryAction>
+                    <Link href="/signin">
+                        Já possui uma conta?{" "}
+                        <PrimaryText>Entrar!</PrimaryText>
+                    </Link>
+                </SecondaryAction>
+            </FlexContent>
+        </FlexContainer>
     );
 }

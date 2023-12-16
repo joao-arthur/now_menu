@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import BaseLink from "next/link";
 
-
-
 export const FlexContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -19,6 +17,29 @@ export const FlexContent = styled.div`
     overflow: auto;
     height: 100%;
 `;
+
+export const Title = styled.h3`
+    margin: 0;
+`;
+
+export const Subtitle = styled.h5`
+    margin: 0;
+    font-weight: normal;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+`;
+
+export const Text = styled.span`
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 5px;
+`;
+
+export const PrimaryText = styled.span`
+    color: var(--primary);
+    font-weight: bold;
+`;
+
 
 
 
@@ -74,31 +95,15 @@ export const SecondaryButton = styled.button`
     cursor: pointer;
 `;
 
-export const Text = styled.span`
-    font-size: 0.8rem;
-    color: #777;
-    margin-top: 5px;
-`;
+
 
 export const AloneTitle = styled.h3`
     margin: 40px 0 10px;
 `;
 
-export const Title = styled.h3`
-    margin: 0;
-`;
 
-export const Subtitle = styled.h5`
-    margin: 0;
-    font-weight: normal;
-    font-size: 0.8rem;
-    margin-bottom: 10px;
-`;
 
-export const PrimaryText = styled.span`
-    color: var(--primary);
-    font-weight: bold;
-`;
+
 
 export const LogoContainer = styled.div`
     align-self: center;

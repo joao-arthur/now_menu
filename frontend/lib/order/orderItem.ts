@@ -3,4 +3,3 @@ export type OrderItem = {
     readonly amount: number;
     readonly observation: string;
 };
-

@@ -1,12 +1,12 @@
-import ImageNext from "next/image";
+import Image from "next/image";
 
 export function SignUpSuccessImg() {
-  return (
-    <ImageNext
-      src="orderSuccess.svg"
-      height={300}
-      width={300}
-      alt=""
-    />
-  );
+    return (
+        <Image
+            src="orderSuccess.svg"
+            height={300}
+            width={300}
+            alt=""
+        />
+    );
 }

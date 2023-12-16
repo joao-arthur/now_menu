@@ -1,8 +1,7 @@
 import { nanoid } from "nanoid";
 import { create } from "zustand";
 
-import {MenuItem,UnsavedMenuItem,Category} from './menuItem';
-
+import { Category, MenuItem, UnsavedMenuItem } from "./menuItem";
 
 type MenuRegisterStore = {
     readonly categories: readonly Category[];

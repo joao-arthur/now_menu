@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
 import type { ReactNode } from "react";
 
 type Props = {
     readonly children: ReactNode;
-}
+};
 
-export function Container({children}:Props): ReactNode {
+export function Container({ children }: Props): ReactNode {
     return (
-        <div className="flex flex-col w-full h-full">
+        <div className="flex flex-col w-full h-full items-center">
             {children}
         </div>
-    )
+    );
 }
