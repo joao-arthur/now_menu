@@ -27,6 +27,21 @@ type RestaurantAPI = {
     };
 };
 
+type ItemToPatch = {
+    readonly name: string;
+    readonly description: string;
+    readonly prepareTime: number;
+    readonly price: number;
+};
+
+type ItemToPost = {
+    readonly name: string;
+    readonly description: string;
+    readonly prepareTime: number;
+    readonly price: number;
+    readonly category: string;
+};
+
 export function useGetUserMenu() {
     return useMutation({
         mutationKey: ["getUserMenu"],
@@ -103,27 +118,12 @@ export function useDeleteItem(id: string) {
     });
 }
 
-type ItemToPatch = {
-    readonly name: string;
-    readonly description: string;
-    readonly prepareTime: number;
-    readonly price: number;
-};
-
 export function usePatchItem(id: string, item: ItemToPatch) {
     return useMutation({
         mutationKey: ["patchItem"],
         mutationFn: () => req.patch(`item/${id}`, item),
     });
 }
-
-type ItemToPost = {
-    readonly name: string;
-    readonly description: string;
-    readonly prepareTime: number;
-    readonly price: number;
-    readonly category: string;
-};
 
 export function usePostItem(item: ItemToPost) {
     return useMutation({

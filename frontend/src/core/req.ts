@@ -1,9 +1,9 @@
-type method = "GET" | "POST" | "PATCH" | "DELETE";
+type Method = "GET" | "POST" | "PATCH" | "DELETE";
 
 const baseURL = "http://localhost:8080";
 
 function customFetch<T>(
-    method: method,
+    method: Method,
     resource: string,
     content?: object,
 ): Promise<T> {

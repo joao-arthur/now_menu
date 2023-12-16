@@ -1,104 +1,92 @@
-import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
+import { create } from "zustand";
 
-type item = {
-    name: string;
-    description: string;
-    prepareTime: number;
-    price: number;
+type Item = {
+    readonly id: string;
+    readonly name: string;
+    readonly description: string;
+    readonly prepareTime: number;
+    readonly price: number;
 };
 
-type category = {
-    name: string;
-    items: (item & { id: string })[];
+type UnsavedItem = Omit<Item, "id">;
+
+type Category = {
+    readonly name: string;
+    readonly items: readonly Item[];
 };
 
-type state = {
-    categories: category[];
-    currentCategory: string | undefined;
-    currentItemId: string | undefined;
+type MenuRegisterStore = {
+    readonly categories: readonly Category[];
+    readonly currentCategory: string | undefined;
+    readonly currentItemId: string | undefined;
+    readonly setCurrentCategory: (currentCategory: string) => void;
+    readonly setCurrentItemId: (currentItemId: string) => void;
+    readonly addCategory: (category: string) => void;
+    readonly deleteCategory: (category: string) => void;
+    readonly addItem: (item: UnsavedItem) => void;
+    readonly editItem: (item: UnsavedItem) => void;
+    readonly deleteItem: (item: string) => void;
 };
 
-export const { reducer: menuRegister, actions: menuRegisterActions } =
-    createSlice({
-        name: "menuRegister",
-        initialState: {
-            categories: [
-                { name: "Pratos", items: [] },
-                { name: "Bebidas", items: [] },
-            ],
+export const useMenuRegisterStore = create<MenuRegisterStore>((
+    set,
+) => ({
+    categories: [
+        { name: "Pratos", items: [] },
+        { name: "Bebidas", items: [] },
+    ],
+    currentCategory: undefined,
+    currentItemId: undefined,
+    setCurrentCategory: (currentCategory: string) =>
+        set({ currentCategory }),
+    setCurrentItemId: (currentItemId: string) =>
+        set({ currentItemId }),
+    addCategory: (category: string) =>
+        set(({ categories }) => ({
+            categories: categories.concat([{
+                name: category,
+                items: [],
+            }]),
+        })),
+    deleteCategory: (category: string) =>
+        set(({ categories }) => ({
+            categories: categories.filter(({ name }) =>
+                name !== category
+            ),
+        })),
+    addItem: (item: UnsavedItem) =>
+        set(({ categories, currentCategory }) => ({
+            categories: categories.map((category) => ({
+                name: category.name,
+                items: category.name === currentCategory
+                    ? category.items.concat({ ...item, id: nanoid() })
+                    : category.items,
+            })),
             currentCategory: undefined,
+        })),
+    editItem: (item: UnsavedItem) =>
+        set(({ categories, currentItemId }) => ({
+            categories: categories.map((category) => ({
+                name: category.name,
+                items: category.items.map((
+                    oldItem,
+                ) => (oldItem.id === currentItemId
+                    ? {
+                        id: oldItem.id,
+                        ...item,
+                    }
+                    : oldItem)
+                ),
+            })),
             currentItemId: undefined,
-        } as state,
-        reducers: {
-            addCategory: (state, action: PayloadAction<string>) => {
-                state.categories.push({
-                    name: action.payload,
-                    items: [],
-                });
-            },
-            setCurrentCategory: (
-                state,
-                action: PayloadAction<string>,
-            ) => {
-                state.currentCategory = action.payload;
-            },
-            addCategoryItem: (state, action: PayloadAction<item>) => {
-                for (const category of state.categories) {
-                    if (category.name === state.currentCategory) {
-                        category.items.push({
-                            ...action.payload,
-                            id: nanoid(),
-                        });
-                        break;
-                    }
-                }
-                state.currentCategory = undefined;
-            },
-            setCurrentItem: (
-                state,
-                action: PayloadAction<string | undefined>,
-            ) => {
-                state.currentItemId = action.payload;
-            },
-            editCategoryItem: (
-                state,
-                action: PayloadAction<item>,
-            ) => {
-                for (const category of state.categories) {
-                    for (const item of category.items) {
-                        if (item.id === state.currentItemId) {
-                            item.description =
-                                action.payload.description;
-                            item.name = action.payload.name;
-                            item.prepareTime =
-                                action.payload.prepareTime;
-                            item.price = action.payload.price;
-                            break;
-                        }
-                    }
-                }
-                state.currentItemId = undefined;
-            },
-            deleteCategory: (
-                state,
-                action: PayloadAction<string>,
-            ) => {
-                state.categories = state.categories.filter(
-                    ({ name }) => name !== action.payload,
-                );
-            },
-            deleteItem: (state, action: PayloadAction<string>) => {
-                for (const category of state.categories) {
-                    if (
-                        category.items
-                            .map(({ id }) => id)
-                            .includes(action.payload)
-                    ) {
-                        category.items = category.items.filter(
-                            ({ id }) => id !== action.payload,
-                        );
-                    }
-                }
-            },
-        },
-    });
+        })),
+    deleteItem: (itemId: string) =>
+        set(({ categories }) => ({
+            categories: categories.map((category) => ({
+                name: category.name,
+                items: category.items.filter((item) =>
+                    item.id !== itemId
+                ),
+            })),
+        })),
+}));

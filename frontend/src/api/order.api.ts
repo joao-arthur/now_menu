@@ -2,16 +2,18 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { req } from "../core/req";
 import { Toast } from "../components/Toast";
 
+type OrderItem = {
+    readonly itemId: string;
+    readonly itemName: string;
+    readonly amount: number;
+    readonly observation: string;
+    readonly prepareTime: number;
+    readonly price: number;
+};
+
 type OrderFromAPI = {
     readonly _id: string;
-    readonly items: readonly {
-        readonly itemId: string;
-        readonly itemName: string;
-        readonly amount: number;
-        readonly observation: string;
-        readonly prepareTime: number;
-        readonly price: number;
-    }[];
+    readonly items: readonly OrderItem[];
     readonly tableId: string;
     readonly tableName: string;
     readonly customer: string;
@@ -23,14 +25,7 @@ type OrderFromAPI = {
 type OrderToAPI = {
     readonly tableId: string;
     readonly customer: string;
-    readonly items: readonly {
-        readonly itemId: string;
-        readonly itemName: string;
-        readonly amount: number;
-        readonly observation: string;
-        readonly prepareTime: number;
-        readonly price: number;
-    }[];
+    readonly items: readonly OrderItem[];
 };
 
 export function useGetOrders() {

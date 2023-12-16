@@ -1,34 +1,35 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { create } from "zustand";
 
-type item = {
-    id: string;
-    amount: number;
-    observation: string;
+type OrderItem = {
+    readonly id: string;
+    readonly amount: number;
+    readonly observation: string;
 };
 
-type amountPayload = {
-    id: string;
-    amount: number;
+type ItemAmount = {
+    readonly item: string;
+    readonly amount: number;
 };
 
-export const {
-    reducer: orderRegister,
-    actions: orderRegisterActions,
-} = createSlice({
-    name: "orderRegister",
-    initialState: [] as item[],
-    reducers: {
-        addItem: (state, action: PayloadAction<item>) => {
-            state.push(action.payload);
-        },
-        setAmount: (state, action: PayloadAction<amountPayload>) => {
-            for (const item of state) {
-                if (item.id === action.payload.id) {
-                    item.amount = action.payload.amount;
-                    break;
-                }
-            }
-        },
-        clear: () => [],
-    },
-});
+type OrderRegisterStore = {
+    readonly items: readonly OrderItem[];
+    readonly addItem: (item: OrderItem) => void;
+    readonly setAmount: (itemAmount: ItemAmount) => void;
+    readonly clear: () => void;
+};
+
+export const useOrderRegisterStore = create<OrderRegisterStore>((
+    set,
+) => ({
+    items: [],
+    addItem: (item: OrderItem) =>
+        set(({ items }) => ({ items: items.concat(item) })),
+    setAmount: (itemAmount: ItemAmount) =>
+        set(({ items }) => ({
+            items: items.map((item) => (item.id === itemAmount.item
+                ? { ...item, amount: itemAmount.amount }
+                : item)
+            ),
+        })),
+    clear: () => set({ items: [] }),
+}));

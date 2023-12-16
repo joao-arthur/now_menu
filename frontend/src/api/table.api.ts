@@ -10,7 +10,7 @@ export type TableAPI = {
     readonly updatedAt: string;
 };
 
-type TableType = {
+type Table = {
     readonly name: string;
 };
 
@@ -21,7 +21,7 @@ export function useGetTables() {
     });
 }
 
-export function usePostTable(tables: readonly TableType[]) {
+export function usePostTable(tables: readonly Table[]) {
     return useMutation({
         mutationKey: ["postTables"],
         mutationFn: () =>

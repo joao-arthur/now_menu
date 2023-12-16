@@ -1,97 +1,94 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { create } from "zustand";
 
-export type item = {
-    id: string;
-    name: string;
-    description: string;
-    image: string;
-    prepareTime: number;
-    price: number;
+export type MenuItem = {
+    readonly id: string;
+    readonly name: string;
+    readonly description: string;
+    readonly image: string;
+    readonly prepareTime: number;
+    readonly price: number;
 };
 
-type restaurant = {
-    address: string;
-    cep: string;
-    city: string;
-    district: string;
-    email: string;
-    name: string;
-    state: string;
-    telephone: string;
+type Restaurant = {
+    readonly address: string;
+    readonly cep: string;
+    readonly city: string;
+    readonly district: string;
+    readonly email: string;
+    readonly name: string;
+    readonly state: string;
+    readonly telephone: string;
 };
 
-type menuInfoType = {
-    mostOrdered: string[];
-    restaurant: restaurant;
-    categories: {
-        name: string;
-        items: item[];
-    }[];
+type Category = {
+    readonly name: string;
+    readonly items: readonly MenuItem[];
 };
 
-type menuType = menuInfoType & {
-    loaded: boolean;
-    selectedCategory: string;
-    search: string;
+type MenuInfo = {
+    readonly mostOrdered: readonly string[];
+    readonly restaurant: Restaurant;
+    readonly categories: readonly Category[];
 };
 
-export const { reducer: menuInfo, actions: menuInfoActions } =
-    createSlice({
-        name: "menuInfo",
-        initialState: {
-            mostOrdered: [],
-            categories: [],
-            loaded: false,
-            selectedCategory: "",
-            restaurant: {
-                address: "",
-                cep: "",
-                city: "",
-                district: "",
-                email: "",
-                name: "",
-                state: "",
-                telephone: "",
-            },
-            search: "",
-        } as menuType,
-        reducers: {
-            loadMenu: (
-                state,
-                action: PayloadAction<menuInfoType>,
-            ) => {
-                state.categories = action.payload.categories.concat([
+const menuInfo: MenuInfo = {
+    mostOrdered: [],
+    categories: [],
+    restaurant: {
+        address: "",
+        cep: "",
+        city: "",
+        district: "",
+        email: "",
+        name: "",
+        state: "",
+        telephone: "",
+    },
+};
+
+type MenuInfoStore = {
+    readonly menuInfo: MenuInfo;
+    readonly loaded: boolean;
+    readonly selectedCategory: string;
+    readonly search: string;
+    readonly setMenu: (menuInfo: MenuInfo) => void;
+    readonly setSelectedCategory: (selectedCategory: string) => void;
+    readonly setSearch: (search: string) => void;
+};
+
+export const useMenuInfoStore = create<MenuInfoStore>((set) => ({
+    menuInfo: menuInfo,
+    loaded: false,
+    selectedCategory: "",
+    search: "",
+    setMenu: (menuInfo: MenuInfo) =>
+        set({
+            menuInfo: {
+                categories: menuInfo.categories.concat([
                     {
                         name: "Mais baratos",
-                        items: action.payload.categories
+                        items: menuInfo.categories
                             .flatMap((category) => category.items)
                             .sort((a, b) => a.price - b.price)
                             .slice(0, 5),
                     },
                     {
                         name: "Mais caros",
-                        items: action.payload.categories
+                        items: menuInfo.categories
                             .flatMap((category) => category.items)
                             .sort((a, b) => b.price - a.price)
                             .slice(0, 5),
                     },
-                ]);
-                state.mostOrdered = action.payload.mostOrdered;
-                state.restaurant = action.payload.restaurant;
-                state.loaded = true;
-                if (action.payload.categories.length) {
-                    state.selectedCategory =
-                        action.payload.categories[0].name;
-                }
+                ]),
+                mostOrdered: menuInfo.mostOrdered,
+                restaurant: menuInfo.restaurant,
             },
-            setSelectedCategory: (
-                state,
-                action: PayloadAction<string>,
-            ) => {
-                state.selectedCategory = action.payload;
-            },
-            setSearch: (state, action: PayloadAction<string>) => {
-                state.search = action.payload;
-            },
-        },
-    });
+            loaded: true,
+            selectedCategory: menuInfo.categories.length
+                ? menuInfo.categories[0].name
+                : "",
+        }),
+    setSelectedCategory: (selectedCategory: string) =>
+        set({ selectedCategory }),
+    setSearch: (search: string) => set({ search }),
+}));

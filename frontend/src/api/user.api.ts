@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { req } from "../core/req";
 import { Toast } from "../components/Toast";
 
-type UserType = {
+type User = {
     readonly cnpj: string;
     readonly name: string;
     readonly telephone: string;
@@ -27,7 +27,7 @@ type UserFromAPI = {
     readonly email: string;
 };
 
-export function useSignUp(user: UserType) {
+export function useSignUp(user: User) {
     return useMutation({
         mutationKey: ["signUp"],
         mutationFn: () =>

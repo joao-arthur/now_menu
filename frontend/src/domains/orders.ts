@@ -1,25 +1,27 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { create } from "zustand";
 
-export type order = {
-    id: string;
-    createdAt: string;
-    customer: string;
-    tableName: string;
-    items: {
-        itemId: string;
-        itemName: string;
-        amount: number;
-        observation: string;
-        prepareTime: number;
-    }[];
+type OrderItem = {
+    readonly itemId: string;
+    readonly itemName: string;
+    readonly amount: number;
+    readonly observation: string;
+    readonly prepareTime: number;
 };
 
-export const { reducer: orders, actions: ordersActions } =
-    createSlice({
-        name: "orders",
-        initialState: [] as order[],
-        reducers: {
-            setOrders: (_, action: PayloadAction<order[]>) =>
-                action.payload,
-        },
-    });
+export type Order = {
+    readonly id: string;
+    readonly createdAt: string;
+    readonly customer: string;
+    readonly tableName: string;
+    readonly items: readonly OrderItem[];
+};
+
+type OrdersStore = {
+    readonly orders: readonly Order[];
+    readonly setOrders: (orders: readonly Order[]) => void;
+};
+
+export const useOrdersStore = create<OrdersStore>((set) => ({
+    orders: [],
+    setOrders: (orders: readonly Order[]) => set({ orders }),
+}));
