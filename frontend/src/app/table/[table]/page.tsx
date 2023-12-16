@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import { useMenuInfoStore } from "@/domains/menuInfo";
 import { useSessionStore } from "@/domains/session";
@@ -89,12 +91,17 @@ export default function TableIdPage() {
                     <SearchBar />
                     <MostOrdered />
                     <CategoryList />
-                    <MenuItemList tableId={tableId}/>
+                    <MenuItemList tableId={tableId} />
                 </Content>
             </FlexContent>
             {logged
                 ? <UserPageFooter current="menu" />
-                : <AnonimousPageFooter selected={false} tableId={tableId} />}
+                : (
+                    <AnonimousPageFooter
+                        selected={false}
+                        tableId={tableId}
+                    />
+                )}
         </FlexContainer>
     );
 }

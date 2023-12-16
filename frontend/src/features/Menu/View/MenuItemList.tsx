@@ -10,9 +10,9 @@ export const Container = styled.div`
 
 type Props = {
     readonly tableId: string;
-}
+};
 
-export function MenuItemList({tableId}:Props) {
+export function MenuItemList({ tableId }: Props) {
     const { menuInfo, search, selectedCategory } = useMenuInfoStore();
 
     if (!menuInfo.categories.length) return <Container />;

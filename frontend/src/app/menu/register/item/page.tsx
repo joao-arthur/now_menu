@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useMenuRegisterStore } from "@/domains/menuRegister";
 import { Field, Title as FieldTitle } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";

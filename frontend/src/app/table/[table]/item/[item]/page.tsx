@@ -1,7 +1,9 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import styled from "styled-components";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useMenuInfoStore } from "@/domains/menuInfo";
 import { useOrderRegisterStore } from "@/domains/orderRegister";
 import { useGetMockedImage } from "@/api/image.api";

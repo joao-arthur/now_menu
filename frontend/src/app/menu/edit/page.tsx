@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import type { MenuItem } from "@/domains/menuInfo";
 import { useMenuRegisterStore } from "@/domains/menuRegister";
@@ -36,14 +38,14 @@ export default function MenuEditPage() {
     const { data, mutate } = useGetUserMenu();
     const [categories, setCategories] = useState<readonly Category[]>(
         [],
-        );
-        const [modalVisible, setModalVisible] = useState(false);
-        const [newCategoryName, setNewCategoryName] = useState("");
-        const [redirectToItem, setRedirectToItem] = useState("");
-        const [redirectToNew, setRedirectToNew] = useState(false);
-        const [itemToDelete, setItemToDelete] = useState("");
-        const { isSuccess: isSuccessDelete, mutate: mutateDelete } =
-            useDeleteItem(itemToDelete);
+    );
+    const [modalVisible, setModalVisible] = useState(false);
+    const [newCategoryName, setNewCategoryName] = useState("");
+    const [redirectToItem, setRedirectToItem] = useState("");
+    const [redirectToNew, setRedirectToNew] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState("");
+    const { isSuccess: isSuccessDelete, mutate: mutateDelete } =
+        useDeleteItem(itemToDelete);
     const validForm = !!categories.length &&
         !!categories.flatMap((category) => category.items).length;
 

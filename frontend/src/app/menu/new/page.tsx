@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import { useMenuRegisterStore } from "@/domains/menuRegister";
 import { usePostItem } from "@/api/item.api";

@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useSessionStore } from "@/domains/session";
 
 export function useUserRoute() {

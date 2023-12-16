@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import { useOrdersStore } from "@/domains/orders";
 import { useGetOrders } from "@/api/order.api";

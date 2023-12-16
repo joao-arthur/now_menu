@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "styled-components";
 import { useSessionStore } from "@/domains/session";
 import {

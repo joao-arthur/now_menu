@@ -20,8 +20,12 @@ type MenuRegisterStore = {
     readonly categories: readonly Category[];
     readonly currentCategory: string | undefined;
     readonly currentItemId: string | undefined;
-    readonly setCurrentCategory: (currentCategory: string|undefined) => void;
-    readonly setCurrentItemId: (currentItemId: string|undefined) => void;
+    readonly setCurrentCategory: (
+        currentCategory: string | undefined,
+    ) => void;
+    readonly setCurrentItemId: (
+        currentItemId: string | undefined,
+    ) => void;
     readonly addCategory: (category: string) => void;
     readonly deleteCategory: (category: string) => void;
     readonly addItem: (item: UnsavedItem) => void;

@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useSignUpStore } from "@/domains/signUp";
 import { useSessionStore } from "@/domains/session";
 import { Image } from "@/components/Image/Image";

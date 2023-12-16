@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { useMenuRegisterStore } from "@/domains/menuRegister";
 import { req } from "@/core/req";

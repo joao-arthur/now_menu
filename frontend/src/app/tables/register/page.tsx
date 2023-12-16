@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Field } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -70,7 +72,9 @@ export default function TablesRegisterPage() {
         mutatePostTables();
     }
 
-    if (shouldRedirect) router.push("/qrcode");
+    if (shouldRedirect) {
+        router.push("/qrcode");
+    }
 
     return (
         <FlexContainer>

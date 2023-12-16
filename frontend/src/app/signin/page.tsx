@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useSignUpStore } from "@/domains/signUp";
 import { useSessionStore } from "@/domains/session";

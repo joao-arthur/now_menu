@@ -1,3 +1,5 @@
+"use client";
+
 import { decodeJWT } from "@/core/decodeJWT";
 import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
 import { FlexContainer, FlexContentMax } from "@/components/Layout";

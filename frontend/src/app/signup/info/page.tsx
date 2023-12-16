@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useSignUpStore } from "@/domains/signUp";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";

@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import type { MenuItem } from "@/domains/menuInfo";
 import { useOrderRegisterStore } from "@/domains/orderRegister";
@@ -129,7 +131,7 @@ export default function TableIdCartPage() {
                 </Button>
                 <Padding />
             </FlexContent>
-            <AnonimousPageFooter selected  tableId={tableId}/>
+            <AnonimousPageFooter selected tableId={tableId} />
         </FlexContainer>
     );
 }

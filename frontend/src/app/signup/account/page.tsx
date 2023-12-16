@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useSignUpStore } from "@/domains/signUp";
 import { useSignUp } from "@/api/user.api";
 import { Checkbox } from "@/components/Checkbox/Checkbox";
@@ -62,7 +64,7 @@ export default function SignUpAccountPage() {
     }
 
     if (success) {
-        return router.push("/signup/success");
+        router.push("/signup/success");
     }
 
     return (

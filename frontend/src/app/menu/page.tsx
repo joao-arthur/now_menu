@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import styled from "styled-components";
 import { useMenuInfoStore } from "@/domains/menuInfo";
