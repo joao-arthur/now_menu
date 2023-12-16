@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import { useMenuInfoStore } from "@/domains/menuInfo";
 import { MostOrderedItem } from "./MostOrderedItem";
-import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;
@@ -39,14 +39,12 @@ export const Item = styled.img`
 export function MostOrdered() {
     const { menuInfo } = useMenuInfoStore();
 
-    const mostOrdered = menuInfo.mostOrdered;
-
     return (
         <Container>
             <Title>Mais pedidos</Title>
             <Content>
                 <List>
-                    {mostOrdered.map((mostOrdered) => (
+                    {menuInfo.mostOrdered.map((mostOrdered) => (
                         <MostOrderedItem key={mostOrdered} />
                     ))}
                 </List>

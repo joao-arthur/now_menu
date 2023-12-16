@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import { PrimaryText } from "@/components/Layout";
 import { useMenuInfoStore } from "@/domains/menuInfo";
-import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;

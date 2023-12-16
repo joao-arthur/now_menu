@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { redirect, useParams } from "react-router-dom";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import type { MenuItem } from "@/domains/menuInfo";
+import { useOrderRegisterStore } from "@/domains/orderRegister";
+import { useMenuInfoStore } from "@/domains/menuInfo";
 import { AnonimousPageFooter } from "@/components/AnonimousPageFooter/AnonimousPageFooter";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
@@ -12,12 +16,8 @@ import {
     Title,
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
-import { useOrderRegisterStore } from "@/domains/orderRegister";
-import { CartItem } from "./CartItem/CartItem";
-import { useMenuInfoStore } from "@/domains/menuInfo";
-import type { MenuItem } from "@/domains/menuInfo";
 import { usePostOrder } from "@/api/order.api";
-import styled from "styled-components";
+import { CartItem } from "@/features/Order/Cart/CartItem";
 
 export const ValueContainer = styled.div`
     display: flex;
@@ -28,16 +28,14 @@ export const ItemsContainer = styled.div`
     margin: 20px 0;
 `;
 
-export function OrderCart() {
-    const { tableId } = useParams<{ tableId: string }>();
+export default function TableIdCartPage() {
+    const router = useRouter();
+    const tableId = router?.params?.table;
+    const itemId = router?.params?.item;
+    const { items: orderItems, clear } = useOrderRegisterStore();
+    const { menuInfo } = useMenuInfoStore();
     const [name, setName] = useState("");
     const [success, setSuccess] = useState(false);
-
-    const { items: orderItems, clear } = useOrderRegisterStore();
-
-    const selectedItems = orderItems;
-
-    const { menuInfo } = useMenuInfoStore();
 
     const allItems = menuInfo.categories
         .filter(
@@ -48,14 +46,14 @@ export function OrderCart() {
             items.map((item) => ({ ...item, category: name }))
         );
 
-    const items = selectedItems.map((selectedItem) => ({
+    const items = orderItems.map((selectedItem) => ({
         ...(allItems.find((item) =>
             item.id === selectedItem.id
         ) as MenuItem),
         ...selectedItem,
     }));
 
-    const validForm = !!name && !!selectedItems.length;
+    const validForm = !!name && !!orderItems.length;
 
     const { isSuccess, isPending, mutate } = usePostOrder({
         tableId,
@@ -86,7 +84,7 @@ export function OrderCart() {
         mutate();
     }
 
-    if (success) redirect(`/table/${tableId}/success`);
+    if (success) router.push(`/table/${tableId}/success`);
 
     return (
         <FlexContainer>
@@ -131,7 +129,7 @@ export function OrderCart() {
                 </Button>
                 <Padding />
             </FlexContent>
-            <AnonimousPageFooter selected />
+            <AnonimousPageFooter selected  tableId={tableId}/>
         </FlexContainer>
     );
 }

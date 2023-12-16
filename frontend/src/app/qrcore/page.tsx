@@ -9,7 +9,7 @@ export const Iframe = styled.iframe`
     border: none;
 `;
 
-export function ViewQRCode() {
+export default function QRCodePage() {
     let userId = "";
     try {
         userId = decodeJWT(
@@ -24,8 +24,7 @@ export function ViewQRCode() {
     }
     if (!userId) return null;
 
-    const baseURL =
-        `${import.meta.env.VITE_BACKEND_URL}/table/qrcode`;
+    const baseURL = `http://localhost:8080/table/qrcode`;
     const origin = window.location.origin;
     const params = new URLSearchParams({ userId, origin }).toString();
 

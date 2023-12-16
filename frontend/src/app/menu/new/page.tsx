@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import { useMenuRegisterStore } from "@/domains/menuRegister";
+import { usePostItem } from "@/api/item.api";
 import { Field, Title as FieldTitle } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -10,9 +13,6 @@ import {
     Title,
 } from "@/components/Layout";
 import { Form } from "@/components/Form/Form";
-import { usePostItem } from "@/api/item.api";
-import styled from "styled-components";
-import { useMenuRegisterStore } from "@/domains/menuRegister";
 
 export const FieldsContainer = styled.div`
     display: flex;
@@ -24,7 +24,11 @@ export const CustomField = styled(Field)`
     min-width: 0;
 `;
 
-export function MenuItemNew() {
+export default function MenuNewPage() {
+    const router = useRouter();
+
+    const { currentCategory } = useMenuRegisterStore();
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [prepareHours, setPrepareHours] = useState(0);
@@ -32,21 +36,16 @@ export function MenuItemNew() {
     const [prepareSeconds, setPrepareSeconds] = useState(0);
     const [price, setPrice] = useState("");
 
-    const { currentCategory } = useMenuRegisterStore();
-    const category = currentCategory;
-
     const { isSuccess, mutate } = usePostItem({
         name,
         description,
         prepareTime: prepareHours * 3600 + prepareMinutes * 60 +
             prepareSeconds,
         price: Number(price.replace(",", ".")) * 100,
-        category: category as string,
+        category: currentCategory!,
     });
-    const validForm = name &&
-        description &&
-        (prepareHours || prepareMinutes || prepareSeconds) &&
-        price;
+    const validForm = name && description &&
+        (prepareHours || prepareMinutes || prepareSeconds) && price;
 
     function submit() {
         if (!validForm) return;
@@ -54,7 +53,7 @@ export function MenuItemNew() {
     }
 
     if (isSuccess) {
-        redirect("/menu/edit");
+        router.push("/menu/edit");
     }
 
     return (

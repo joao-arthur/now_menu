@@ -114,7 +114,7 @@ export function CollapsableList({
 }: Props) {
     const [deleteCategoryVisible, setDeleteCategoryVisible] =
         useState(false);
-    const [itemToDelete, setItemToDelete] = useState<item>();
+    const [itemToDelete, setItemToDelete] = useState<ListItem>();
 
     return (
         <>

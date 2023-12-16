@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
+import styled from "styled-components";
+import { useRouter } from "next/router";
 import { useMutation } from "@tanstack/react-query";
+import { useMenuRegisterStore } from "@/domains/menuRegister";
 import { req } from "@/core/req";
 import { CollapsableList } from "@/components/CollapsableList/CollapsableList";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
@@ -14,10 +16,8 @@ import {
     Text,
     Title,
 } from "@/components/Layout";
-import { useMenuRegisterStore } from "@/domains/menuRegister";
 import { Toast } from "@/components/Toast";
 import { Modal } from "@/components/Modal/Modal";
-import styled from "styled-components";
 import { Input as BaseInput } from "@/components/Input/Input";
 
 export const Category = styled.span`
@@ -28,7 +28,8 @@ export const Input = styled(BaseInput)`
     width: 100%;
 `;
 
-export function MenuRegisterInfo() {
+export default function MenuRegisterPage() {
+    const router = useRouter();
     const {
         categories,
         setCurrentCategory,
@@ -85,9 +86,9 @@ export function MenuRegisterInfo() {
     FlexContainer;
 
     if (redirectToItem) {
-        redirect("/menu/register/item");
+        router.push("/menu/register/item");
     } else if (isSuccess) {
-        redirect("/menu/register/success");
+        router.push("/menu/register/success");
     }
 
     return (

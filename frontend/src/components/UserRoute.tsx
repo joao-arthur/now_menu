@@ -1,21 +1,11 @@
+import { useRouter } from "next/router";
 import { useSessionStore } from "@/domains/session";
-import { ComponentType } from "react";
-import { redirect, Route } from "react-router-dom";
 
-type Props = {
-    readonly path: string;
-    readonly exact: true;
-    readonly component: ComponentType;
-};
-
-export function UserRoute({ exact, path, component }: Props) {
+export function useUserRoute() {
+    const router = useRouter();
     const { session } = useSessionStore();
 
-    const shouldLogin = !session.logged && session.verified;
-
-    if (shouldLogin) {
-        redirect("/signin");
+    if (!session.logged && session.verified) {
+        router.push("/signin");
     }
-
-    return <Route exact={exact} path={path} component={component} />;
 }

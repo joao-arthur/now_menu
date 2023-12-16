@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
+import { useSignUpStore } from "@/domains/signUp";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
 import { Image } from "@/components/Image/Image";
@@ -14,9 +15,9 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { useSignUpStore } from "@/domains/signUp";
 
-export function SignUpGeneralInfo() {
+export default function SignUpInfoPage() {
+    const router = useRouter();
     const {
         values,
         setCNPJ,
@@ -35,7 +36,7 @@ export function SignUpGeneralInfo() {
     }
 
     if (submitted) {
-        redirect("/signup/address");
+        router.push("/signup/address");
     }
 
     return (
@@ -79,7 +80,7 @@ export function SignUpGeneralInfo() {
                     <Button disabled={!validForm}>continuar</Button>
                 </Form>
                 <SecondaryAction>
-                    <Link to="/signin">
+                    <Link href="/signin">
                         Já possui uma conta?{" "}
                         <PrimaryText>Entrar!</PrimaryText>
                     </Link>

@@ -22,11 +22,11 @@ export function PageHeader({ goBackLink, showSkipLink }: Props) {
         <Container>
             <div>
                 {goBackLink
-                    ? <Link to={goBackLink}>voltar</Link>
+                    ? <Link href={goBackLink}>voltar</Link>
                     : null}
             </div>
             <div>
-                {showSkipLink ? <Link to="/">pular</Link> : null}
+                {showSkipLink ? <Link href="/">pular</Link> : null}
             </div>
         </Container>
     );

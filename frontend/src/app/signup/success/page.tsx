@@ -1,5 +1,7 @@
 import { useEffect } from "react";
-import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
+import { useSignUpStore } from "@/domains/signUp";
+import { useSessionStore } from "@/domains/session";
 import { Image } from "@/components/Image/Image";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -9,10 +11,9 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { useSignUpStore } from "@/domains/signUp";
-import { useSessionStore } from "@/domains/session";
 
-export function SignUpSuccess() {
+export default function SignUpSuccessPage() {
+    const router = useRouter();
     const { setLogged } = useSessionStore();
     const {
         success,
@@ -26,7 +27,7 @@ export function SignUpSuccess() {
     }, []);
 
     if (!success) {
-        redirect("/signin");
+        router.push("/signin");
     }
 
     return (
@@ -43,7 +44,7 @@ export function SignUpSuccess() {
                     width={300}
                     height={300}
                 />
-                <ButtonLink to="/menu/register">
+                <ButtonLink href="/menu/register">
                     Cadastrar cardápio
                 </ButtonLink>
             </FlexContent>

@@ -1,8 +1,7 @@
-import { useParams } from "react-router-dom";
-import { Link } from "../Layout";
 import styled from "styled-components";
-import { Icon as IconBase } from "../Icon/Icon";
 import { useOrderRegisterStore } from "@/domains/orderRegister";
+import { Link } from "../Layout";
+import { Icon as IconBase } from "../Icon/Icon";
 
 export const Container = styled.div`
     display: flex;
@@ -32,22 +31,19 @@ export const Icon = styled(IconBase)<IconProps>`
 
 type Props = {
     readonly selected: boolean;
+    readonly tableId: string;
 };
 
-export function AnonimousPageFooter({ selected }: Props) {
-    const { tableId } = useParams<{ tableId: string }>();
-
+export function AnonimousPageFooter({ selected, tableId }: Props) {
     const { items } = useOrderRegisterStore();
-
-    const hasItems = !!items.length;
 
     return (
         <Container>
-            <Link to={`/table/${tableId}/cart`}>
+            <Link href={`/table/${tableId}/cart`}>
                 <Icon
                     selected={selected}
                     name="MdShoppingBasket"
-                    hasColor={hasItems}
+                    hasColor={!!items.length}
                 />
             </Link>
         </Container>

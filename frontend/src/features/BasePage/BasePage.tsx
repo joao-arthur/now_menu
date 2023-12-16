@@ -17,7 +17,6 @@ type Props = {
 
 export function BasePage({ children }: Props) {
     const { setLogged } = useSessionStore();
-
     const [height, setHeight] = useState(window.innerHeight);
 
     function updateHeight() {

@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
+import { useSignUpStore } from "@/domains/signUp";
+import { useSignUp } from "@/api/user.api";
 import { Checkbox } from "@/components/Checkbox/Checkbox";
 import { Field } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
@@ -13,11 +15,10 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { useSignUpStore } from "@/domains/signUp";
 import { Form } from "@/components/Form/Form";
-import { useSignUp } from "@/api/user.api";
 
-export function SignUpAccount() {
+export default function SignUpAccountPage() {
+    const router = useRouter();
     const [acceptedTerms, setAcceptedTerm] = useState(false);
     const {
         values,
@@ -61,7 +62,7 @@ export function SignUpAccount() {
     }
 
     if (success) {
-        return redirect("/signup/success");
+        return router.push("/signup/success");
     }
 
     return (
@@ -115,7 +116,7 @@ export function SignUpAccount() {
                     </Button>
                 </Form>
                 <SecondaryAction>
-                    <Link to="/signin">
+                    <Link href="/signin">
                         Já possui uma conta?{" "}
                         <PrimaryText>Entrar!</PrimaryText>
                     </Link>

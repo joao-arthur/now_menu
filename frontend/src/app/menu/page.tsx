@@ -1,21 +1,20 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import { useMenuInfoStore } from "@/domains/menuInfo";
+import { useSessionStore } from "@/domains/session";
+import { useGetUserMenu } from "@/api/item.api";
 import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
 import { AnonimousPageFooter } from "@/components/AnonimousPageFooter/AnonimousPageFooter";
-import { useMenuInfoStore } from "@/domains/menuInfo";
 import {
     FlexContainer,
     FlexContent,
     Link,
     Title,
 } from "@/components/Layout";
-import { SearchBar } from "./SearchBar";
-import { MostOrdered } from "./MostOrdered/MostOrdered";
-import { CategoryList } from "./CategoryList/CategoryList";
-import { MenuItemList } from "./MenuItemList/MenuItemList";
-import { useGetTableMenu, useGetUserMenu } from "@/api/item.api";
-import styled from "styled-components";
-import { useSessionStore } from "@/domains/session";
+import { SearchBar } from "@/features/Menu/View/SearchBar";
+import { MostOrdered } from "@/features/Menu/View/MostOrdered";
+import { CategoryList } from "@/features/Menu/View/CategoryList";
+import { MenuItemList } from "@/features/Menu/View/MenuItemList";
 
 export const Container = styled.div`
     display: flex;
@@ -33,16 +32,10 @@ export const Edit = styled.span`
     font-size: 0.8rem;
 `;
 
-export function MenuView() {
+export default function MenuPage() {
     const { setMenu, menuInfo, loaded } = useMenuInfoStore();
-    const { tableId } = useParams<{ tableId: string }>();
-    const restaurant = menuInfo.restaurant;
-
     const { session } = useSessionStore();
-    const logged = session.logged;
-    const { data, mutate } = tableId
-        ? useGetTableMenu(tableId)
-        : useGetUserMenu();
+    const { data, mutate } = useGetUserMenu();
 
     useEffect(() => {
         if (!loaded) mutate();
@@ -71,27 +64,32 @@ export function MenuView() {
         <FlexContainer>
             <FlexContent>
                 <Container>
-                    {logged
+                    {session.logged
                         ? (
                             <>
                                 <Title>Meu cardápio</Title>
-                                <Link to="/menu/edit">
+                                <Link href="/menu/edit">
                                     <Edit>editar</Edit>
                                 </Link>
                             </>
                         )
-                        : <Title>{restaurant.name}</Title>}
+                        : <Title>{menuInfo.restaurant.name}</Title>}
                 </Container>
                 <Content>
                     <SearchBar />
                     <MostOrdered />
                     <CategoryList />
-                    <MenuItemList />
+                    <MenuItemList tableId="undefined" />
                 </Content>
             </FlexContent>
-            {logged
+            {session.logged
                 ? <UserPageFooter current="menu" />
-                : <AnonimousPageFooter selected={false} />}
+                : (
+                    <AnonimousPageFooter
+                        selected={false}
+                        tableId="undefined"
+                    />
+                )}
         </FlexContainer>
     );
 }

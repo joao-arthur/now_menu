@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import type { MenuItem } from "@/domains/menuInfo";
+import { useMenuRegisterStore } from "@/domains/menuRegister";
+import { useDeleteItem, useGetUserMenu } from "@/api/item.api";
 import { CollapsableList } from "@/components/CollapsableList/CollapsableList";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -10,10 +14,6 @@ import {
     Title,
 } from "@/components/Layout";
 import { Modal } from "@/components/Modal/Modal";
-import { useDeleteItem, useGetUserMenu } from "@/api/item.api";
-import type { MenuItem } from "@/domains/menuInfo";
-import { useMenuRegisterStore } from "@/domains/menuRegister";
-import styled from "styled-components";
 import { Input as BaseInput } from "@/components/Input/Input";
 
 export const Category = styled.span`
@@ -29,27 +29,23 @@ type Category = {
     readonly items: readonly MenuItem[];
 };
 
-export function MenuEditInfo() {
+export default function MenuEditPage() {
+    const router = useRouter();
     const { setCurrentCategory, setCurrentItemId } =
         useMenuRegisterStore();
-
+    const { data, mutate } = useGetUserMenu();
     const [categories, setCategories] = useState<readonly Category[]>(
         [],
-    );
-    const [modalVisible, setModalVisible] = useState(false);
-    const [newCategoryName, setNewCategoryName] = useState("");
-    const [redirectToItem, setRedirectToItem] = useState("");
-    const [redirectToNew, setRedirectToNew] = useState(false);
+        );
+        const [modalVisible, setModalVisible] = useState(false);
+        const [newCategoryName, setNewCategoryName] = useState("");
+        const [redirectToItem, setRedirectToItem] = useState("");
+        const [redirectToNew, setRedirectToNew] = useState(false);
+        const [itemToDelete, setItemToDelete] = useState("");
+        const { isSuccess: isSuccessDelete, mutate: mutateDelete } =
+            useDeleteItem(itemToDelete);
     const validForm = !!categories.length &&
         !!categories.flatMap((category) => category.items).length;
-
-    const [itemToDelete, setItemToDelete] = useState("");
-    const { isSuccess: isSuccessDelete, mutate: mutateDelete } =
-        useDeleteItem(
-            itemToDelete,
-        );
-
-    const { data, mutate } = useGetUserMenu();
 
     useEffect(() => {
         if (isSuccessDelete) mutate();
@@ -96,9 +92,9 @@ export function MenuEditInfo() {
     }
 
     if (redirectToItem) {
-        redirect(`/menu/edit/${redirectToItem}`);
+        router.push(`/menu/edit/${redirectToItem}`);
     } else if (redirectToNew) {
-        redirect("/menu/new");
+        router.push("/menu/new");
     }
 
     return (

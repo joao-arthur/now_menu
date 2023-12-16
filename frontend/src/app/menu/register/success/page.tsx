@@ -8,7 +8,7 @@ import {
 import { Image } from "@/components/Image/Image";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 
-export function MenuRegisterSuccess() {
+export default function MenuRegisterSuccessPage() {
     return (
         <FlexContainer>
             <FlexContent>
@@ -19,7 +19,7 @@ export function MenuRegisterSuccess() {
                     os QR codes e começar a vender
                 </Subtitle>
                 <Image name="menuSuccess" />
-                <ButtonLink to="/tables/register">
+                <ButtonLink href="/tables/register">
                     Cadastrar mesas
                 </ButtonLink>
             </FlexContent>

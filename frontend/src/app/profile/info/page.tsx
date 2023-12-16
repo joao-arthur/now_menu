@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
 import { useGetUser, usePatchUser } from "@/api/user.api";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
@@ -11,7 +11,8 @@ import {
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 
-export function EditPersonalInfo() {
+export default function ProfileInfoPage() {
+    const router = useRouter();
     const [cnpj, setCNPJ] = useState("");
     const [name, setName] = useState("");
     const [telephone, setTelephone] = useState("");
@@ -44,7 +45,7 @@ export function EditPersonalInfo() {
     }, [data]);
 
     if (isSuccess) {
-        redirect("/orders");
+        router.push("/orders");
     }
 
     return (

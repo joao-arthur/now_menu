@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
-import { redirect, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import styled from "styled-components";
+import { useRouter } from "next/router";
+import { useMenuInfoStore } from "@/domains/menuInfo";
+import { useOrderRegisterStore } from "@/domains/orderRegister";
+import { useGetMockedImage } from "@/api/image.api";
+import { Amount } from "@/features/Order/Item/Amount";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
 import {
@@ -9,11 +14,6 @@ import {
     Padding,
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
-import { Amount } from "./Amount/Amount";
-import { useGetMockedImage } from "@/api/image.api";
-import styled from "styled-components";
-import { useMenuInfoStore } from "@/domains/menuInfo";
-import { useOrderRegisterStore } from "@/domains/orderRegister";
 
 export const Image = styled.img`
     width: 100%;
@@ -67,21 +67,20 @@ export const Price = styled.span`
     font-weight: bold;
 `;
 
-export function OrderItem() {
-    const [imageURL, setImageURL] = useState("");
-    const { tableId, itemId } = useParams<
-        { tableId: string; itemId: string }
-    >();
-
+export default function TableIdItemIdPage() {
+    const router = useRouter();
+    const tableId = router?.params?.table;
+    const itemId = router?.params?.item;
     const { menuInfo } = useMenuInfoStore();
     const { addItem } = useOrderRegisterStore();
-
-    const items = menuInfo.categories.flatMap(({ items }) => items);
+    const { data, mutate } = useGetMockedImage();
+    const [imageURL, setImageURL] = useState("");
     const [submitted, setSubmitted] = useState(false);
     const [amount, setAmount] = useState(1);
     const [observation, setObservation] = useState("");
-    const item = items.find(({ id }) => id === itemId);
-    const { data, mutate } = useGetMockedImage();
+    const item = menuInfo.categories
+        .flatMap(({ items }) => items)
+        .find(({ id }) => id === itemId);
 
     useEffect(() => {
         mutate();
@@ -104,7 +103,7 @@ export function OrderItem() {
     }
 
     if (submitted) {
-        redirect(`/table/${tableId}`);
+        router.push(`/table/${tableId}`);
     }
 
     if (!item) return null;

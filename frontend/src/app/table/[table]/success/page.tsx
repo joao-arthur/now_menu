@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
+import styled from "styled-components";
 import { Image } from "@/components/Image/Image";
 import {
     FlexContainer,
@@ -8,8 +9,6 @@ import {
     Title,
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
-import { OrderAgain } from "./OrderSuccess.styles";
-import styled from "styled-components";
 import { PrimaryText } from "@/components/Layout";
 
 export const OrderAgain = styled(PrimaryText)`
@@ -18,8 +17,9 @@ export const OrderAgain = styled(PrimaryText)`
     font-weight: normal;
 `;
 
-export function OrderSuccess() {
-    const { tableId } = useParams<{ tableId: string }>();
+export default function TableIdSuccessPage() {
+    const router = useRouter();
+    const tableId = router?.params?.table;
 
     return (
         <FlexContainer>
@@ -32,7 +32,7 @@ export function OrderSuccess() {
                 </Subtitle>
                 <Image name="orderSuccess" />
                 <OrderAgain>
-                    <Link to={`/table/${tableId}`}>
+                    <Link href={`/table/${tableId}`}>
                         Pedir novamente
                     </Link>
                 </OrderAgain>

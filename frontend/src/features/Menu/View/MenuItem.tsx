@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { PrimaryText } from "@/components/Layout";
-import type { MenuItem } from "@/domains/menuInfo";
-import { Link } from "@/components/Layout";
-import { useGetMockedImage } from "@/api/image.api";
 import styled from "styled-components";
+import type { MenuItem } from "@/domains/menuInfo";
 import { useOrderRegisterStore } from "@/domains/orderRegister";
 import { useSessionStore } from "@/domains/session";
+import { PrimaryText } from "@/components/Layout";
+import { Link } from "@/components/Layout";
+import { useGetMockedImage } from "@/api/image.api";
 
 export const Container = styled.div`
     display: flex;
@@ -55,23 +54,15 @@ export const Price = styled.span`
 
 type Props = {
     readonly item: MenuItem;
+    readonly tableId: string;
 };
 
-export function MenuItem({
-    item: { description, name, prepareTime, price, id },
-}: Props) {
-    const { tableId } = useParams<{ tableId: string }>();
-
+export function MenuItem({ item, tableId }: Props) {
     const { items } = useOrderRegisterStore();
-
-    const selectedIds = items.map(({ id }) => id);
-
     const { session } = useSessionStore();
-
-    const selected = selectedIds.includes(id);
-    const logged = session.logged;
-    const [imageURL, setImageURL] = useState("");
     const { data, mutate } = useGetMockedImage();
+    const selected = items.map(({ id }) => id).includes(item.id);
+    const [imageURL, setImageURL] = useState("");
 
     useEffect(() => {
         mutate();
@@ -86,34 +77,36 @@ export function MenuItem({
             <Container>
                 <Image src={imageURL} disabled={!!selected} />
                 <Content>
-                    <span>{name}</span>
-                    <Description>{description}</Description>
+                    <span>{item.name}</span>
+                    <Description>{item.description}</Description>
                     <Footer>
                         <Time>
-                            ⏲️ {(prepareTime / 60).toFixed(2)} min
+                            ⏲️ {(item.prepareTime / 60).toFixed(2)} min
                         </Time>
                         {selected
                             ? (
                                 <Price>
-                                    {(price / 100).toLocaleString(
-                                        undefined,
-                                        {
-                                            style: "currency",
-                                            currency: "BRL",
-                                        },
-                                    )}
-                                </Price>
-                            )
-                            : (
-                                <PrimaryText>
-                                    <Price>
-                                        {(price / 100).toLocaleString(
+                                    {(item.price / 100)
+                                        .toLocaleString(
                                             undefined,
                                             {
                                                 style: "currency",
                                                 currency: "BRL",
                                             },
                                         )}
+                                </Price>
+                            )
+                            : (
+                                <PrimaryText>
+                                    <Price>
+                                        {(item.price / 100)
+                                            .toLocaleString(
+                                                undefined,
+                                                {
+                                                    style: "currency",
+                                                    currency: "BRL",
+                                                },
+                                            )}
                                     </Price>
                                 </PrimaryText>
                             )}
@@ -125,10 +118,10 @@ export function MenuItem({
 
     return (
         <>
-            {logged || selected
+            {session.logged || selected
                 ? <Component />
                 : (
-                    <Link to={`/table/${tableId}/item/${id}`}>
+                    <Link href={`/table/${tableId}/item/${item.id}`}>
                         <Component />
                     </Link>
                 )}

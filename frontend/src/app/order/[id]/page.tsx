@@ -1,4 +1,6 @@
-import { redirect, useParams } from "react-router-dom";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import { useGetOrder, useOrderDone } from "@/api/order.api";
 import {
     Button,
     FlexContainer,
@@ -8,8 +10,6 @@ import {
     Title,
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
-import { useGetOrder, useOrderDone } from "@/api/order.api";
-import styled from "styled-components";
 import { SecondaryButton } from "@/components/Layout";
 
 export const Content = styled.div`
@@ -62,8 +62,10 @@ export const Total = styled.span`
     font-size: 1.2rem;
 `;
 
-export function OrderView() {
-    const id = useParams<{ id: string }>().id;
+export default function OrderIdPage() {
+    const router = useRouter();
+    const id = router?.params?.id;
+
     const { data: order, isPending: isPendingGet } = useGetOrder(id);
     const { isSuccess, isPending: isPendingPatch, mutate } =
         useOrderDone(id);
@@ -106,11 +108,10 @@ export function OrderView() {
         );
     }
 
-    const { customer, items, tableName, active } = order;
     const now = new Date();
 
     if (isSuccess) {
-        redirect("/");
+        router.push("/");
     }
 
     return (
@@ -123,18 +124,18 @@ export function OrderView() {
                     {now.toLocaleDateString()}
                 </Subtitle>
                 <StatusButton>
-                    {active
+                    {order.active
                         ? "Pedido em andamento"
                         : "Pedido já entregue"}
                 </StatusButton>
                 <Content>
                     <Client>
-                        <span>Cliente: {customer}</span>
-                        <span>{tableName}</span>
+                        <span>Cliente: {order.customer}</span>
+                        <span>{order.tableName}</span>
                     </Client>
                 </Content>
                 <Content>
-                    {items.map(
+                    {order.items.map(
                         (
                             {
                                 itemId,
@@ -171,7 +172,7 @@ export function OrderView() {
                         <Total>Total</Total>
                         <Total>
                             {(
-                                items.reduce(
+                                order.items.reduce(
                                     (sum, { price, amount }) =>
                                         sum + price * amount,
                                     0,

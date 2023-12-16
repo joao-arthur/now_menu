@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
 import { useGetUser, usePatchUser } from "@/api/user.api";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
@@ -11,7 +11,8 @@ import {
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 
-export function EditAddress() {
+export default function ProfileAddressPage() {
+    const router = useRouter();
     const [cep, setCEP] = useState("");
     const [address, setAddress] = useState("");
     const [district, setDistrict] = useState("");
@@ -47,7 +48,7 @@ export function EditAddress() {
     }, [data]);
 
     if (isSuccess) {
-        redirect("/orders");
+        router.push("/orders");
     }
 
     return (

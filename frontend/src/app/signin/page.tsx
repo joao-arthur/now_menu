@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSignUpStore } from "@/domains/signUp";
+import { useSessionStore } from "@/domains/session";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
 import { Image } from "@/components/Image/Image";
@@ -14,11 +16,9 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { useSignUpStore } from "@/domains/signUp";
-import { useSignIn } from "./useSignIn";
-import { useSessionStore } from "@/domains/session";
+import { useSignIn } from "@/features/SignIn/useSignIn";
 
-export function SignIn() {
+export default function SignInPage() {
     const { setLogged } = useSessionStore();
     const { clear } = useSignUpStore();
 
@@ -69,7 +69,7 @@ export function SignIn() {
                         type="password"
                         required
                         observation={
-                            <InputLink to="#">
+                            <InputLink href="#">
                                 Esqueceu a senha?
                             </InputLink>
                         }
@@ -83,7 +83,7 @@ export function SignIn() {
                     </Button>
                 </Form>
                 <SecondaryAction>
-                    <Link to="/signup">
+                    <Link href="/signup">
                         Novo por aqui?{" "}
                         <PrimaryText>Cadastre-se!</PrimaryText>
                     </Link>

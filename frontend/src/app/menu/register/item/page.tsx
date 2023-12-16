@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
+import styled from "styled-components";
+import { useRouter } from "next/router";
+import { useMenuRegisterStore } from "@/domains/menuRegister";
 import { Field, Title as FieldTitle } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -11,8 +13,6 @@ import {
     Title,
 } from "@/components/Layout";
 import { Form } from "@/components/Form/Form";
-import styled from "styled-components";
-import { useMenuRegisterStore } from "@/domains/menuRegister";
 
 export const FieldsContainer = styled.div`
     display: flex;
@@ -24,13 +24,13 @@ export const CustomField = styled(Field)`
     min-width: 0;
 `;
 
-export function MenuItemRegister() {
+export default function MenuRegisterItemPage() {
+    const router = useRouter();
     const {
         currentItemId,
         categories,
-
-        editCategoryItem,
-        addCategoryItem,
+        editItem,
+        addItem,
     } = useMenuRegisterStore();
 
     const editingItem = currentItemId;
@@ -76,7 +76,7 @@ export function MenuItemRegister() {
     function submit() {
         if (!validForm) return;
         if (editingItem) {
-            editCategoryItem({
+            editItem({
                 name,
                 description,
                 prepareTime: prepareHours * 3600 +
@@ -85,7 +85,7 @@ export function MenuItemRegister() {
                 price: Number(price.replace(",", ".")) * 100,
             });
         } else {
-            addCategoryItem({
+            addItem({
                 name,
                 description,
                 prepareTime: prepareHours * 3600 +
@@ -98,7 +98,7 @@ export function MenuItemRegister() {
     }
 
     if (submitted) {
-        redirect("/menu/register");
+        router.push("/menu/register");
     }
 
     return (

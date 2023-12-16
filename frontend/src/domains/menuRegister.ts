@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { create } from "zustand";
 
 type Item = {
@@ -19,8 +20,8 @@ type MenuRegisterStore = {
     readonly categories: readonly Category[];
     readonly currentCategory: string | undefined;
     readonly currentItemId: string | undefined;
-    readonly setCurrentCategory: (currentCategory: string) => void;
-    readonly setCurrentItemId: (currentItemId: string) => void;
+    readonly setCurrentCategory: (currentCategory: string|undefined) => void;
+    readonly setCurrentItemId: (currentItemId: string|undefined) => void;
     readonly addCategory: (category: string) => void;
     readonly deleteCategory: (category: string) => void;
     readonly addItem: (item: UnsavedItem) => void;
@@ -37,9 +38,9 @@ export const useMenuRegisterStore = create<MenuRegisterStore>((
     ],
     currentCategory: undefined,
     currentItemId: undefined,
-    setCurrentCategory: (currentCategory: string) =>
+    setCurrentCategory: (currentCategory: string | undefined) =>
         set({ currentCategory }),
-    setCurrentItemId: (currentItemId: string) =>
+    setCurrentItemId: (currentItemId: string | undefined) =>
         set({ currentItemId }),
     addCategory: (category: string) =>
         set(({ categories }) => ({

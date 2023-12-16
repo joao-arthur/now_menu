@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { useOrdersStore } from "@/domains/orders";
+import { useGetOrders } from "@/api/order.api";
 import {
     AloneTitle,
     FlexContainer,
@@ -7,13 +9,10 @@ import {
     Text,
 } from "@/components/Layout";
 import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
-import { useGetOrders } from "@/api/order.api";
-import { OrderItem } from "./OrderItem/OrderItem";
-import { useOrdersStore } from "@/domains/orders";
+import { OrderItem } from "@/features/OrdersList/OrderItem";
 
-export function OrdersList() {
+export default function OrdersPage() {
     const { orders, setOrders } = useOrdersStore();
-
     const { mutate, data } = useGetOrders();
 
     useEffect(() => {

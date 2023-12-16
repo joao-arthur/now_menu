@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
+import { useSignUpStore } from "@/domains/signUp";
 import { Field } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -12,10 +13,10 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { useSignUpStore } from "@/domains/signUp";
 import { Form } from "@/components/Form/Form";
 
-export function SignUpAddress() {
+export default function SignUpAddressPage() {
+    const router = useRouter();
     const {
         values,
         setCEP,
@@ -38,7 +39,7 @@ export function SignUpAddress() {
     }
 
     if (submitted) {
-        redirect("/signup/account");
+        router.push("/signup/account");
     }
 
     return (
@@ -92,7 +93,7 @@ export function SignUpAddress() {
                     <Button disabled={!validForm}>continuar</Button>
                 </Form>
                 <SecondaryAction>
-                    <Link to="/signin">
+                    <Link href="/signin">
                         Já possui uma conta?{" "}
                         <PrimaryText>Entrar!</PrimaryText>
                     </Link>

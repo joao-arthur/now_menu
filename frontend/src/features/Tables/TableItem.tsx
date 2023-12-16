@@ -30,13 +30,11 @@ type Props = {
     readonly onRemove: () => void;
 };
 
-export function TableItem({
-    table: { _id, name },
-    isLastItem,
-    onRemove,
-}: Props) {
-    const [modalVisible, setModalVisible] = useState(false);
+export function TableItem(
+    { table: { _id, name }, isLastItem, onRemove }: Props,
+) {
     const { isSuccess, mutate } = useDeleteTable(_id);
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         if (isSuccess) onRemove();

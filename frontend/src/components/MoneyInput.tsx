@@ -1,4 +1,4 @@
-import { CustomInput } from "./Input/Input.styles";
+import { CustomInput } from "./Input/Input";
 
 type Props = {
     readonly name: string;

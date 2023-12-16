@@ -1,6 +1,6 @@
-import { Link, PrimaryText } from "@/components/Layout";
-import { order } from "@/domains/orders";
 import styled from "styled-components";
+import type { Order } from "@/domains/orders";
+import { Link, PrimaryText } from "@/components/Layout";
 
 export const Container = styled.div`
     background-color: var(--backgroundGray);
@@ -38,7 +38,7 @@ export const ItemObservation = styled.p`
 `;
 
 type Props = {
-    readonly order: order;
+    readonly order: Order;
 };
 
 export function OrderItem({
@@ -75,7 +75,7 @@ export function OrderItem({
                 </div>
             </Body>
             <Footer>
-                <Link to={`order/${id}`}>
+                <Link href={`order/${id}`}>
                     <PrimaryText>Visualizar</PrimaryText>
                 </Link>
             </Footer>

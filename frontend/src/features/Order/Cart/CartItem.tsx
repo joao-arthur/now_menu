@@ -1,11 +1,10 @@
 import { PrimaryText } from "@/components/Layout";
 import { MenuItem } from "@/domains/menuInfo";
-import { Amount } from "../Amount/Amount";
 import { useGetMockedImage } from "@/api/image.api";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useOrdersStore } from "@/domains/orders";
 import { useOrderRegisterStore } from "@/domains/orderRegister";
+import { Amount } from "./Amount";
 
 export const Container = styled.div`
     display: flex;
@@ -50,9 +49,8 @@ export function CartItem(
     { item: { id, name, price, amount } }: Props,
 ) {
     const { setAmount } = useOrderRegisterStore();
-
-    const [imageURL, setImageURL] = useState("");
     const { data, mutate } = useGetMockedImage();
+    const [imageURL, setImageURL] = useState("");
 
     useEffect(() => {
         mutate();

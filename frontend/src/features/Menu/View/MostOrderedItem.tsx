@@ -11,8 +11,8 @@ export const Item = styled.img`
 `;
 
 export function MostOrderedItem() {
-    const [imageURL, setImageURL] = useState("");
     const { data, mutate } = useGetMockedImage();
+    const [imageURL, setImageURL] = useState("");
 
     useEffect(() => {
         mutate();

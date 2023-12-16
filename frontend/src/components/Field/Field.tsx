@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Input, props as InputProps } from "../Input/Input";
+import { Input, Props as InputProps } from "../Input/Input";
 import styled from "styled-components";
 
 export const Container = styled.div`

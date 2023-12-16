@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { redirect, useParams } from "react-router-dom";
+import styled from "styled-components";
+import { useRouter } from "next/router";
 import { Field, Title as FieldTitle } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -11,7 +12,6 @@ import {
 } from "@/components/Layout";
 import { Form } from "@/components/Form/Form";
 import { useGetItem, usePatchItem } from "@/api/item.api";
-import styled from "styled-components";
 
 export const FieldsContainer = styled.div`
     display: flex;
@@ -23,8 +23,10 @@ export const CustomField = styled(Field)`
     min-width: 0;
 `;
 
-export function MenuItemEdit() {
-    const id = useParams<{ id: string }>().id;
+export default function MenuEditIdPage() {
+    const router = useRouter();
+    const id = router?.params?.id;
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [prepareHours, setPrepareHours] = useState(0);
@@ -72,7 +74,7 @@ export function MenuItemEdit() {
     }
 
     if (isSuccess) {
-        redirect("/menu/edit");
+        router.push("/menu/edit");
     }
 
     return (

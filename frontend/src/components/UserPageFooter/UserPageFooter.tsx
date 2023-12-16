@@ -34,7 +34,7 @@ export function UserPageFooter({ current }: Props) {
             {current === "orders"
                 ? <Icon current name="FaClipboardList" />
                 : (
-                    <Link to="/orders">
+                    <Link href="/orders">
                         <Icon
                             current={false}
                             name="FaClipboardList"
@@ -44,14 +44,14 @@ export function UserPageFooter({ current }: Props) {
             {current === "menu"
                 ? <Icon current name="GiKnifeFork" />
                 : (
-                    <Link to="/menu">
+                    <Link href="/menu">
                         <Icon current={false} name="GiKnifeFork" />
                     </Link>
                 )}
             {current === "profile"
                 ? <Icon current name="MdStore" />
                 : (
-                    <Link to="/profile">
+                    <Link href="/profile">
                         <Icon current={false} name="MdStore" />
                     </Link>
                 )}

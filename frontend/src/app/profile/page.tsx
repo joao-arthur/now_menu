@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useSessionStore } from "@/domains/session";
 import {
     AloneTitle,
     FlexContainer,
@@ -7,7 +8,6 @@ import {
     PrimaryText,
 } from "@/components/Layout";
 import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
-import { useSessionStore } from "@/domains/session";
 
 export const List = styled.ul`
     list-style: none;
@@ -22,7 +22,7 @@ export const Item = styled.li`
     cursor: pointer;
 `;
 
-export function Profile() {
+export default function ProfilePage() {
     const { setLogged } = useSessionStore();
 
     function signOut() {
@@ -35,16 +35,16 @@ export function Profile() {
             <FlexContent>
                 <AloneTitle>Perfil</AloneTitle>
                 <List>
-                    <Link to="/profile/info">
+                    <Link href="/profile/info">
                         <Item>Informações pessoais</Item>
                     </Link>
-                    <Link to="/profile/address">
+                    <Link href="/profile/address">
                         <Item>Endereço</Item>
                     </Link>
-                    <Link to="/tables/edit">
+                    <Link href="/tables/edit">
                         <Item>Mesas</Item>
                     </Link>
-                    <Link to="/qrcode">
+                    <Link href="/qrcode">
                         <Item>Visualizar QR Code</Item>
                     </Link>
                     <Item onClick={signOut}>

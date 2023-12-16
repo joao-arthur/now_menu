@@ -1,6 +1,6 @@
-import { useMenuInfoStore } from "@/domains/menuInfo";
-import { MenuItem } from "../MenuItem/MenuItem";
 import styled from "styled-components";
+import { useMenuInfoStore } from "@/domains/menuInfo";
+import { MenuItem } from "./MenuItem";
 
 export const Container = styled.div`
     display: flex;
@@ -8,7 +8,11 @@ export const Container = styled.div`
     margin: 20px 0;
 `;
 
-export function MenuItemList() {
+type Props = {
+    readonly tableId: string;
+}
+
+export function MenuItemList({tableId}:Props) {
     const { menuInfo, search, selectedCategory } = useMenuInfoStore();
 
     if (!menuInfo.categories.length) return <Container />;
@@ -34,6 +38,7 @@ export function MenuItemList() {
                     <MenuItem
                         key={item.id}
                         item={item}
+                        tableId={tableId}
                     />
                 ))}
         </Container>

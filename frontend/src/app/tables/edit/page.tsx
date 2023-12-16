@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
+import { useRouter } from "next/router";
 import { Field } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -16,14 +16,15 @@ import {
     useGetTables,
     usePostTable,
 } from "@/api/table.api";
-import { TableItem } from "./TableItem/TableItem";
 import styled from "styled-components";
+import { TableItem } from "@/features/Tables/TableItem";
 
 export const ListContainer = styled.div`
     overflow: auto;
 `;
 
-export function TablesRegister() {
+export default function TablesEditPage() {
+    const router = useRouter();
     const editing = window.location.pathname.includes("edit");
     const [numberOfTables, setNumberOfTables] = useState("");
     const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -69,7 +70,7 @@ export function TablesRegister() {
         mutatePostTables();
     }
 
-    if (shouldRedirect) redirect("/qrcode");
+    if (shouldRedirect) router.push("/qrcode");
 
     return (
         <FlexContainer>

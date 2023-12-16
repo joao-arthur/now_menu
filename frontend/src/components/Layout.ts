@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link as BaseLink } from "react-router-dom";
+import BaseLink from 'next/link';
 
 export const Link = styled(BaseLink)`
     text-decoration: none;
