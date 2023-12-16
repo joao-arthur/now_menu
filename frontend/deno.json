@@ -1,0 +1,18 @@
+{
+    "fmt": {
+        "include": [
+            "app/",
+            "comp/",
+            "lib/"
+        ],
+        "lineWidth": 70,
+        "indentWidth": 4
+    },
+    "lint": {
+        "include": [
+            "app/",
+            "comp/",
+            "lib/"
+        ]
+    }
+}
