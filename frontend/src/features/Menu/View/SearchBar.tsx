@@ -1,10 +1,8 @@
 import { Input } from "@/components/Input/Input";
-import { menuInfoActions } from "@/domains/menuInfo";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useMenuInfoStore } from "@/domains/menuInfo";
 
 export function SearchBar() {
-    const search = useAppSelector(({ menuInfo }) => menuInfo.search);
-    const dispatch = useAppDispatch();
+    const { search, setSearch } = useMenuInfoStore();
 
     return (
         <Input
@@ -12,8 +10,7 @@ export function SearchBar() {
             type="search"
             placeholder="Pesquisar por pratos, bebidas, etc."
             value={search}
-            onChange={(newValue) =>
-                dispatch(menuInfoActions.setSearch(newValue))}
+            onChange={(newValue) => setSearch(newValue)}
         />
     );
 }

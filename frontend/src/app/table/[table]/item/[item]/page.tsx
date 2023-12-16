@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { redirect, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
 import {
@@ -10,10 +9,11 @@ import {
     Padding,
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
-import { orderRegisterActions } from "@/domains/orderRegister";
 import { Amount } from "./Amount/Amount";
 import { useGetMockedImage } from "@/api/image.api";
 import styled from "styled-components";
+import { useMenuInfoStore } from "@/domains/menuInfo";
+import { useOrderRegisterStore } from "@/domains/orderRegister";
 
 export const Image = styled.img`
     width: 100%;
@@ -67,16 +67,16 @@ export const Price = styled.span`
     font-weight: bold;
 `;
 
-
 export function OrderItem() {
     const [imageURL, setImageURL] = useState("");
-    const dispatch = useAppDispatch();
     const { tableId, itemId } = useParams<
         { tableId: string; itemId: string }
     >();
-    const items = useAppSelector(({ menuInfo }) =>
-        menuInfo.categories.flatMap(({ items }) => items)
-    );
+
+    const { menuInfo } = useMenuInfoStore();
+    const { addItem } = useOrderRegisterStore();
+
+    const items = menuInfo.categories.flatMap(({ items }) => items);
     const [submitted, setSubmitted] = useState(false);
     const [amount, setAmount] = useState(1);
     const [observation, setObservation] = useState("");
@@ -94,19 +94,20 @@ export function OrderItem() {
     function submit() {
         if (amount < 1) return;
         if (!item) return;
-        dispatch(
-            orderRegisterActions.addItem({
-                id: item.id,
-                amount,
-                observation,
-            }),
-        );
-        toast.success(`${item.name} adicionado ao carrinho!`);
+
+        addItem({
+            id: item.id,
+            amount,
+            observation,
+        }), toast.success(`${item.name} adicionado ao carrinho!`);
         setSubmitted(true);
     }
 
+    if (submitted) {
+        redirect(`/table/${tableId}`);
+    }
+
     if (!item) return null;
-    if (submitted) redirect(`/table/${tableId}`);
 
     return (
         <FlexContainer>

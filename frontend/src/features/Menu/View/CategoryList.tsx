@@ -1,6 +1,5 @@
-import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { PrimaryText } from "@/components/Layout";
-import { menuInfoActions } from "@/domains/menuInfo";
+import { useMenuInfoStore } from "@/domains/menuInfo";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -30,18 +29,14 @@ export const SelectedItem = styled.span`
     white-space: nowrap;
 `;
 
-
 export function CategoryList() {
-    const dispatch = useAppDispatch();
-    const categories = useAppSelector(({ menuInfo }) =>
-        menuInfo.categories
-    );
-    const selectedCategory = useAppSelector(
-        ({ menuInfo }) => menuInfo.selectedCategory,
-    );
+    const { menuInfo, setSelectedCategory, selectedCategory } =
+        useMenuInfoStore();
+
+    const categories = menuInfo.categories;
 
     function clickItem(categoryName: string) {
-        dispatch(menuInfoActions.setSelectedCategory(categoryName));
+        setSelectedCategory(categoryName);
     }
 
     if (!categories.length) return <Container />;

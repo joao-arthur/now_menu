@@ -65,7 +65,6 @@ export const SecondaryButton = styled(SecondaryButtonBase)`
     width: 47%;
 `;
 
-
 export type ModalProps = {
     readonly children: ReactNode;
     readonly title: string;

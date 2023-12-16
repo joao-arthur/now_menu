@@ -2,7 +2,6 @@ import styled from "styled-components";
 import InputMask from "react-input-mask";
 import { MoneyInput } from "../MoneyInput";
 
-
 export const CustomInput = styled.input`
     border: none;
     background-color: whitesmoke;

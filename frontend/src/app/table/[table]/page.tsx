@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
 import { AnonimousPageFooter } from "@/components/AnonimousPageFooter/AnonimousPageFooter";
-import { menuInfoActions } from "@/domains/menuInfo";
+import { useMenuInfoStore } from "@/domains/menuInfo";
 import {
     FlexContainer,
     FlexContent,
@@ -14,11 +13,9 @@ import { SearchBar } from "./SearchBar";
 import { MostOrdered } from "./MostOrdered/MostOrdered";
 import { CategoryList } from "./CategoryList/CategoryList";
 import { MenuItemList } from "./MenuItemList/MenuItemList";
-import {
-    useGetTableMenu,
-    useGetUserMenu,
-} from "@/api/item.api";
+import { useGetTableMenu, useGetUserMenu } from "@/api/item.api";
 import styled from "styled-components";
+import { useSessionStore } from "@/domains/session";
 
 export const Container = styled.div`
     display: flex;
@@ -36,15 +33,13 @@ export const Edit = styled.span`
     font-size: 0.8rem;
 `;
 
-
 export function MenuView() {
-    const dispatch = useAppDispatch();
+    const { session } = useSessionStore();
+    const { loaded, menuInfo, setMenu } = useMenuInfoStore();
+
     const { tableId } = useParams<{ tableId: string }>();
-    const loaded = useAppSelector(({ menuInfo }) => menuInfo.loaded);
-    const restaurant = useAppSelector(({ menuInfo }) =>
-        menuInfo.restaurant
-    );
-    const logged = useAppSelector(({ user }) => user.logged);
+    const restaurant = menuInfo.restaurant;
+    const logged = session.logged;
     const { data, mutate } = tableId
         ? useGetTableMenu(tableId)
         : useGetUserMenu();
@@ -55,26 +50,22 @@ export function MenuView() {
 
     useEffect(() => {
         if (data) {
-            dispatch(
-                menuInfoActions.loadMenu({
-                    mostOrdered: ["erhfiuefh", "erfheu", "erfugeyu"],
-                    restaurant: data.restaurant,
-                    categories: Array.from(
-                        new Set(
-                            data.items.map(({ category }) =>
-                                category
-                            ),
-                        ),
-                    ).map((category) => ({
-                        name: category,
-                        items: data.items.filter(
-                            (item) => item.category === category,
-                        ),
-                    })),
-                }),
-            );
+            setMenu({
+                mostOrdered: ["erhfiuefh", "erfheu", "erfugeyu"],
+                restaurant: data.restaurant,
+                categories: Array.from(
+                    new Set(
+                        data.items.map(({ category }) => category),
+                    ),
+                ).map((category) => ({
+                    name: category,
+                    items: data.items.filter(
+                        (item) => item.category === category,
+                    ),
+                })),
+            });
         }
-    }, [dispatch, data]);
+    }, [data]);
 
     return (
         <FlexContainer>

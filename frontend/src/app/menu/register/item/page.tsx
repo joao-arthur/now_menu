@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Field, FieldTitle } from "@/components/Field/Field";
+import { Field, Title as FieldTitle } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     Button,
@@ -12,9 +11,8 @@ import {
     Title,
 } from "@/components/Layout";
 import { Form } from "@/components/Form/Form";
-import { menuRegisterActions } from "@/domains/menuRegister";
 import styled from "styled-components";
-import { Field } from "@/components/Field/Field";
+import { useMenuRegisterStore } from "@/domains/menuRegister";
 
 export const FieldsContainer = styled.div`
     display: flex;
@@ -26,9 +24,18 @@ export const CustomField = styled(Field)`
     min-width: 0;
 `;
 
-
 export function MenuItemRegister() {
-    const dispatch = useAppDispatch();
+    const {
+        currentItemId,
+        categories,
+
+        editCategoryItem,
+        addCategoryItem,
+    } = useMenuRegisterStore();
+
+    const editingItem = currentItemId;
+    const items = categories.flatMap(({ items }) => items);
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [prepareHours, setPrepareHours] = useState(0);
@@ -36,12 +43,6 @@ export function MenuItemRegister() {
     const [prepareSeconds, setPrepareSeconds] = useState(0);
     const [price, setPrice] = useState("");
     const [submitted, setSubmitted] = useState(false);
-    const editingItem = useAppSelector(
-        ({ menuRegister }) => menuRegister.currentItemId,
-    );
-    const items = useAppSelector(({ menuRegister }) =>
-        menuRegister.categories.flatMap(({ items }) => items)
-    );
     const validForm = name &&
         description &&
         (prepareHours || prepareMinutes || prepareSeconds) &&
@@ -75,27 +76,23 @@ export function MenuItemRegister() {
     function submit() {
         if (!validForm) return;
         if (editingItem) {
-            dispatch(
-                menuRegisterActions.editCategoryItem({
-                    name,
-                    description,
-                    prepareTime: prepareHours * 3600 +
-                        prepareMinutes * 60 +
-                        prepareSeconds,
-                    price: Number(price.replace(",", ".")) * 100,
-                }),
-            );
+            editCategoryItem({
+                name,
+                description,
+                prepareTime: prepareHours * 3600 +
+                    prepareMinutes * 60 +
+                    prepareSeconds,
+                price: Number(price.replace(",", ".")) * 100,
+            });
         } else {
-            dispatch(
-                menuRegisterActions.addCategoryItem({
-                    name,
-                    description,
-                    prepareTime: prepareHours * 3600 +
-                        prepareMinutes * 60 +
-                        prepareSeconds,
-                    price: Number(price.replace(",", ".")) * 100,
-                }),
-            );
+            addCategoryItem({
+                name,
+                description,
+                prepareTime: prepareHours * 3600 +
+                    prepareMinutes * 60 +
+                    prepareSeconds,
+                price: Number(price.replace(",", ".")) * 100,
+            });
         }
         setSubmitted(true);
     }
@@ -103,6 +100,7 @@ export function MenuItemRegister() {
     if (submitted) {
         redirect("/menu/register");
     }
+
     return (
         <FlexContainer>
             <FlexContent>

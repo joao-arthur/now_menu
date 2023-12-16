@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
-
 import { redirect, useParams } from "react-router-dom";
-import {
-    Field,
-    Title as FieldTitle,
-} from "@/components/Field/Field";
+import { Field, Title as FieldTitle } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     Button,
@@ -26,7 +22,6 @@ export const FieldsContainer = styled.div`
 export const CustomField = styled(Field)`
     min-width: 0;
 `;
-
 
 export function MenuItemEdit() {
     const id = useParams<{ id: string }>().id;
@@ -76,7 +71,10 @@ export function MenuItemEdit() {
         mutatePatch();
     }
 
-    if (isSuccess) redirect("/menu/edit");
+    if (isSuccess) {
+        redirect("/menu/edit");
+    }
+
     return (
         <FlexContainer>
             <FlexContent>

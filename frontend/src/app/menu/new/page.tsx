@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { redirect } from "react-router-dom";
-import { useAppSelector } from "../../../../hooks";
-import {
-    Field,
-    FieldTitle,
-} from "@/components/Field/Field";
+import { Field, Title as FieldTitle } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     Button,
@@ -16,7 +12,7 @@ import {
 import { Form } from "@/components/Form/Form";
 import { usePostItem } from "@/api/item.api";
 import styled from "styled-components";
-import { Field } from "@/components/Field/Field";
+import { useMenuRegisterStore } from "@/domains/menuRegister";
 
 export const FieldsContainer = styled.div`
     display: flex;
@@ -28,7 +24,6 @@ export const CustomField = styled(Field)`
     min-width: 0;
 `;
 
-
 export function MenuItemNew() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -36,9 +31,10 @@ export function MenuItemNew() {
     const [prepareMinutes, setPrepareMinutes] = useState(0);
     const [prepareSeconds, setPrepareSeconds] = useState(0);
     const [price, setPrice] = useState("");
-    const category = useAppSelector(
-        ({ menuRegister }) => menuRegister.currentCategory,
-    );
+
+    const { currentCategory } = useMenuRegisterStore();
+    const category = currentCategory;
+
     const { isSuccess, mutate } = usePostItem({
         name,
         description,
@@ -57,7 +53,10 @@ export function MenuItemNew() {
         mutate();
     }
 
-    if (isSuccess) redirect("/menu/edit");
+    if (isSuccess) {
+        redirect("/menu/edit");
+    }
+
     return (
         <FlexContainer>
             <FlexContent>

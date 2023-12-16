@@ -1,6 +1,6 @@
+import { useSessionStore } from "@/domains/session";
 import { ComponentType } from "react";
 import { redirect, Route } from "react-router-dom";
-import { useAppSelector } from "../hooks";
 
 type Props = {
     readonly path: string;
@@ -9,11 +9,13 @@ type Props = {
 };
 
 export function UserRoute({ exact, path, component }: Props) {
-    const shouldLogin = useAppSelector(
-        ({ user }) => !user.logged && user.verified,
-    );
+    const { session } = useSessionStore();
+
+    const shouldLogin = !session.logged && session.verified;
+
     if (shouldLogin) {
         redirect("/signin");
     }
+
     return <Route exact={exact} path={path} component={component} />;
 }

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { redirect } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Field } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -13,27 +12,34 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { signUpActions } from "@/domains/signUp";
+import { useSignUpStore } from "@/domains/signUp";
 import { Form } from "@/components/Form/Form";
 
 export function SignUpAddress() {
-    const dispatch = useAppDispatch();
-    const { cep, address, district, city, state } = useAppSelector(
-        ({ signUp }) => signUp,
-    );
+    const {
+        values,
+        setCEP,
+        setAddress,
+        setDistrict,
+        setCity,
+        setState,
+    } = useSignUpStore();
     const [submitted, setSubmitted] = useState(false);
-    const validForm = cep.replaceAll(/[^0-9]/g, "").length === 8 &&
-        address &&
-        district &&
-        city &&
-        state;
+    const validForm =
+        values.cep.replaceAll(/[^0-9]/g, "").length === 8 &&
+        values.address &&
+        values.district &&
+        values.city &&
+        values.state;
 
     function submit() {
         if (!validForm) return;
         setSubmitted(true);
     }
 
-    if (submitted) redirect("/signup/account");
+    if (submitted) {
+        redirect("/signup/account");
+    }
 
     return (
         <FlexContainer>
@@ -48,51 +54,40 @@ export function SignUpAddress() {
                         type="mask"
                         mask="99999-999"
                         required
-                        value={cep}
-                        onChange={(newValue) =>
-                            dispatch(signUpActions.setCEP(newValue))}
+                        value={values.cep}
+                        onChange={(newValue) => setCEP(newValue)}
                     />
                     <Field
                         title="Endereço"
                         name="address"
                         type="text"
                         required
-                        value={address}
-                        onChange={(newValue) =>
-                            dispatch(
-                                signUpActions.setAddress(newValue),
-                            )}
+                        value={values.address}
+                        onChange={(newValue) => setAddress(newValue)}
                     />
                     <Field
                         title="Bairro"
                         name="bairro"
                         type="text"
                         required
-                        value={district}
-                        onChange={(newValue) =>
-                            dispatch(
-                                signUpActions.setDistrict(newValue),
-                            )}
+                        value={values.district}
+                        onChange={(newValue) => setDistrict(newValue)}
                     />
                     <Field
                         title="Cidade"
                         name="city"
                         type="text"
                         required
-                        value={city}
-                        onChange={(newValue) =>
-                            dispatch(signUpActions.setCity(newValue))}
+                        value={values.city}
+                        onChange={(newValue) => setCity(newValue)}
                     />
                     <Field
                         title="Estado"
                         name="state"
                         type="text"
                         required
-                        value={state}
-                        onChange={(newValue) =>
-                            dispatch(
-                                signUpActions.setState(newValue),
-                            )}
+                        value={values.state}
+                        onChange={(newValue) => setState(newValue)}
                     />
                     <Button disabled={!validForm}>continuar</Button>
                 </Form>

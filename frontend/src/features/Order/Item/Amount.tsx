@@ -20,7 +20,6 @@ export const Content = styled.div`
     margin: 10px 8px;
 `;
 
-
 type Props = {
     readonly value: number;
     readonly onChange: (newValue: number) => void;

@@ -1,11 +1,11 @@
-import { useAppDispatch } from "../../../../hooks";
 import { PrimaryText } from "@/components/Layout";
-import { orderRegisterActions } from "@/domains/orderRegister";
-import { item } from "@/domains/menuInfo";
+import { MenuItem } from "@/domains/menuInfo";
 import { Amount } from "../Amount/Amount";
 import { useGetMockedImage } from "@/api/image.api";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useOrdersStore } from "@/domains/orders";
+import { useOrderRegisterStore } from "@/domains/orderRegister";
 
 export const Container = styled.div`
     display: flex;
@@ -40,9 +40,8 @@ export const Price = styled.span`
     display: block;
 `;
 
-
 type Props = {
-    readonly item: item & {
+    readonly item: MenuItem & {
         readonly amount: number;
     };
 };
@@ -50,8 +49,9 @@ type Props = {
 export function CartItem(
     { item: { id, name, price, amount } }: Props,
 ) {
+    const { setAmount } = useOrderRegisterStore();
+
     const [imageURL, setImageURL] = useState("");
-    const dispatch = useAppDispatch();
     const { data, mutate } = useGetMockedImage();
 
     useEffect(() => {
@@ -77,14 +77,8 @@ export function CartItem(
             </Content>
             <Amount
                 value={amount}
-                onChange={(newAmount) => {
-                    dispatch(
-                        orderRegisterActions.setAmount({
-                            id,
-                            amount: newAmount,
-                        }),
-                    );
-                }}
+                onChange={(newAmount) =>
+                    setAmount({ item: id, amount: newAmount })}
             />
         </Container>
     );

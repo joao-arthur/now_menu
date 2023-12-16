@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
     AloneTitle,
     FlexContainer,
@@ -8,13 +7,13 @@ import {
     Text,
 } from "@/components/Layout";
 import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
-import { ordersActions } from "@/domains/orders";
 import { useGetOrders } from "@/api/order.api";
 import { OrderItem } from "./OrderItem/OrderItem";
+import { useOrdersStore } from "@/domains/orders";
 
 export function OrdersList() {
-    const dispatch = useAppDispatch();
-    const orders = useAppSelector(({ orders }) => orders);
+    const { orders, setOrders } = useOrdersStore();
+
     const { mutate, data } = useGetOrders();
 
     useEffect(() => {
@@ -22,8 +21,8 @@ export function OrdersList() {
     }, []);
 
     useEffect(() => {
-        if (data) dispatch(ordersActions.setOrders(data));
-    }, [dispatch, data]);
+        if (data) setOrders(data);
+    }, [data]);
 
     return (
         <FlexContainer>

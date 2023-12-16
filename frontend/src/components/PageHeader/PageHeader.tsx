@@ -12,7 +12,6 @@ export const Link = styled(BaseLink)`
     font-size: 0.8rem;
 `;
 
-
 type Props = {
     readonly goBackLink?: string;
     readonly showSkipLink?: boolean;

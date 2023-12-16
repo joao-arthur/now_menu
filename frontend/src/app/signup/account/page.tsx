@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { redirect } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Checkbox } from "@/components/Checkbox/Checkbox";
 import { Field } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
@@ -14,45 +13,38 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { signUpActions } from "@/domains/signUp";
+import { useSignUpStore } from "@/domains/signUp";
 import { Form } from "@/components/Form/Form";
 import { useSignUp } from "@/api/user.api";
 
 export function SignUpAccount() {
-    const dispatch = useAppDispatch();
     const [acceptedTerms, setAcceptedTerm] = useState(false);
     const {
-        cnpj,
-        name,
-        telephone,
-        cep,
-        address,
-        district,
-        city,
-        state,
-        email,
-        password,
-        passwordMatch,
+        values,
         success,
-    } = useAppSelector(({ signUp }) => signUp);
+        setEmail,
+        setPassword,
+        setPasswordMatch,
+        setSuccess,
+    } = useSignUpStore();
 
-    const validForm = email &&
-        password &&
-        passwordMatch &&
-        password === passwordMatch &&
+    const validForm = values.email &&
+        values.password &&
+        values.passwordMatch &&
+        values.password === values.passwordMatch &&
         acceptedTerms;
 
     const { isSuccess, isPending, data, mutate } = useSignUp({
-        cnpj,
-        name,
-        telephone,
-        cep,
-        address,
-        district,
-        city,
-        state,
-        email,
-        password,
+        cnpj: values.cnpj,
+        name: values.name,
+        telephone: values.telephone,
+        cep: values.cep,
+        address: values.address,
+        district: values.district,
+        city: values.city,
+        state: values.state,
+        email: values.email,
+        password: values.password,
     });
 
     function submit() {
@@ -65,10 +57,13 @@ export function SignUpAccount() {
             "@NOW_MENU/user/token",
             JSON.stringify(data),
         );
-        dispatch(signUpActions.setSuccess(true));
+        setSuccess(true);
     }
 
-    if (success) return redirect("/signup/success");
+    if (success) {
+        return redirect("/signup/success");
+    }
+
     return (
         <FlexContainer>
             <FlexContent>
@@ -81,11 +76,8 @@ export function SignUpAccount() {
                         name="email"
                         type="email"
                         required
-                        value={email}
-                        onChange={(newValue) =>
-                            dispatch(
-                                signUpActions.setEmail(newValue),
-                            )}
+                        value={values.email}
+                        onChange={(newValue) => setEmail(newValue)}
                         disabled={isPending}
                     />
                     <Field
@@ -93,11 +85,8 @@ export function SignUpAccount() {
                         name="password"
                         type="password"
                         required
-                        value={password}
-                        onChange={(newValue) =>
-                            dispatch(
-                                signUpActions.setPassword(newValue),
-                            )}
+                        value={values.password}
+                        onChange={(newValue) => setPassword(newValue)}
                         disabled={isPending}
                     />
                     <Field
@@ -105,13 +94,9 @@ export function SignUpAccount() {
                         name="passwordMatch"
                         type="password"
                         required
-                        value={passwordMatch}
+                        value={values.passwordMatch}
                         onChange={(newValue) =>
-                            dispatch(
-                                signUpActions.setPasswordMatch(
-                                    newValue,
-                                ),
-                            )}
+                            setPasswordMatch(newValue)}
                         disabled={isPending}
                     />
                     <Checkbox

@@ -62,7 +62,6 @@ export const Total = styled.span`
     font-size: 1.2rem;
 `;
 
-
 export function OrderView() {
     const id = useParams<{ id: string }>().id;
     const { data: order, isPending: isPendingGet } = useGetOrder(id);

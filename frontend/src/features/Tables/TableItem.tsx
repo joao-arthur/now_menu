@@ -24,7 +24,6 @@ export const ButtonIcon = styled(Icon)`
     }
 `;
 
-
 type Props = {
     readonly table: TableAPI;
     readonly isLastItem: boolean;

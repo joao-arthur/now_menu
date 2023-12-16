@@ -1,6 +1,6 @@
+import { useSessionStore } from "@/domains/session";
 import { ComponentType } from "react";
 import { redirect, Route } from "react-router-dom";
-import { useAppSelector } from "../hooks";
 
 type Props = {
     readonly path: string;
@@ -9,9 +9,12 @@ type Props = {
 };
 
 export function AnonimousRoute({ path, component, exact }: Props) {
-    const logged = useAppSelector(({ user }) => user.logged);
+    const { session } = useSessionStore();
+
+    const logged = session.logged;
     if (logged) {
         redirect("/orders");
     }
+
     return <Route exact={exact} path={path} component={component} />;
 }

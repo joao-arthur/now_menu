@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
-import { useAppDispatch } from "../../../../hooks";
 import { CollapsableList } from "@/components/CollapsableList/CollapsableList";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -11,12 +10,9 @@ import {
     Title,
 } from "@/components/Layout";
 import { Modal } from "@/components/Modal/Modal";
-import {
-    useDeleteItem,
-    useGetUserMenu,
-} from "@/api/item.api";
-import { item } from "@/domains/menuInfo";
-import { menuRegisterActions } from "@/domains/menuRegister";
+import { useDeleteItem, useGetUserMenu } from "@/api/item.api";
+import type { MenuItem } from "@/domains/menuInfo";
+import { useMenuRegisterStore } from "@/domains/menuRegister";
 import styled from "styled-components";
 import { Input as BaseInput } from "@/components/Input/Input";
 
@@ -28,14 +24,15 @@ export const Input = styled(BaseInput)`
     width: 100%;
 `;
 
-
 type Category = {
     readonly name: string;
-    readonly items: readonly item[];
+    readonly items: readonly MenuItem[];
 };
 
 export function MenuEditInfo() {
-    const dispatch = useAppDispatch();
+    const { setCurrentCategory, setCurrentItemId } =
+        useMenuRegisterStore();
+
     const [categories, setCategories] = useState<readonly Category[]>(
         [],
     );
@@ -83,12 +80,12 @@ export function MenuEditInfo() {
     }, [data]);
 
     function addItem(category: string) {
-        dispatch(menuRegisterActions.setCurrentCategory(category));
+        setCurrentCategory(category);
         setRedirectToNew(true);
     }
 
     useEffect(() => {
-        dispatch(menuRegisterActions.setCurrentItem(undefined));
+        setCurrentItemId(undefined);
     }, []);
 
     useEffect(() => mutate(), []);
@@ -103,6 +100,7 @@ export function MenuEditInfo() {
     } else if (redirectToNew) {
         redirect("/menu/new");
     }
+
     return (
         <FlexContainer>
             <FlexContent>

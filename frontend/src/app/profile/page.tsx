@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useAppDispatch } from "../../hooks";
 import {
     AloneTitle,
     FlexContainer,
@@ -7,8 +6,8 @@ import {
     Link,
     PrimaryText,
 } from "@/components/Layout";
-import { userActions } from "@/domains/user";
 import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
+import { useSessionStore } from "@/domains/session";
 
 export const List = styled.ul`
     list-style: none;
@@ -23,13 +22,12 @@ export const Item = styled.li`
     cursor: pointer;
 `;
 
-
 export function Profile() {
-    const dispatch = useAppDispatch();
+    const { setLogged } = useSessionStore();
 
     function signOut() {
         window.localStorage.removeItem("@NOW_MENU/user/token");
-        dispatch(userActions.setLogged(false));
+        setLogged(false);
     }
 
     return (

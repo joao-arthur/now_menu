@@ -49,6 +49,7 @@ export function EditAddress() {
     if (isSuccess) {
         redirect("/orders");
     }
+
     return (
         <FlexContainer>
             <FlexContent>

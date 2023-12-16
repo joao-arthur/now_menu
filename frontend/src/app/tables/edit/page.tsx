@@ -23,7 +23,6 @@ export const ListContainer = styled.div`
     overflow: auto;
 `;
 
-
 export function TablesRegister() {
     const editing = window.location.pathname.includes("edit");
     const [numberOfTables, setNumberOfTables] = useState("");
@@ -71,6 +70,7 @@ export function TablesRegister() {
     }
 
     if (shouldRedirect) redirect("/qrcode");
+
     return (
         <FlexContainer>
             <FlexContent>

@@ -6,7 +6,6 @@ export const CustomForm = styled.form`
     flex-direction: column;
 `;
 
-
 type Props = {
     readonly children: ReactNode | ReactNode[];
     readonly onSubmit: () => void;

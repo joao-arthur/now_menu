@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { redirect } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Image } from "@/components/Image/Image";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -10,22 +9,25 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { userActions } from "@/domains/user";
-import { signUpActions } from "@/domains/signUp";
+import { useSignUpStore } from "@/domains/signUp";
+import { useSessionStore } from "@/domains/session";
 
 export function SignUpSuccess() {
-    const dispatch = useAppDispatch();
-    const signUpSuccess = useAppSelector(({ signUp }) =>
-        signUp.success
-    );
+    const { setLogged } = useSessionStore();
+    const {
+        success,
+        clear,
+    } = useSignUpStore();
 
     useEffect(() => {
-        if (!signUpSuccess) return;
-        dispatch(userActions.setLogged(true));
-        dispatch(signUpActions.clearSignUpAfterLogin());
+        if (!success) return;
+        setLogged(true);
+        clear();
     }, []);
 
-    if (!signUpSuccess) redirect("/signin");
+    if (!success) {
+        redirect("/signin");
+    }
 
     return (
         <FlexContainer>

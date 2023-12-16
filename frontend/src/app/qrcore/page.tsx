@@ -1,9 +1,6 @@
 import { decodeJWT } from "@/core/decodeJWT";
 import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
-import {
-    FlexContainer,
-    FlexContentMax,
-} from "@/components/Layout";
+import { FlexContainer, FlexContentMax } from "@/components/Layout";
 import styled from "styled-components";
 
 export const Iframe = styled.iframe`
@@ -11,7 +8,6 @@ export const Iframe = styled.iframe`
     height: 100vh;
     border: none;
 `;
-
 
 export function ViewQRCode() {
     let userId = "";

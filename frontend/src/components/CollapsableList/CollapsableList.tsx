@@ -87,7 +87,6 @@ export const AddItemMessage = styled.div`
     cursor: pointer;
 `;
 
-
 type ListItem = {
     readonly name: string;
     readonly value: string;

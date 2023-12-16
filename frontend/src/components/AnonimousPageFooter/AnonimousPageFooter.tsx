@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
 import { Link } from "../Layout";
 import styled from "styled-components";
 import { Icon as IconBase } from "../Icon/Icon";
+import { useOrderRegisterStore } from "@/domains/orderRegister";
 
 export const Container = styled.div`
     display: flex;
@@ -36,9 +36,10 @@ type Props = {
 
 export function AnonimousPageFooter({ selected }: Props) {
     const { tableId } = useParams<{ tableId: string }>();
-    const hasItems = !!useAppSelector(
-        ({ orderRegister }) => orderRegister.length,
-    );
+
+    const { items } = useOrderRegisterStore();
+
+    const hasItems = !!items.length;
 
     return (
         <Container>

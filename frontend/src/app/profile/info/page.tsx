@@ -46,6 +46,7 @@ export function EditPersonalInfo() {
     if (isSuccess) {
         redirect("/orders");
     }
+
     return (
         <FlexContainer>
             <FlexContent>

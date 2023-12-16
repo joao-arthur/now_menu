@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../../hooks";
+import { useMenuInfoStore } from "@/domains/menuInfo";
 import { MostOrderedItem } from "./MostOrderedItem";
 import styled from "styled-components";
 
@@ -36,11 +36,10 @@ export const Item = styled.img`
     object-fit: cover;
 `;
 
-
 export function MostOrdered() {
-    const mostOrdered = useAppSelector(({ menuInfo }) =>
-        menuInfo.mostOrdered
-    );
+    const { menuInfo } = useMenuInfoStore();
+
+    const mostOrdered = menuInfo.mostOrdered;
 
     return (
         <Container>

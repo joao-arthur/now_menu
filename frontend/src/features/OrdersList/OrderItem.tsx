@@ -37,7 +37,6 @@ export const ItemObservation = styled.p`
     font-size: 0.9rem;
 `;
 
-
 type Props = {
     readonly order: order;
 };

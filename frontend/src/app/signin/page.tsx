@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAppDispatch } from "../../hooks";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
 import { Image } from "@/components/Image/Image";
@@ -15,12 +14,14 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { userActions } from "@/domains/user";
-import { signUpActions } from "@/domains/signUp";
+import { useSignUpStore } from "@/domains/signUp";
 import { useSignIn } from "./useSignIn";
+import { useSessionStore } from "@/domains/session";
 
 export function SignIn() {
-    const dispatch = useAppDispatch();
+    const { setLogged } = useSessionStore();
+    const { clear } = useSignUpStore();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const validForm = email && password;
@@ -40,8 +41,8 @@ export function SignIn() {
             "@NOW_MENU/user/token",
             JSON.stringify(data),
         );
-        dispatch(userActions.setLogged(true));
-        dispatch(signUpActions.clearSignUpAfterLogin());
+        setLogged(true);
+        clear();
     }
 
     return (

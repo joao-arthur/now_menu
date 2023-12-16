@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { redirect } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
 import { Image } from "@/components/Image/Image";
@@ -15,24 +14,29 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { signUpActions } from "@/domains/signUp";
+import { useSignUpStore } from "@/domains/signUp";
 
 export function SignUpGeneralInfo() {
-    const dispatch = useAppDispatch();
-    const { cnpj, name, telephone } = useAppSelector(({ signUp }) =>
-        signUp
-    );
+    const {
+        values,
+        setCNPJ,
+        setName,
+        setTelephone,
+    } = useSignUpStore();
     const [submitted, setSubmitted] = useState(false);
-    const validForm = cnpj.replaceAll(/[^0-9]/g, "").length === 14 &&
-        name &&
-        telephone.replaceAll(/[^0-9]/g, "").length === 11;
+    const validForm =
+        values.cnpj.replaceAll(/[^0-9]/g, "").length === 14 &&
+        values.name &&
+        values.telephone.replaceAll(/[^0-9]/g, "").length === 11;
 
     function submit() {
         if (!validForm) return;
         setSubmitted(true);
     }
 
-    if (submitted) redirect("/signup/address");
+    if (submitted) {
+        redirect("/signup/address");
+    }
 
     return (
         <FlexContainer>
@@ -51,18 +55,16 @@ export function SignUpGeneralInfo() {
                         type="mask"
                         mask="99.999.999/9999-99"
                         required
-                        value={cnpj}
-                        onChange={(newValue) =>
-                            dispatch(signUpActions.setCNPJ(newValue))}
+                        value={values.cnpj}
+                        onChange={(newValue) => setCNPJ(newValue)}
                     />
                     <Field
                         title="Nome do estabelecimento"
                         name="name"
                         type="text"
                         required
-                        value={name}
-                        onChange={(newValue) =>
-                            dispatch(signUpActions.setName(newValue))}
+                        value={values.name}
+                        onChange={(newValue) => setName(newValue)}
                     />
                     <Field
                         title="Telefone"
@@ -70,11 +72,9 @@ export function SignUpGeneralInfo() {
                         type="mask"
                         mask="(99) 9 9999-9999"
                         required
-                        value={telephone}
+                        value={values.telephone}
                         onChange={(newValue) =>
-                            dispatch(
-                                signUpActions.setTelephone(newValue),
-                            )}
+                            setTelephone(newValue)}
                     />
                     <Button disabled={!validForm}>continuar</Button>
                 </Form>

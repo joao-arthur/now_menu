@@ -18,7 +18,6 @@ export const Observation = styled.div`
     margin-top: 5px;
 `;
 
-
 type Props = {
     title: string;
     observation?: ReactNode;

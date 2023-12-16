@@ -24,7 +24,6 @@ export const Icon = styled(IconBase)<IconProps>`
     width: 25px;
 `;
 
-
 type Props = {
     readonly current?: "orders" | "menu" | "profile";
 };

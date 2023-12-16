@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../../hooks";
+import { useMenuInfoStore } from "@/domains/menuInfo";
 import { MenuItem } from "../MenuItem/MenuItem";
 import styled from "styled-components";
 
@@ -8,18 +8,11 @@ export const Container = styled.div`
     margin: 20px 0;
 `;
 
-
 export function MenuItemList() {
-    const categories = useAppSelector(({ menuInfo }) =>
-        menuInfo.categories
-    );
-    const search = useAppSelector(({ menuInfo }) => menuInfo.search);
-    const selectedCategory = useAppSelector(
-        ({ menuInfo }) => menuInfo.selectedCategory,
-    );
+    const { menuInfo, search, selectedCategory } = useMenuInfoStore();
 
-    if (!categories.length) return <Container />;
-    const currentCategory = categories.find(
+    if (!menuInfo.categories.length) return <Container />;
+    const currentCategory = menuInfo.categories.find(
         (category) => category.name === selectedCategory,
     );
     if (!currentCategory) return <Container />;

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../../../hooks";
 import { PrimaryText } from "@/components/Layout";
-import { item } from "@/domains/menuInfo";
+import type { MenuItem } from "@/domains/menuInfo";
 import { Link } from "@/components/Layout";
 import { useGetMockedImage } from "@/api/image.api";
 import styled from "styled-components";
+import { useOrderRegisterStore } from "@/domains/orderRegister";
+import { useSessionStore } from "@/domains/session";
 
 export const Container = styled.div`
     display: flex;
@@ -52,20 +53,23 @@ export const Price = styled.span`
     display: block;
 `;
 
-
 type Props = {
-    readonly item: item;
+    readonly item: MenuItem;
 };
 
 export function MenuItem({
     item: { description, name, prepareTime, price, id },
 }: Props) {
     const { tableId } = useParams<{ tableId: string }>();
-    const selectedIds = useAppSelector(({ orderRegister }) =>
-        orderRegister.map(({ id }) => id)
-    );
+
+    const { items } = useOrderRegisterStore();
+
+    const selectedIds = items.map(({ id }) => id);
+
+    const { session } = useSessionStore();
+
     const selected = selectedIds.includes(id);
-    const logged = useAppSelector(({ user }) => user.logged);
+    const logged = session.logged;
     const [imageURL, setImageURL] = useState("");
     const { data, mutate } = useGetMockedImage();
 

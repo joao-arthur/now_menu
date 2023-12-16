@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { req } from "@/core/req";
 import { CollapsableList } from "@/components/CollapsableList/CollapsableList";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
@@ -15,7 +14,7 @@ import {
     Text,
     Title,
 } from "@/components/Layout";
-import { menuRegisterActions } from "@/domains/menuRegister";
+import { useMenuRegisterStore } from "@/domains/menuRegister";
 import { Toast } from "@/components/Toast";
 import { Modal } from "@/components/Modal/Modal";
 import styled from "styled-components";
@@ -30,10 +29,15 @@ export const Input = styled(BaseInput)`
 `;
 
 export function MenuRegisterInfo() {
-    const dispatch = useAppDispatch();
-    const categories = useAppSelector(
-        ({ menuRegister }) => menuRegister.categories,
-    );
+    const {
+        categories,
+        setCurrentCategory,
+        setCurrentItemId,
+        deleteCategory,
+        deleteItem,
+        addCategory,
+    } = useMenuRegisterStore();
+
     const [modalVisible, setModalVisible] = useState(false);
     const [newCategoryName, setNewCategoryName] = useState("");
     const [redirectToItem, setRedirectToItem] = useState(false);
@@ -41,7 +45,7 @@ export function MenuRegisterInfo() {
         !!categories.flatMap((category) => category.items).length;
 
     function addItem(category: string) {
-        dispatch(menuRegisterActions.setCurrentCategory(category));
+        setCurrentCategory(category);
         setRedirectToItem(true);
     }
 
@@ -71,7 +75,7 @@ export function MenuRegisterInfo() {
     });
 
     useEffect(() => {
-        dispatch(menuRegisterActions.setCurrentItem(undefined));
+        setCurrentItemId(undefined);
     }, []);
 
     function submit() {
@@ -80,8 +84,12 @@ export function MenuRegisterInfo() {
     }
     FlexContainer;
 
-    if (redirectToItem) redirect("/menu/register/item");
-    if (isSuccess) redirect("/menu/register/success");
+    if (redirectToItem) {
+        redirect("/menu/register/item");
+    } else if (isSuccess) {
+        redirect("/menu/register/success");
+    }
+
     return (
         <FlexContainer>
             <FlexContent>
@@ -107,21 +115,15 @@ export function MenuRegisterInfo() {
                         addMessage="Adicionar produto"
                         onAddClick={addItem}
                         onDeleteCategory={() =>
-                            dispatch(
-                                menuRegisterActions.deleteCategory(
-                                    category.name,
-                                ),
+                            deleteCategory(
+                                category.name,
                             )}
                         onDeleteItem={(id) => {
-                            dispatch(
-                                menuRegisterActions.deleteItem(id),
-                            );
+                            deleteItem(id);
                         }}
                         onEditItem={(id) => {
-                            dispatch(
-                                menuRegisterActions.setCurrentItem(
-                                    id,
-                                ),
+                            setCurrentItemId(
+                                id,
                             );
                             setRedirectToItem(true);
                         }}
@@ -148,10 +150,8 @@ export function MenuRegisterInfo() {
                 title="Título da nova categoria"
                 onCancel={() => setModalVisible(false)}
                 onConfirm={() => {
-                    dispatch(
-                        menuRegisterActions.addCategory(
-                            newCategoryName,
-                        ),
+                    addCategory(
+                        newCategoryName,
                     );
                     setNewCategoryName("");
                     setModalVisible(false);

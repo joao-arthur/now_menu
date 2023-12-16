@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
-import { useAppDispatch } from "../../hooks";
-import { userActions } from "@/domains/user";
 import styled from "styled-components";
+import { useSessionStore } from "@/domains/session";
 
 type ContainerProps = {
     readonly heightProp: number;
@@ -12,13 +11,13 @@ export const AppContainer = styled.div<ContainerProps>`
     display: flex;
 `;
 
-
 type Props = {
     readonly children: ReactNode;
 };
 
 export function BasePage({ children }: Props) {
-    const dispatch = useAppDispatch();
+    const { setLogged } = useSessionStore();
+
     const [height, setHeight] = useState(window.innerHeight);
 
     function updateHeight() {
@@ -29,8 +28,8 @@ export function BasePage({ children }: Props) {
         const token = window.localStorage.getItem(
             "@NOW_MENU/user/token",
         );
-        dispatch(userActions.setLogged(!!token));
-    }, [dispatch]);
+        setLogged(!!token);
+    }, []);
 
     useEffect(() => {
         window.addEventListener("resize", updateHeight);

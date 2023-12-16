@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { redirect, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { AnonimousPageFooter } from "@/components/AnonimousPageFooter/AnonimousPageFooter";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
@@ -13,9 +12,10 @@ import {
     Title,
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
-import { orderRegisterActions } from "@/domains/orderRegister";
+import { useOrderRegisterStore } from "@/domains/orderRegister";
 import { CartItem } from "./CartItem/CartItem";
-import { item } from "@/domains/menuInfo";
+import { useMenuInfoStore } from "@/domains/menuInfo";
+import type { MenuItem } from "@/domains/menuInfo";
 import { usePostOrder } from "@/api/order.api";
 import styled from "styled-components";
 
@@ -28,29 +28,30 @@ export const ItemsContainer = styled.div`
     margin: 20px 0;
 `;
 
-
 export function OrderCart() {
-    const dispatch = useAppDispatch();
     const { tableId } = useParams<{ tableId: string }>();
     const [name, setName] = useState("");
     const [success, setSuccess] = useState(false);
-    const selectedItems = useAppSelector(({ orderRegister }) =>
-        orderRegister
-    );
-    const allItems = useAppSelector(({ menuInfo }) =>
-        menuInfo.categories
-            .filter(
-                ({ name }) =>
-                    !["Mais caros", "Mais baratos"].includes(name),
-            )
-            .flatMap(({ name, items }) =>
-                items.map((item) => ({ ...item, category: name }))
-            )
-    );
+
+    const { items: orderItems, clear } = useOrderRegisterStore();
+
+    const selectedItems = orderItems;
+
+    const { menuInfo } = useMenuInfoStore();
+
+    const allItems = menuInfo.categories
+        .filter(
+            ({ name }) =>
+                !["Mais caros", "Mais baratos"].includes(name),
+        )
+        .flatMap(({ name, items }) =>
+            items.map((item) => ({ ...item, category: name }))
+        );
+
     const items = selectedItems.map((selectedItem) => ({
         ...(allItems.find((item) =>
             item.id === selectedItem.id
-        ) as item),
+        ) as MenuItem),
         ...selectedItem,
     }));
 
@@ -75,10 +76,10 @@ export function OrderCart() {
 
     useEffect(() => {
         if (isSuccess) {
-            dispatch(orderRegisterActions.clear());
+            clear();
             setSuccess(true);
         }
-    }, [dispatch, isSuccess]);
+    }, [isSuccess]);
 
     function submit() {
         if (!validForm) return;
@@ -86,6 +87,7 @@ export function OrderCart() {
     }
 
     if (success) redirect(`/table/${tableId}/success`);
+
     return (
         <FlexContainer>
             <FlexContent>
