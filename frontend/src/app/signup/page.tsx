@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useSignUpStore } from "@/domains/signUp";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
-import { Image } from "@/components/Image/Image";
 import {
     Button,
     FlexContainer,
@@ -17,8 +16,9 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
+import { LogoImg } from "@/components/Image/LogoImg";
 
-export default function SignUpInfoPage() {
+export default function SignUpPage() {
     const router = useRouter();
     const {
         values,
@@ -45,7 +45,7 @@ export default function SignUpInfoPage() {
         <FlexContainer>
             <FlexContent>
                 <LogoContainer>
-                    <Image name="logo" height={240} width={230} />
+                   <LogoImg/>
                 </LogoContainer>
                 <Title>Cadastrar</Title>
                 <Subtitle>

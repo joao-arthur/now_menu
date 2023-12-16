@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSignUpStore } from "@/domains/signUp";
 import { useSessionStore } from "@/domains/session";
-import { Image } from "@/components/Image/Image";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     ButtonLink,
@@ -13,6 +12,7 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
+import { SignUpSuccessImg } from "@/components/Image/SignUpSuccessImg";
 
 export default function SignUpSuccessPage() {
     const router = useRouter();
@@ -41,11 +41,7 @@ export default function SignUpSuccessPage() {
                     Parabéns! seu cadastro está finalizado, agora você
                     precisa cadastrar o seu cardápio
                 </Subtitle>
-                <Image
-                    name="signupSuccess"
-                    width={300}
-                    height={300}
-                />
+                <SignUpSuccessImg/>
                 <ButtonLink href="/menu/register">
                     Cadastrar cardápio
                 </ButtonLink>

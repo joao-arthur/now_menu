@@ -7,8 +7,8 @@ import {
     Subtitle,
     Title,
 } from "@/components/Layout";
-import { Image } from "@/components/Image/Image";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
+import { MenuSuccessImg } from "@/components/Image/MenuSuccessImg";
 
 export default function MenuRegisterSuccessPage() {
     return (
@@ -20,7 +20,7 @@ export default function MenuRegisterSuccessPage() {
                     Parabéns! seu cardápio está pronto, agora só gerar
                     os QR codes e começar a vender
                 </Subtitle>
-                <Image name="menuSuccess" />
+                <MenuSuccessImg/>
                 <ButtonLink href="/tables/register">
                     Cadastrar mesas
                 </ButtonLink>

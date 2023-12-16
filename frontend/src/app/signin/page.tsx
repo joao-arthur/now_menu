@@ -5,7 +5,6 @@ import { useSignUpStore } from "@/domains/signUp";
 import { useSessionStore } from "@/domains/session";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
-import { Image } from "@/components/Image/Image";
 import {
     Button,
     FlexContainer,
@@ -19,6 +18,7 @@ import {
     Title,
 } from "@/components/Layout";
 import { useSignIn } from "@/features/SignIn/useSignIn";
+import { LogoImg } from "@/components/Image/LogoImg";
 
 export default function SignInPage() {
     const { setLogged } = useSessionStore();
@@ -51,7 +51,7 @@ export default function SignInPage() {
         <FlexContainer>
             <FlexContent>
                 <LogoContainer>
-                    <Image name="logo" height={240} width={230} />
+                    <LogoImg/>
                 </LogoContainer>
                 <Title>Entrar</Title>
                 <Subtitle>Por favor entre para continuar</Subtitle>

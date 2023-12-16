@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
-import { Image } from "@/components/Image/Image";
 import {
     FlexContainer,
     FlexContent,
@@ -12,6 +11,7 @@ import {
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import { PrimaryText } from "@/components/Layout";
+import { OrderSuccessImg } from "@/components/Image/OrderSuccessImg";
 
 export const OrderAgain = styled(PrimaryText)`
     text-align: center;
@@ -32,7 +32,7 @@ export default function TableIdSuccessPage() {
                     Parabéns! seu pedido já está sendo praparado.
                     Agora só esperar.
                 </Subtitle>
-                <Image name="orderSuccess" />
+                <OrderSuccessImg/>
                 <OrderAgain>
                     <Link href={`/table/${tableId}`}>
                         Pedir novamente
