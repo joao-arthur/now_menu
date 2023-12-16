@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { useMenuRegisterStore } from "@/domains/menuRegister";
+import { useMenuRegisterStore } from "@/lib/menu/useMenuRegisterStore";
 import { req } from "@/core/req";
 import { CollapsableList } from "@/components/CollapsableList/CollapsableList";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
@@ -22,11 +22,11 @@ import { Toast } from "@/components/Toast";
 import { Modal } from "@/components/Modal/Modal";
 import { Input as BaseInput } from "@/components/Input/Input";
 
-export const Category = styled.span`
+const Category = styled.span`
     margin-bottom: 5px;
 `;
 
-export const Input = styled(BaseInput)`
+const Input = styled(BaseInput)`
     width: 100%;
 `;
 

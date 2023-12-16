@@ -1,5 +1,5 @@
 import { Input } from "@/components/Input/Input";
-import { useMenuInfoStore } from "@/domains/menuInfo";
+import { useMenuInfoStore } from "@/lib/menu/useMenuInfoStore";
 
 export function SearchBar() {
     const { search, setSearch } = useMenuInfoStore();

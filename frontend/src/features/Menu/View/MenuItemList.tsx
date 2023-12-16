@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useMenuInfoStore } from "@/domains/menuInfo";
+import { useMenuInfoStore } from "@/lib/menu/useMenuInfoStore";
 import { MenuItem } from "./MenuItem";
 
 export const Container = styled.div`

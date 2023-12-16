@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
-import type { MenuItem } from "@/domains/menuInfo";
-import { useMenuRegisterStore } from "@/domains/menuRegister";
-import { useDeleteItem, useGetUserMenu } from "@/api/item.api";
+import type { MenuItem } from "@/lib/menu/useMenuInfoStore";
+import { useMenuRegisterStore } from "@/lib/menu/useMenuRegisterStore";
+import { useDeleteItem, useGetUserMenu } from "@/lib/item/itemAPI";
 import { CollapsableList } from "@/components/CollapsableList/CollapsableList";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -18,11 +18,11 @@ import {
 import { Modal } from "@/components/Modal/Modal";
 import { Input as BaseInput } from "@/components/Input/Input";
 
-export const Category = styled.span`
+ const Category = styled.span`
     margin-bottom: 5px;
 `;
 
-export const Input = styled(BaseInput)`
+ const Input = styled(BaseInput)`
     width: 100%;
 `;
 

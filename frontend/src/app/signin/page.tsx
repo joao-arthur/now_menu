@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useSignUpStore } from "@/domains/signUp";
-import { useSessionStore } from "@/domains/session";
+import { useSignUpStore } from "@/lib/session/useSignUpStore";
+import { useSessionStore } from "@/lib/session/useSessionStore";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
 import {
@@ -51,7 +51,7 @@ export default function SignInPage() {
         <FlexContainer>
             <FlexContent>
                 <LogoContainer>
-                    <LogoImg/>
+                    <LogoImg />
                 </LogoContainer>
                 <Title>Entrar</Title>
                 <Subtitle>Por favor entre para continuar</Subtitle>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSignUpStore } from "@/domains/signUp";
+import { useSignUpStore } from "@/lib/session/useSignUpStore";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
 import {
@@ -20,12 +20,8 @@ import { LogoImg } from "@/components/Image/LogoImg";
 
 export default function SignUpPage() {
     const router = useRouter();
-    const {
-        values,
-        setCNPJ,
-        setName,
-        setTelephone,
-    } = useSignUpStore();
+    const { values, setCNPJ, setName, setTelephone } =
+        useSignUpStore();
     const [submitted, setSubmitted] = useState(false);
     const validForm =
         values.cnpj.replaceAll(/[^0-9]/g, "").length === 14 &&
@@ -45,7 +41,7 @@ export default function SignUpPage() {
         <FlexContainer>
             <FlexContent>
                 <LogoContainer>
-                   <LogoImg/>
+                    <LogoImg />
                 </LogoContainer>
                 <Title>Cadastrar</Title>
                 <Subtitle>

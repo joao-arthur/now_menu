@@ -1,7 +1,7 @@
 import { Icon } from "@/components/Icon/Icon";
 import styled from "styled-components";
 
-export const Container = styled.div`
+ const Container = styled.div`
     background-color: var(--backgroundGray);
     border-radius: 7px;
     display: flex;
@@ -11,12 +11,12 @@ type ButtonProps = {
     readonly selectable: boolean;
 };
 
-export const Button = styled.div<ButtonProps>`
+ const Button = styled.div<ButtonProps>`
     padding: 10px 8px;
     ${({ selectable }) => (selectable ? "cursor: pointer;" : "")}
 `;
 
-export const Content = styled.div`
+ const Content = styled.div`
     margin: 10px 8px;
 `;
 

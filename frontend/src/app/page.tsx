@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useSessionStore } from "@/domains/session";
+import { useSessionStore } from "@/lib/session/useSessionStore";
 
 export default function AppPage() {
     const router = useRouter();

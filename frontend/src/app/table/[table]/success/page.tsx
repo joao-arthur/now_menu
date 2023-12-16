@@ -32,7 +32,7 @@ export default function TableIdSuccessPage() {
                     Parabéns! seu pedido já está sendo praparado.
                     Agora só esperar.
                 </Subtitle>
-                <OrderSuccessImg/>
+                <OrderSuccessImg />
                 <OrderAgain>
                     <Link href={`/table/${tableId}`}>
                         Pedir novamente

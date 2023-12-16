@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSignUpStore } from "@/domains/signUp";
-import { useSignUp } from "@/api/user.api";
+import { useSignUpStore } from "@/lib/session/useSignUpStore";
+import { useSignUp } from "@/lib/user/userAPI";
 import { Checkbox } from "@/components/Checkbox/Checkbox";
 import { Field } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";

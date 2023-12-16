@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
-import { useMenuInfoStore } from "@/domains/menuInfo";
-import { useSessionStore } from "@/domains/session";
-import { useGetTableMenu, useGetUserMenu } from "@/api/item.api";
+import { useMenuInfoStore } from "@/lib/menu/useMenuInfoStore";
+import { useSessionStore } from "@/lib/session/useSessionStore";
+import { useGetTableMenu, useGetUserMenu } from "@/lib/item/itemAPI";
 import {
     FlexContainer,
     FlexContent,
@@ -19,19 +19,19 @@ import { MostOrdered } from "@/features/Menu/View/MostOrdered";
 import { CategoryList } from "@/features/Menu/View/CategoryList";
 import { MenuItemList } from "@/features/Menu/View/MenuItemList";
 
-export const Container = styled.div`
+ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
 `;
 
-export const Content = styled.div`
+ const Content = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 40px;
 `;
 
-export const Edit = styled.span`
+ const Edit = styled.span`
     font-size: 0.8rem;
 `;
 

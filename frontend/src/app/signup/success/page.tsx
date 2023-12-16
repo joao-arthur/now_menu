@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useSignUpStore } from "@/domains/signUp";
-import { useSessionStore } from "@/domains/session";
+import { useSignUpStore } from "@/lib/session/useSignUpStore";
+import { useSessionStore } from "@/lib/session/useSessionStore";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
     ButtonLink,
@@ -41,7 +41,7 @@ export default function SignUpSuccessPage() {
                     Parabéns! seu cadastro está finalizado, agora você
                     precisa cadastrar o seu cardápio
                 </Subtitle>
-                <SignUpSuccessImg/>
+                <SignUpSuccessImg />
                 <ButtonLink href="/menu/register">
                     Cadastrar cardápio
                 </ButtonLink>

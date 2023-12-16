@@ -1,9 +1,9 @@
 import { PrimaryText } from "@/components/Layout";
-import { MenuItem } from "@/domains/menuInfo";
-import { useGetMockedImage } from "@/api/image.api";
+import { MenuItem } from "@/lib/menu/useMenuInfoStore";
+import { useGetMockedImage } from "@/api/imageAPI";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useOrderRegisterStore } from "@/domains/orderRegister";
+import { useOrderRegisterStore } from "@/lib/order/useOrderRegisterStore";
 import { Amount } from "./Amount";
 
 export const Container = styled.div`

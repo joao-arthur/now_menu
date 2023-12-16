@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useOrderRegisterStore } from "@/domains/orderRegister";
+import { useOrderRegisterStore } from "@/lib/order/useOrderRegisterStore";
 import { Link } from "../Layout";
 import { Icon as IconBase } from "../Icon/Icon";
 

@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import { TableAPI, useDeleteTable } from "@/api/table.api";
+import { TableAPI, useDeleteTable } from "@/lib/table/tableAPI";
 import { Modal } from "@/components/Modal/Modal";
 import styled from "styled-components";
 import { Icon } from "@/components/Icon/Icon";
 
-export const Container = styled.div`
+const Container = styled.div`
     display: flex;
     height: 30px;
     align-items: center;
 `;
 
-export const TableName = styled.span`
+ const TableName = styled.span`
     flex: 1;
 `;
 
-export const ButtonIcon = styled(Icon)`
+ const ButtonIcon = styled(Icon)`
     padding: 12px;
     cursor: pointer;
     border-radius: 6px;

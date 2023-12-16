@@ -1,46 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { req } from "@/core/req";
 
-export type ItemAPI = {
-    readonly _id: string;
-    readonly userId: string;
-    readonly name: string;
-    readonly description: string;
-    readonly prepareTime: number;
-    readonly price: number;
-    readonly category: string;
-    readonly createdAt: string;
-    readonly updatedAt: string;
-};
 
-type RestaurantAPI = {
-    readonly items: readonly ItemAPI[];
-    readonly restaurant: {
-        readonly address: string;
-        readonly cep: string;
-        readonly city: string;
-        readonly district: string;
-        readonly email: string;
-        readonly name: string;
-        readonly state: string;
-        readonly telephone: string;
-    };
-};
-
-type ItemToPatch = {
-    readonly name: string;
-    readonly description: string;
-    readonly prepareTime: number;
-    readonly price: number;
-};
-
-type ItemToPost = {
-    readonly name: string;
-    readonly description: string;
-    readonly prepareTime: number;
-    readonly price: number;
-    readonly category: string;
-};
 
 export function useGetUserMenu() {
     return useMutation({
@@ -118,14 +79,14 @@ export function useDeleteItem(id: string) {
     });
 }
 
-export function usePatchItem(id: string, item: ItemToPatch) {
+export function usePatchItem(id: string, item: ItemToUpdate) {
     return useMutation({
         mutationKey: ["patchItem"],
         mutationFn: () => req.patch(`item/${id}`, item),
     });
 }
 
-export function usePostItem(item: ItemToPost) {
+export function usePostItem(item: ItemToSave) {
     return useMutation({
         mutationKey: ["postItem"],
         mutationFn: () => req.post("item", item),

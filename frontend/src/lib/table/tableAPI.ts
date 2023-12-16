@@ -1,18 +1,7 @@
+import type { TableAPI, TableUnsaved } from "./table";
 import { useMutation } from "@tanstack/react-query";
 import { req } from "@/core/req";
 import { Toast } from "@/components/Toast";
-
-export type TableAPI = {
-    readonly _id: string;
-    readonly name: string;
-    readonly userId: string;
-    readonly createdAt: string;
-    readonly updatedAt: string;
-};
-
-type Table = {
-    readonly name: string;
-};
 
 export function useGetTables() {
     return useMutation({
@@ -21,7 +10,7 @@ export function useGetTables() {
     });
 }
 
-export function usePostTable(tables: readonly Table[]) {
+export function usePostTable(tables: readonly TableUnsaved[]) {
     return useMutation({
         mutationKey: ["postTables"],
         mutationFn: () =>

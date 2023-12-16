@@ -1,4 +1,4 @@
-import { useGetMockedImage } from "@/api/image.api";
+import { useGetMockedImage } from "@/api/imageAPI";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 

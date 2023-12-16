@@ -1,31 +1,7 @@
+import type { User, UserFromAPI } from "./user";
 import { useMutation } from "@tanstack/react-query";
 import { req } from "@/core/req";
 import { Toast } from "@/components/Toast";
-
-type User = {
-    readonly cnpj: string;
-    readonly name: string;
-    readonly telephone: string;
-    readonly cep: string;
-    readonly address: string;
-    readonly district: string;
-    readonly city: string;
-    readonly state: string;
-    readonly email: string;
-    readonly password: string;
-};
-
-type UserFromAPI = {
-    readonly cnpj: string;
-    readonly name: string;
-    readonly telephone: string;
-    readonly cep: string;
-    readonly address: string;
-    readonly district: string;
-    readonly city: string;
-    readonly state: string;
-    readonly email: string;
-};
 
 export function useSignUp(user: User) {
     return useMutation({

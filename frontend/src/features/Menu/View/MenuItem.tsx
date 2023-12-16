@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import type { MenuItem } from "@/domains/menuInfo";
-import { useOrderRegisterStore } from "@/domains/orderRegister";
-import { useSessionStore } from "@/domains/session";
+import type { MenuItem } from "@/lib/menu/useMenuInfoStore";
+import { useOrderRegisterStore } from "@/lib/order/useOrderRegisterStore";
+import { useSessionStore } from "@/lib/session/useSessionStore";
 import { PrimaryText } from "@/components/Layout";
 import { Link } from "@/components/Layout";
-import { useGetMockedImage } from "@/api/image.api";
+import { useGetMockedImage } from "@/api/imageAPI";
 
 export const Container = styled.div`
     display: flex;

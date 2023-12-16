@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
-import { useMenuRegisterStore } from "@/domains/menuRegister";
+import { useMenuRegisterStore } from "@/lib/menu/useMenuRegisterStore";
 import { Field, Title as FieldTitle } from "@/components/Field/Field";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
 import {
@@ -16,13 +16,13 @@ import {
 } from "@/components/Layout";
 import { Form } from "@/components/Form/Form";
 
-export const FieldsContainer = styled.div`
+const FieldsContainer = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 30px;
 `;
 
-export const CustomField = styled(Field)`
+const CustomField = styled(Field)`
     min-width: 0;
 `;
 

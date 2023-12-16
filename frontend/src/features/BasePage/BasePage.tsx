@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSessionStore } from "@/domains/session";
+import { useSessionStore } from "@/lib/session/useSessionStore";
 
 type ContainerProps = {
     readonly heightProp: number;

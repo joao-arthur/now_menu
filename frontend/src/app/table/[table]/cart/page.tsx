@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
-import type { MenuItem } from "@/domains/menuInfo";
-import { useOrderRegisterStore } from "@/domains/orderRegister";
-import { useMenuInfoStore } from "@/domains/menuInfo";
+import type { MenuItem } from "@/lib/menu/useMenuInfoStore";
+import { useOrderRegisterStore } from "@/lib/order/useOrderRegisterStore";
+import { useMenuInfoStore } from "@/lib/menu/useMenuInfoStore";
 import { AnonimousPageFooter } from "@/components/AnonimousPageFooter/AnonimousPageFooter";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
@@ -18,15 +18,15 @@ import {
     Title,
 } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader/PageHeader";
-import { usePostOrder } from "@/api/order.api";
+import { usePostOrder } from "@/lib/order/orderAPI";
 import { CartItem } from "@/features/Order/Cart/CartItem";
 
-export const ValueContainer = styled.div`
+ const ValueContainer = styled.div`
     display: flex;
     justify-content: space-between;
 `;
 
-export const ItemsContainer = styled.div`
+ const ItemsContainer = styled.div`
     margin: 20px 0;
 `;
 

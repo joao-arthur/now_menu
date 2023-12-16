@@ -20,7 +20,7 @@ export default function MenuRegisterSuccessPage() {
                     Parabéns! seu cardápio está pronto, agora só gerar
                     os QR codes e começar a vender
                 </Subtitle>
-                <MenuSuccessImg/>
+                <MenuSuccessImg />
                 <ButtonLink href="/tables/register">
                     Cadastrar mesas
                 </ButtonLink>

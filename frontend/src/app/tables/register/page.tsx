@@ -17,11 +17,11 @@ import {
     TableAPI,
     useGetTables,
     usePostTable,
-} from "@/api/table.api";
+} from "@/lib/table/tableAPI";
 import styled from "styled-components";
 import { TableItem } from "@/features/Tables/TableItem";
 
-export const ListContainer = styled.div`
+const ListContainer = styled.div`
     overflow: auto;
 `;
 

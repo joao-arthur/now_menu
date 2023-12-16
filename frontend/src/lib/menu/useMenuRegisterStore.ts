@@ -1,20 +1,8 @@
 import { nanoid } from "nanoid";
 import { create } from "zustand";
 
-type Item = {
-    readonly id: string;
-    readonly name: string;
-    readonly description: string;
-    readonly prepareTime: number;
-    readonly price: number;
-};
+import {MenuItem,UnsavedMenuItem,Category} from './menuItem';
 
-type UnsavedItem = Omit<Item, "id">;
-
-type Category = {
-    readonly name: string;
-    readonly items: readonly Item[];
-};
 
 type MenuRegisterStore = {
     readonly categories: readonly Category[];
@@ -28,8 +16,8 @@ type MenuRegisterStore = {
     ) => void;
     readonly addCategory: (category: string) => void;
     readonly deleteCategory: (category: string) => void;
-    readonly addItem: (item: UnsavedItem) => void;
-    readonly editItem: (item: UnsavedItem) => void;
+    readonly addItem: (item: UnsavedMenuItem) => void;
+    readonly editItem: (item: UnsavedMenuItem) => void;
     readonly deleteItem: (item: string) => void;
 };
 
@@ -59,7 +47,7 @@ export const useMenuRegisterStore = create<MenuRegisterStore>((
                 name !== category
             ),
         })),
-    addItem: (item: UnsavedItem) =>
+    addItem: (item: UnsavedMenuItem) =>
         set(({ categories, currentCategory }) => ({
             categories: categories.map((category) => ({
                 name: category.name,
@@ -69,7 +57,7 @@ export const useMenuRegisterStore = create<MenuRegisterStore>((
             })),
             currentCategory: undefined,
         })),
-    editItem: (item: UnsavedItem) =>
+    editItem: (item: UnsavedMenuItem) =>
         set(({ categories, currentItemId }) => ({
             categories: categories.map((category) => ({
                 name: category.name,

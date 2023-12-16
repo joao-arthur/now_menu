@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
-import { useSessionStore } from "@/domains/session";
+import { useSessionStore } from "@/lib/session/useSessionStore";
 
-export function useUserRoute() {
+export function useLoggedRoute() {
     const router = useRouter();
     const { session } = useSessionStore();
 

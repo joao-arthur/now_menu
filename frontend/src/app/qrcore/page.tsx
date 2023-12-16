@@ -5,7 +5,7 @@ import { UserPageFooter } from "@/components/UserPageFooter/UserPageFooter";
 import { FlexContainer, FlexContentMax } from "@/components/Layout";
 import styled from "styled-components";
 
-export const Iframe = styled.iframe`
+ const Iframe = styled.iframe`
     width: 100%;
     height: 100vh;
     border: none;

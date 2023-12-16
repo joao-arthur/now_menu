@@ -13,15 +13,15 @@ import {
     Title,
 } from "@/components/Layout";
 import { Form } from "@/components/Form/Form";
-import { useGetItem, usePatchItem } from "@/api/item.api";
+import { useGetItem, usePatchItem } from "@/lib/item/itemAPI";
 
-export const FieldsContainer = styled.div`
+ const FieldsContainer = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 30px;
 `;
 
-export const CustomField = styled(Field)`
+ const CustomField = styled(Field)`
     min-width: 0;
 `;
 

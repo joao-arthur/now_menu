@@ -1,10 +1,5 @@
 import { create } from "zustand";
-
-type OrderItem = {
-    readonly id: string;
-    readonly amount: number;
-    readonly observation: string;
-};
+import { OrderItem } from "./orderItem";
 
 type ItemAmount = {
     readonly item: string;

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useOrdersStore } from "@/domains/orders";
-import { useGetOrders } from "@/api/order.api";
+import { useOrdersStore } from "@/lib/order/useOrdersStore";
+import { useGetOrders } from "@/lib/order/orderAPI";
 import {
     AloneTitle,
     FlexContainer,

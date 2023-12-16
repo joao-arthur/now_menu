@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useGetUser, usePatchUser } from "@/api/user.api";
+import { useGetUser, usePatchUser } from "@/lib/user/userAPI";
 import { Field } from "@/components/Field/Field";
 import { Form } from "@/components/Form/Form";
 import {
