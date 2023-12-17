@@ -1,13 +1,24 @@
 "use client";
 
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { SignUpInfo } from "@/lib/signUp/signUpInfo";
+import { signUpInfoSchema } from "@/lib/signUp/signUpInfoSchema";
 import { LogoImg } from "@/comp/img/LogoImg";
-import { TextAreaInput } from "@/comp/input/TextAreaInput";
 import { TextInput } from "@/comp/input/TextInput";
 import { Layout } from "@/comp/layout/Layout";
-import { useState } from "react";
 
 export default function SignUpPage() {
     const [value, setValue] = useState();
+
+    const { register, handleSubmit } = useForm<SignUpInfo>({
+        resolver: zodResolver(signUpInfoSchema),
+    });
+
+    function handleOnSubmit(form: SignUpInfo) {
+        console.log(form);
+    }
 
     return (
         <Layout.Container>
@@ -15,34 +26,22 @@ export default function SignUpPage() {
                 <LogoImg />
                 <h3>Cadastrar</h3>
                 <h5>Por favor cadastre-se para continuar</h5>
-                <form className="flex flex-col">
+                <form
+                    className="flex flex-col"
+                    onSubmit={handleSubmit(handleOnSubmit)}
+                >
                     <div className="flex flex-col">
                         <span>CNPJ</span>
-                        <input
-                            type="text"
-                            name="cnpj"
-                            required
-                        />
+                        <TextInput {...register("cnpj")} />
                     </div>
                     <div className="flex flex-col">
                         <span>Nome do estabelecimento</span>
-                        <input
-                            type="text"
-                            name="name"
-                            required
-                        />
-                        <TextInput name="rhweriug" />
+                        <TextInput {...register("name")} />
                     </div>
                     <div className="flex flex-col">
                         <span>Telefone</span>
-                        <input
-                            type="text"
-                            name="telephone"
-                            required
-                        />
+                        <TextInput {...register("telephone")} />
                     </div>
-
-                    <TextAreaInput name="fehiu" />
                     <button className="text-white font-bold bg-main rounded-lg cursor-pointer p-3">
                         Continuar
                     </button>
