@@ -10,14 +10,13 @@ import { TextInput } from "@/comp/input/TextInput";
 import { Layout } from "@/comp/layout/Layout";
 
 export default function SignUpPage() {
-    const [value, setValue] = useState();
-
     const { register, handleSubmit } = useForm<SignUpInfo>({
         resolver: zodResolver(signUpInfoSchema),
     });
 
     function handleOnSubmit(form: SignUpInfo) {
         console.log(form);
+        
     }
 
     return (
