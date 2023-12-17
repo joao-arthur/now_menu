@@ -70,7 +70,7 @@ export default function SignUpAddressPage() {
                     />
                     <Field
                         title="Bairro"
-                        name="bairro"
+                        name="district"
                         type="text"
                         required
                         value={values.district}

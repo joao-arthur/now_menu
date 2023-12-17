@@ -1,4 +1,4 @@
-export type SignUpToCreate = {
+export type SignUp = {
     readonly cnpj: string;
     readonly name: string;
     readonly telephone: string;
@@ -9,5 +9,4 @@ export type SignUpToCreate = {
     readonly state: string;
     readonly email: string;
     readonly password: string;
-    readonly passwordMatch: string;
 };

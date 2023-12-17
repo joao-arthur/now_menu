@@ -1,9 +1,14 @@
 "use client";
 
 import { LogoImg } from "@/comp/img/LogoImg";
+import { TextAreaInput } from "@/comp/input/TextAreaInput";
+import { TextInput } from "@/comp/input/TextInput";
 import { Layout } from "@/comp/layout/Layout";
+import { useState } from "react";
 
 export default function SignUpPage() {
+    const [value, setValue] = useState();
+
     return (
         <Layout.Container>
             <Layout.Content>
@@ -26,6 +31,7 @@ export default function SignUpPage() {
                             name="name"
                             required
                         />
+                        <TextInput name="rhweriug" />
                     </div>
                     <div className="flex flex-col">
                         <span>Telefone</span>
@@ -35,7 +41,11 @@ export default function SignUpPage() {
                             required
                         />
                     </div>
-                    <button className="text-white font-bold bg-main rounded-lg cursor-pointer p-3">Continuar</button>
+
+                    <TextAreaInput name="fehiu" />
+                    <button className="text-white font-bold bg-main rounded-lg cursor-pointer p-3">
+                        Continuar
+                    </button>
                 </form>
             </Layout.Content>
         </Layout.Container>
