@@ -1,12 +1,5 @@
 import Image from "next/image";
 
 export function LogoImg() {
-    return (
-        <Image
-            src="/logo.svg"
-            height={250}
-            width={250}
-            alt=""
-        />
-    );
+    return <Image src="/logo.svg" width={200} height={200} />;
 }

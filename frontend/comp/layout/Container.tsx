@@ -9,7 +9,9 @@ type Props = {
 export function Container({ children }: Props): ReactNode {
     return (
         <div className="flex flex-col w-full h-full items-center">
-            {children}
+            <div className="flex flex-col w-4/5 h-full">
+                {children}
+            </div>
         </div>
     );
 }
