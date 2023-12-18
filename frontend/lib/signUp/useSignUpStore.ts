@@ -45,19 +45,10 @@ export const useSignUpStore = create<SignUpStore>((set) => ({
     values: initialState,
     success: false,
     setInfoForm: (infoForm: SignUpInfo) =>
-        set(({ values }) => ({
-            values: { ...values, ...infoForm },
-        })),
+        set(({ values }) => ({ values: { ...values, ...infoForm } })),
     setAddressForm: (addressForm: SignUpAddress) =>
-        set(({ values }) => ({
-            values: { ...values, ...addressForm },
-        })),
+        set(({ values }) => ({ values: { ...values, ...addressForm } })),
     setAccountForm: (accountForm: SignUpAccount) =>
-        set(({ values }) => ({
-            values: { ...values, ...accountForm },
-        })),
-    clear: () =>
-        set(({ values }) => ({
-            values: { ...values, ...initialState },
-        })),
+        set(({ values }) => ({ values: { ...values, ...accountForm } })),
+    clear: () => set(({ values }) => ({ values: { ...values, ...initialState } })),
 }));

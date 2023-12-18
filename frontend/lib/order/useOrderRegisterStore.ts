@@ -17,14 +17,13 @@ export const useOrderRegisterStore = create<OrderRegisterStore>((
     set,
 ) => ({
     items: [],
-    addItem: (item: OrderItem) =>
-        set(({ items }) => ({ items: items.concat(item) })),
+    addItem: (item: OrderItem) => set(({ items }) => ({ items: items.concat(item) })),
     setAmount: (itemAmount: ItemAmount) =>
         set(({ items }) => ({
-            items: items.map((item) => (item.id === itemAmount.item
-                ? { ...item, amount: itemAmount.amount }
-                : item)
-            ),
+            items: items
+                .map((item) => (
+                    item.id === itemAmount.item ? { ...item, amount: itemAmount.amount } : item
+                )),
         })),
     clear: () => set({ items: [] }),
 }));

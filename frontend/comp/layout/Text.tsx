@@ -4,6 +4,6 @@ type Props = {
     readonly children: ReactNode;
 };
 
-export function Text({ children }: Props) {
+export function Text({ children }: Props): ReactNode {
     return <span>{children}</span>;
 }

@@ -15,6 +15,5 @@ export const useSessionStore = create<SessionStore>((set) => ({
         logged: false,
         verified: false,
     },
-    setLogged: (isLogged: boolean) =>
-        set({ session: { logged: isLogged, verified: true } }),
+    setLogged: (isLogged: boolean) => set({ session: { logged: isLogged, verified: true } }),
 }));

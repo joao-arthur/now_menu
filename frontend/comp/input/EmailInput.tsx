@@ -1,9 +1,4 @@
-import type {
-    ChangeEventHandler,
-    FocusEventHandler,
-    ForwardedRef,
-    ReactNode,
-} from "react";
+import type { ChangeEventHandler, FocusEventHandler, ForwardedRef, ReactNode } from "react";
 import { forwardRef } from "react";
 import { cl } from "@/lib/cl";
 
@@ -23,9 +18,7 @@ type Props = ForwardedProps & {
     readonly forwardedRef: ForwardedRef<HTMLInputElement | null>;
 };
 
-function EmailInputComp(
-    { forwardedRef, ...props }: Props,
-): ReactNode {
+function EmailInputComp({ forwardedRef, ...props }: Props): ReactNode {
     return (
         <input
             {...props}

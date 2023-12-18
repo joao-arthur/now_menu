@@ -1,9 +1,4 @@
-import type {
-    ChangeEventHandler,
-    FocusEventHandler,
-    ForwardedRef,
-    ReactNode,
-} from "react";
+import type { ChangeEventHandler, FocusEventHandler, ForwardedRef, ReactNode } from "react";
 import { forwardRef } from "react";
 import { cl } from "@/lib/cl";
 
@@ -23,9 +18,7 @@ type Props = ForwardedProps & {
     readonly forwardedRef: ForwardedRef<HTMLTextAreaElement | null>;
 };
 
-function TextAreaInputComp(
-    { forwardedRef, ...props }: Props,
-): ReactNode {
+function TextAreaInputComp({ forwardedRef, ...props }: Props): ReactNode {
     return (
         <textarea
             {...props}
@@ -41,7 +34,5 @@ export const TextAreaInput = forwardRef<
     HTMLTextAreaElement | null,
     ForwardedProps
 >(
-    (props, ref) => (
-        <TextAreaInputComp {...props} forwardedRef={ref} />
-    ),
+    (props, ref) => <TextAreaInputComp {...props} forwardedRef={ref} />,
 );

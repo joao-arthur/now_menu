@@ -10,10 +10,9 @@ function customFetch<T>(
     const localstorageToken = window.localStorage.getItem(
         "@NOW_MENU/user/token",
     );
-    const authorization =
-        localstorageToken && JSON.parse(localstorageToken)?.token
-            ? `Bearer ${JSON.parse(localstorageToken).token}`
-            : "";
+    const authorization = localstorageToken && JSON.parse(localstorageToken)?.token
+        ? `Bearer ${JSON.parse(localstorageToken).token}`
+        : "";
 
     return fetch(`${baseURL}/${resource}`, {
         method,

@@ -4,10 +4,7 @@ import "./globals.css";
 import type { ReactNode } from "react";
 import { StrictMode } from "react";
 import { Toaster } from "react-hot-toast";
-import {
-    QueryClient,
-    QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useWindowSize } from "@uidotdev/usehooks";
 
 type Props = {

@@ -1,9 +1,4 @@
-import type {
-    ChangeEventHandler,
-    FocusEventHandler,
-    ForwardedRef,
-    ReactNode,
-} from "react";
+import type { ChangeEventHandler, FocusEventHandler, ForwardedRef, ReactNode } from "react";
 import { forwardRef } from "react";
 import { cl } from "@/lib/cl";
 

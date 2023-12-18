@@ -29,10 +29,8 @@ export const useMenuRegisterStore = create<MenuRegisterStore>((
     ],
     currentCategory: undefined,
     currentItemId: undefined,
-    setCurrentCategory: (currentCategory: string | undefined) =>
-        set({ currentCategory }),
-    setCurrentItemId: (currentItemId: string | undefined) =>
-        set({ currentItemId }),
+    setCurrentCategory: (currentCategory: string | undefined) => set({ currentCategory }),
+    setCurrentItemId: (currentItemId: string | undefined) => set({ currentItemId }),
     addCategory: (category: string) =>
         set(({ categories }) => ({
             categories: categories.concat([{
@@ -42,9 +40,7 @@ export const useMenuRegisterStore = create<MenuRegisterStore>((
         })),
     deleteCategory: (category: string) =>
         set(({ categories }) => ({
-            categories: categories.filter(({ name }) =>
-                name !== category
-            ),
+            categories: categories.filter(({ name }) => name !== category),
         })),
     addItem: (item: UnsavedMenuItem) =>
         set(({ categories, currentCategory }) => ({
@@ -76,9 +72,7 @@ export const useMenuRegisterStore = create<MenuRegisterStore>((
         set(({ categories }) => ({
             categories: categories.map((category) => ({
                 name: category.name,
-                items: category.items.filter((item) =>
-                    item.id !== itemId
-                ),
+                items: category.items.filter((item) => item.id !== itemId),
             })),
         })),
 }));

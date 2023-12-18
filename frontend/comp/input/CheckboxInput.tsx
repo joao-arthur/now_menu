@@ -1,9 +1,4 @@
-import type {
-    ChangeEventHandler,
-    FocusEventHandler,
-    ForwardedRef,
-    ReactNode,
-} from "react";
+import type { ChangeEventHandler, FocusEventHandler, ForwardedRef, ReactNode } from "react";
 import { forwardRef } from "react";
 import { cl } from "@/lib/cl";
 
@@ -23,9 +18,7 @@ type Props = ForwardedProps & {
     readonly forwardedRef: ForwardedRef<HTMLInputElement | null>;
 };
 
-function CheckboxInputComp(
-    { forwardedRef, ...props }: Props,
-): ReactNode {
+function CheckboxInputComp({ forwardedRef, ...props }: Props): ReactNode {
     return (
         <input
             {...props}
@@ -42,7 +35,5 @@ export const CheckboxInput = forwardRef<
     HTMLInputElement | null,
     ForwardedProps
 >(
-    (props, ref) => (
-        <CheckboxInputComp {...props} forwardedRef={ref} />
-    ),
+    (props, ref) => <CheckboxInputComp {...props} forwardedRef={ref} />,
 );

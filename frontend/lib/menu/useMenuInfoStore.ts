@@ -84,11 +84,8 @@ export const useMenuInfoStore = create<MenuInfoStore>((set) => ({
                 restaurant: menuInfo.restaurant,
             },
             loaded: true,
-            selectedCategory: menuInfo.categories.length
-                ? menuInfo.categories[0].name
-                : "",
+            selectedCategory: menuInfo.categories.length ? menuInfo.categories[0].name : "",
         }),
-    setSelectedCategory: (selectedCategory: string) =>
-        set({ selectedCategory }),
+    setSelectedCategory: (selectedCategory: string) => set({ selectedCategory }),
     setSearch: (search: string) => set({ search }),
 }));
