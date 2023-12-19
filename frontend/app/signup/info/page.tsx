@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import type { SignUpInfo } from "@/lib/signUp/signUpInfo";
 import { signUpInfoSchema } from "@/lib/signUp/signUpInfoSchema";
 import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
-import { LogoImg } from "@/comp/img/LogoImg";
+import { NowMenuImg } from "@/comp/img/NowMenuImg";
 import { TextInput } from "@/comp/input/TextInput";
 
 export default function SignUpInfoPage(): ReactNode {
@@ -26,14 +26,11 @@ export default function SignUpInfoPage(): ReactNode {
         <div className="flex flex-col w-full h-full items-center">
             <div className="flex flex-col w-4/5 h-full">
                 <div className="h-40 flex justify-center">
-                    <LogoImg />
+                    <NowMenuImg />
                 </div>
                 <h3 className="text-typography text-3xl font-bold">
-                    Cadastrar estabelecimento
+                    Cadastre o seu restaurante
                 </h3>
-                <h5 className="text-typography">
-                    Preencha para continuar
-                </h5>
                 <div className="py-2">
                     <form
                         className="flex flex-col"

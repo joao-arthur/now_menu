@@ -18,7 +18,7 @@ export default function SignUpAccountPage(): ReactNode {
 
     function handleOnSubmit(form: SignUpAccount) {
         setAccountForm(form);
-        router.push("/signup/address");
+        router.push("/signup/success");
     }
 
     return (
@@ -26,14 +26,21 @@ export default function SignUpAccountPage(): ReactNode {
             <div className="flex flex-col w-4/5 h-full">
                 <div className="h-32">
                     <div className="h-16 flex items-center">
-                        <button className="text-typography py-1">voltar</button>
+                        <button
+                            className="text-typography py-1"
+                            onClick={() => {
+                                router.back();
+                            }}
+                        >
+                            voltar
+                        </button>
                     </div>
                 </div>
                 <h3 className="text-typography text-3xl font-bold">
                     Conta
                 </h3>
                 <h5 className="text-typography">
-                    Por favor preencha para continuar.
+                    Preencha para continuar
                 </h5>
                 <div className="py-2">
                     <form

@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 
-export function SignUpSuccessImg(): ReactNode {
+export function ChefTasteImg(): ReactNode {
     return (
         <Image
-            src="orderSuccess.svg"
-            width={300}
-            height={300}
+            src="/chefTaste.svg"
+            width={250}
+            height={250}
             alt=""
         />
     );

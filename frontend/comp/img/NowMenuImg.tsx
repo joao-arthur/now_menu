@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 
-export function LogoImg(): ReactNode {
+export function NowMenuImg(): ReactNode {
     return (
         <Image
-            src="/logo.svg"
+            src="/nowMenu.svg"
             width={200}
             height={200}
             alt=""

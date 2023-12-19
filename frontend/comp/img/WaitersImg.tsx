@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 
-export function OrderSuccessImg(): ReactNode {
+export function WaitersImg(): ReactNode {
     return (
         <Image
-            src="/orderSuccess.svg"
-            width={250}
-            height={250}
+            src="/waiters.svg"
+            width={300}
+            height={300}
             alt=""
         />
     );
