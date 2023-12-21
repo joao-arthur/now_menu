@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import type { SignUpAddress } from "@/lib/signUp/signUpAddress";
 import { signUpAddressSchema } from "@/lib/signUp/signUpAddressSchema";
 import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
-import { TextInput } from "@/comp/input/TextInput";
+import { Input } from "@/comp/input/Input";
 
 export default function SignUpAddressPage(): ReactNode {
     const router = useRouter();
@@ -51,35 +51,35 @@ export default function SignUpAddressPage(): ReactNode {
                             <span className="text-typography text-sm">
                                 CEP
                             </span>
-                            <TextInput {...register("cep")} />
+                            <Input.Text {...register("cep")} />
                         </div>
                         <div className="flex flex-col py-2">
                             <span className="text-typography text-sm">
                                 Endereço
                             </span>
-                            <TextInput {...register("address")} />
+                            <Input.Text {...register("address")} />
                         </div>
                         <div className="flex flex-col py-2">
                             <span className="text-typography text-sm">
                                 Bairro
                             </span>
-                            <TextInput {...register("district")} />
+                            <Input.Text {...register("district")} />
                         </div>
                         <div className="flex flex-col py-2">
                             <span className="text-typography text-sm">
                                 Cidade
                             </span>
-                            <TextInput {...register("city")} />
+                            <Input.Text {...register("city")} />
                         </div>
                         <div className="flex flex-col py-2">
                             <span className="text-typography text-sm">
                                 Estado
                             </span>
-                            <TextInput {...register("state")} />
+                            <Input.Text {...register("state")} />
                         </div>
                         <div className="pt-4">
                             <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
-                                Continuar
+                                CONTINUAR
                             </button>
                         </div>
                     </form>

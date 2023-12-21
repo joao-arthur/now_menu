@@ -24,8 +24,13 @@ export default function SignUpSuccessPage() {
                     <ChefTasteImg />
                 </div>
                 <div className="pt-4">
-                    <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
-                        Cadastrar cardápio
+                    <button
+                        className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg"
+                        onClick={() => {
+                            router.push("/menu/register");
+                        }}
+                    >
+                        CADASTRAR CARDÁPIO
                     </button>
                 </div>
             </div>

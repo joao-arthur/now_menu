@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import type { SignUpAccount } from "@/lib/signUp/signUpAccount";
 import { signUpAccountSchema } from "@/lib/signUp/signUpAccountSchema";
 import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
-import { TextInput } from "@/comp/input/TextInput";
+import { Input } from "@/comp/input/Input";
 
 export default function SignUpAccountPage(): ReactNode {
     const router = useRouter();
@@ -51,17 +51,17 @@ export default function SignUpAccountPage(): ReactNode {
                             <span className="text-typography text-sm">
                                 E-mail
                             </span>
-                            <TextInput {...register("email")} />
+                            <Input.Text {...register("email")} />
                         </div>
                         <div className="flex flex-col py-2">
                             <span className="text-typography text-sm">
                                 Senha
                             </span>
-                            <TextInput {...register("password")} />
+                            <Input.Text {...register("password")} />
                         </div>
                         <div className="pt-4">
                             <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
-                                Continuar
+                                CONTINUAR
                             </button>
                         </div>
                     </form>

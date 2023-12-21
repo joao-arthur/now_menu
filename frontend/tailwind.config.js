@@ -11,7 +11,6 @@ module.exports = {
                 main: "#ff4060",
                 mainDisabled: "#dda6af",
                 typography: "#162437",
-                backgroundGray: "#f5f5f5",
                 borderGray: "#e5e5e5",
             }
         },

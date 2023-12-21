@@ -8,7 +8,7 @@ import type { SignUpInfo } from "@/lib/signUp/signUpInfo";
 import { signUpInfoSchema } from "@/lib/signUp/signUpInfoSchema";
 import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
 import { NowMenuImg } from "@/comp/img/NowMenuImg";
-import { TextInput } from "@/comp/input/TextInput";
+import { Input } from "@/comp/input/Input";
 
 export default function SignUpInfoPage(): ReactNode {
     const router = useRouter();
@@ -40,23 +40,23 @@ export default function SignUpInfoPage(): ReactNode {
                             <span className="text-typography text-sm">
                                 CNPJ
                             </span>
-                            <TextInput {...register("cnpj")} />
+                            <Input.Text {...register("cnpj")} />
                         </div>
                         <div className="flex flex-col py-2">
                             <span className="text-typography text-sm">
                                 Nome do estabelecimento
                             </span>
-                            <TextInput {...register("name")} />
+                            <Input.Text {...register("name")} />
                         </div>
                         <div className="flex flex-col py-2">
                             <span className="text-typography text-sm">
                                 Telefone
                             </span>
-                            <TextInput {...register("telephone")} />
+                            <Input.Text {...register("telephone")} />
                         </div>
                         <div className="pt-4">
                             <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
-                                Continuar
+                                CONTINUAR
                             </button>
                         </div>
                     </form>
