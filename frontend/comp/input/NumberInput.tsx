@@ -25,7 +25,7 @@ function NumberInputComp({ forwardedRef, ...props }: Props): ReactNode {
             type="number"
             ref={forwardedRef}
             className={cl(
-                "border-none bg-gray-100 px-5 py-2 rounded-md text-sm",
+                "min-w-0 border-none bg-gray-100 px-5 py-2 rounded-md text-sm",
             )}
         />
     );

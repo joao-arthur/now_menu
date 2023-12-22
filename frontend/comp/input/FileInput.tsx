@@ -22,7 +22,7 @@ function FileInputComp({ forwardedRef, ...props }: Props): ReactNode {
     return (
         <input
             {...props}
-            type="checkbox"
+            type="file"
             ref={forwardedRef}
             className={cl(
                 "border-none bg-gray-100 px-5 py-2 rounded-md text-sm",
