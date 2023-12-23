@@ -10,6 +10,7 @@ import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
 import { Input } from "@/comp/input/Input";
 import { Layout } from "@/comp/layout/Layout";
 import { Button } from "@/comp/button/button";
+import { Form } from "@/comp/form/form";
 
 export default function SignUpAddressPage(): ReactNode {
     const router = useRouter();
@@ -39,44 +40,31 @@ export default function SignUpAddressPage(): ReactNode {
             </div>
             <Layout.Title label="Endereço do estabelecimento" />
             <div className="py-2">
-                <form
-                    className="flex flex-col"
-                    onSubmit={handleSubmit(handleOnSubmit)}
-                >
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            CEP
-                        </span>
+                <Form.Container onSubmit={handleSubmit(handleOnSubmit)}>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="CEP" />
                         <Input.Text {...register("cep")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Endereço
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Endereço" />
                         <Input.Text {...register("address")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Bairro
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Bairro" />
                         <Input.Text {...register("district")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Cidade
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Cidade" />
                         <Input.Text {...register("city")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Estado
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Estado" />
                         <Input.Text {...register("state")} />
-                    </div>
+                    </Form.FieldContainer>
                     <div className="pt-4">
                         <Button.Submit label="CONTINUAR" />
                     </div>
-                </form>
+                </Form.Container>
             </div>
             <div className="flex justify-center">
                 <span>Possui uma conta?</span>

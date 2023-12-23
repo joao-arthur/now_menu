@@ -11,6 +11,7 @@ import { NowMenuImg } from "@/comp/img/NowMenuImg";
 import { Input } from "@/comp/input/Input";
 import { Layout } from "@/comp/layout/Layout";
 import { Button } from "@/comp/button/button";
+import { Form } from "@/comp/form/form";
 
 export default function SignUpInfoPage(): ReactNode {
     const router = useRouter();
@@ -30,32 +31,23 @@ export default function SignUpInfoPage(): ReactNode {
                 <NowMenuImg />
             </div>
             <div className="py-2">
-                <form
-                    className="flex flex-col"
-                    onSubmit={handleSubmit(handleOnSubmit)}
-                >
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            CNPJ
-                        </span>
+                <Form.Container onSubmit={handleSubmit(handleOnSubmit)}>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="CNPJ" />
                         <Input.Text {...register("cnpj")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Nome do estabelecimento
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Nome do estabelecimento" />
                         <Input.Text {...register("name")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Telefone
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Telefone" />
                         <Input.Text {...register("telephone")} />
-                    </div>
+                    </Form.FieldContainer>
                     <div className="pt-4">
                         <Button.Submit label="CADASTRAR" />
                     </div>
-                </form>
+                </Form.Container>
             </div>
             <div className="flex justify-center">
                 <span>Possui uma conta?</span>

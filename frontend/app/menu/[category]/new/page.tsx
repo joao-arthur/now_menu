@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/comp/input/Input";
 import { Layout } from "@/comp/layout/Layout";
+import { Form } from "@/comp/form/form";
+import { Button } from "@/comp/button/button";
 
 export default function MenuCategoryNewPage() {
     const router = useRouter();
@@ -45,26 +47,17 @@ export default function MenuCategoryNewPage() {
             </div>
             <Layout.Title label="Adicionar produto" />
             <div className="py-2">
-                <form
-                    className="flex flex-col"
-                    onSubmit={handleSubmit(handleOnSubmit)}
-                >
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Nome
-                        </span>
+                <Form.Container onSubmit={handleSubmit(handleOnSubmit)}>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Nome" />
                         <Input.Text {...register("name")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Descricão
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Descricão" />
                         <Input.Text {...register("description")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Tempo estimado de preparo
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Tempo estimado de preparo" />
                         <div className="flex flex-row w-full gap-x-2">
                             <Input.Number
                                 {...register("prepareHours", { valueAsNumber: true })}
@@ -76,25 +69,19 @@ export default function MenuCategoryNewPage() {
                                 {...register("prepareSeconds", { valueAsNumber: true })}
                             />
                         </div>
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Preço
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Preço" />
                         <Input.Number {...register("price")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Foto do produto
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Foto do produto" />
                         <Input.File />
-                    </div>
+                    </Form.FieldContainer>
                     <div className="pt-4">
-                        <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
-                            ADICIONAR
-                        </button>
+                        <Button.Submit label="ADICIONAR" />
                     </div>
-                </form>
+                </Form.Container>
             </div>
         </Layout.Container>
     );

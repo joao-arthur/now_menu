@@ -8,6 +8,7 @@ import { SignInFormSchema } from "@/lib/signIn/signInSchema";
 import { Layout } from "@/comp/layout/Layout";
 import { Input } from "@/comp/input/Input";
 import { NowMenuImg } from "@/comp/img/NowMenuImg";
+import { Form } from "@/comp/form/form";
 
 export default function SignInPage() {
     const router = useRouter();
@@ -37,28 +38,21 @@ export default function SignInPage() {
                 <NowMenuImg />
             </div>
             <div className="py-2">
-                <form
-                    className="flex flex-col"
-                    onSubmit={handleSubmit(handleOnSubmit)}
-                >
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            E-mail
-                        </span>
+                <Form.Container onSubmit={handleSubmit(handleOnSubmit)}>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="E-mail" />
                         <Input.Text {...register("email")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Password
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Password" />
                         <Input.Text {...register("password")} />
-                    </div>
+                    </Form.FieldContainer>
                     <div className="pt-4">
                         <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
                             ACESSAR
                         </button>
                     </div>
-                </form>
+                </Form.Container>
             </div>
             <div className="flex justify-center">
                 <span>Novo por aqui?</span>

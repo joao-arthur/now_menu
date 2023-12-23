@@ -7,6 +7,7 @@ import { Input } from "@/comp/input/Input";
 import { TableItem } from "@/feats/tables/tableItem";
 import { TableAPI } from "@/lib/table/table";
 import { Layout } from "@/comp/layout/Layout";
+import { Form } from "@/comp/form/form";
 
 type form = {
     numberoftables: string;
@@ -64,22 +65,17 @@ export default function TablesRegisterPage(): ReactNode {
                 )
                 : null}
             <div className="py-2">
-                <form
-                    className="flex flex-col"
-                    onSubmit={handleSubmit(handleOnSubmit)}
-                >
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            quantas mesas tem no seu restaurante?
-                        </span>
+                <Form.Container onSubmit={handleSubmit(handleOnSubmit)}>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="quantas mesas tem no seu restaurante?" />
                         <Input.Number {...register("numberoftables")} />
-                    </div>
+                    </Form.FieldContainer>
                     <div className="pt-4">
                         <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
                             GERAR
                         </button>
                     </div>
-                </form>
+                </Form.Container>
             </div>
         </Layout.Container>
     );

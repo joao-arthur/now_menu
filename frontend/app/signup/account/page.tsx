@@ -10,6 +10,7 @@ import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
 import { Input } from "@/comp/input/Input";
 import { Layout } from "@/comp/layout/Layout";
 import { Button } from "@/comp/button/button";
+import { Form } from "@/comp/form/form";
 
 export default function SignUpAccountPage(): ReactNode {
     const router = useRouter();
@@ -39,26 +40,19 @@ export default function SignUpAccountPage(): ReactNode {
             </div>
             <Layout.Title label="Acesso da conta" />
             <div className="py-2">
-                <form
-                    className="flex flex-col"
-                    onSubmit={handleSubmit(handleOnSubmit)}
-                >
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            E-mail
-                        </span>
+                <Form.Container onSubmit={handleSubmit(handleOnSubmit)}>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="E-mail" />
                         <Input.Text {...register("email")} />
-                    </div>
-                    <div className="flex flex-col py-2">
-                        <span className="text-typography text-sm">
-                            Senha
-                        </span>
+                    </Form.FieldContainer>
+                    <Form.FieldContainer>
+                        <Form.FieldTitle label="Senha" />
                         <Input.Text {...register("password")} />
-                    </div>
+                    </Form.FieldContainer>
                     <div className="pt-4">
                         <Button.Submit label="CONTINUAR" />
                     </div>
-                </form>
+                </Form.Container>
             </div>
             <div className="flex justify-center">
                 <span>Possui uma conta?</span>
