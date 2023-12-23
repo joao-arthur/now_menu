@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { req } from "@/core/req";
-import { Toast } from "@/components/Toast";
+import { Toast } from "@/comp/Toast";
+import { req } from "../core/req";
 
 type OrderItem = {
     readonly itemId: string;

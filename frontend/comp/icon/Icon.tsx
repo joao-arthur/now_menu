@@ -11,8 +11,8 @@ type Props = {
 export function Icon({ name, onClick }: Props): ReactNode {
     switch (name) {
         case "trash":
-            return <HiPencil size={18} onClick={() => {}} />;
-        case "pencil":
             return <HiTrash size={18} onClick={() => {}} />;
+        case "pencil":
+            return <HiPencil size={18} onClick={() => {}} />;
     }
 }

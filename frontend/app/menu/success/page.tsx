@@ -27,7 +27,7 @@ export default function MenuSuccessPage() {
                     <button
                         className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg"
                         onClick={() => {
-                            router.push("/menu/register");
+                            router.push("/tables/register");
                         }}
                     >
                         CADASTRAR MESAS

@@ -1,7 +1,7 @@
 import type { TableAPI, TableUnsaved } from "./table";
 import { useMutation } from "@tanstack/react-query";
-import { req } from "@/core/req";
-import { Toast } from "@/components/Toast";
+import { Toast } from "@/comps/Toast";
+import { req } from "../core/req";
 
 export function useGetTables() {
     return useMutation({
