@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { CollapsableList } from "@/comp/CollapsableList";
 import { useMenuRegisterStore } from "@/lib/menu/useMenuRegisterStore";
+import { Layout } from "@/comp/layout/Layout";
+import { Button } from "@/comp/button/button";
 
 export default function MenuRegisterPage(): ReactNode {
     const router = useRouter();
@@ -16,70 +18,64 @@ export default function MenuRegisterPage(): ReactNode {
     }
 
     return (
-        <div className="flex flex-col w-full h-full items-center">
-            <div className="flex flex-col w-4/5 h-full">
-                <div className="h-32">
-                    <div className="h-16 flex items-center justify-end">
-                        <button
-                            className="text-typography py-1"
-                            onClick={() => {
-                                router.push("");
-                            }}
-                        >
-                            pular
-                        </button>
-                    </div>
-                </div>
-                <h3 className="text-typography text-3xl font-bold">
-                    Cadastre seu cardápio
-                </h3>
-                {categories.map((category) => (
-                    <div className="py-2" key={category.name}>
-                        <CollapsableList
-                            name={category.name}
-                            items={category.items.map((item) => ({
-                                name: item.name,
-                                value: (item.price / 100).toLocaleString(
-                                    undefined,
-                                    {
-                                        style: "currency",
-                                        currency: "BRL",
-                                    },
-                                ),
-                                id: item.id,
-                            }))}
-                            addMessage="Adicionar produto"
-                            onDeleteItem={() => {}}
-                            onAddClick={() => {
-                                router.push(`/menu/${category.name}/new`);
-                            }}
-                            onEditItem={(id) => {
-                                router.push(`/menu/${category.name}/${id}`);
-                            }}
-                        />
-                    </div>
-                ))}
-                <div className="flex flex-col rounded-lg bg-gray-100">
-                    <div className="text-center py-2">
-                        <button
-                            onClick={() => {}}
-                            className="bg"
-                        >
-                            Adicionar categoria
-                        </button>
-                    </div>
-                </div>
-                <div className="pt-4">
+        <Layout.Container>
+            <div className="h-32">
+                <div className="h-16 flex items-center justify-end">
                     <button
-                        className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg"
+                        className="text-typography py-1"
                         onClick={() => {
-                            router.push("/menu/success");
+                            router.push("");
                         }}
                     >
-                        SALVAR CARDÁPIO
+                        pular
                     </button>
                 </div>
             </div>
-        </div>
+            <Layout.Title label="Cadastre seu cardápio" />
+            {categories.map((category) => (
+                <div className="py-2" key={category.name}>
+                    <CollapsableList
+                        name={category.name}
+                        items={category.items.map((item) => ({
+                            name: item.name,
+                            value: (item.price / 100).toLocaleString(
+                                undefined,
+                                {
+                                    style: "currency",
+                                    currency: "BRL",
+                                },
+                            ),
+                            id: item.id,
+                        }))}
+                        addMessage="Adicionar produto"
+                        onDeleteItem={() => {}}
+                        onAddClick={() => {
+                            router.push(`/menu/${category.name}/new`);
+                        }}
+                        onEditItem={(id) => {
+                            router.push(`/menu/${category.name}/${id}`);
+                        }}
+                    />
+                </div>
+            ))}
+            <div className="flex flex-col rounded-lg bg-gray-100">
+                <div className="text-center py-2">
+                    <button
+                        onClick={() => {}}
+                        className="bg"
+                    >
+                        Adicionar categoria
+                    </button>
+                </div>
+            </div>
+            <div className="pt-4">
+                <Button.Primary
+                    label="SALVAR CARDÁPIO"
+                    onClick={() => {
+                        router.push("/menu/success");
+                    }}
+                />
+            </div>
+        </Layout.Container>
     );
 }

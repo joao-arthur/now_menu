@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 
 type Props = {
-    readonly children: ReactNode;
+    readonly label: string;
 };
 
-export function Subtitle({ children }: Props): ReactNode {
-    return <h5>{children}</h5>;
+export function Subtitle({ label }: Props): ReactNode {
+    return <h5 className="text-typography">{label}</h5>;
 }

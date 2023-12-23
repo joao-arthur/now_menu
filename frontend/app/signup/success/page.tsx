@@ -2,38 +2,34 @@
 
 import { useRouter } from "next/navigation";
 import { ChefTasteImg } from "@/comp/img/ChefTasteImg";
+import { Layout } from "@/comp/layout/Layout";
+import { Button } from "@/comp/button/button";
 
 export default function SignUpSuccessPage() {
     const router = useRouter();
 
     return (
-        <div className="flex flex-col w-full h-full items-center">
-            <div className="flex flex-col w-4/5 h-full">
-                <div className="h-32">
-                    <div className="h-16 flex items-center justify-end">
-                        <button className="text-typography py-1">pular</button>
-                    </div>
-                </div>
-                <div className="flex flex-col items-center">
-                    <h3 className="text-typography text-3xl font-bold">
-                        Conta criada!
-                    </h3>
-                    <h5 className="text-typography">
-                        Agora vamos cadastrar o seu cardápio
-                    </h5>
-                    <ChefTasteImg />
-                </div>
-                <div className="pt-4">
-                    <button
-                        className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg"
-                        onClick={() => {
-                            router.push("/menu/register");
-                        }}
-                    >
-                        CADASTRAR CARDÁPIO
-                    </button>
+        <Layout.Container>
+            <div className="h-32">
+                <div className="h-16 flex items-center justify-end">
+                    <button className="text-typography py-1">pular</button>
                 </div>
             </div>
-        </div>
+            <div className="flex flex-col w-full">
+                <Layout.Title label="Conta criada!" />
+                <Layout.Subtitle label="Agora vamos cadastrar o seu cardápio" />
+                <div className="flex flex-col items-center">
+                    <ChefTasteImg />
+                </div>
+            </div>
+            <div className="pt-4">
+                <Button.Primary
+                    label="CADASTRAR CARDÁPIO"
+                    onClick={() => {
+                        router.push("/menu/register");
+                    }}
+                />
+            </div>
+        </Layout.Container>
     );
 }

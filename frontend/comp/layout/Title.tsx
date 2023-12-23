@@ -1,9 +1,13 @@
 import type { ReactNode } from "react";
 
 type Props = {
-    readonly children: ReactNode;
+    readonly label: string;
 };
 
-export function Title({ children }: Props): ReactNode {
-    return <h3>{children}</h3>;
+export function Title({ label }: Props): ReactNode {
+    return (
+        <h3 className="text-typography text-3xl font-bold">
+            {label}
+        </h3>
+    );
 }

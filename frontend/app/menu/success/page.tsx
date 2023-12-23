@@ -2,38 +2,34 @@
 
 import { useRouter } from "next/navigation";
 import { WaitersImg } from "@/comp/img/WaitersImg";
+import { Layout } from "@/comp/layout/Layout";
+import { Button } from "@/comp/button/button";
 
 export default function MenuSuccessPage() {
     const router = useRouter();
 
     return (
-        <div className="flex flex-col w-full h-full items-center">
-            <div className="flex flex-col w-4/5 h-full">
-                <div className="h-32">
-                    <div className="h-16 flex items-center justify-end">
-                        <button className="text-typography py-1">pular</button>
-                    </div>
-                </div>
-                <div className="flex flex-col items-center">
-                    <h3 className="text-typography text-3xl font-bold">
-                        Cardápio criado!
-                    </h3>
-                    <h5 className="text-typography">
-                        Agora é só gerar os QR codes e começar a vender
-                    </h5>
-                    <WaitersImg />
-                </div>
-                <div className="pt-4">
-                    <button
-                        className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg"
-                        onClick={() => {
-                            router.push("/tables/register");
-                        }}
-                    >
-                        CADASTRAR MESAS
-                    </button>
+        <Layout.Container>
+            <div className="h-32">
+                <div className="h-16 flex items-center justify-end">
+                    <button className="text-typography py-1">pular</button>
                 </div>
             </div>
-        </div>
+            <div className="flex flex-col">
+                <Layout.Title label="Cardápio criado!" />
+                <Layout.Subtitle label="Agora é só gerar os QR codes e começar a vender" />
+                <div className="flex flex-col items-center">
+                    <WaitersImg />
+                </div>
+            </div>
+            <div className="pt-4">
+                <Button.Primary
+                    label="GERAR QR CODES"
+                    onClick={() => {
+                        router.push("/qrcode");
+                    }}
+                />
+            </div>
+        </Layout.Container>
     );
 }

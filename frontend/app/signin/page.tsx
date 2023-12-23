@@ -1,26 +1,22 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import type { SignUpAccount } from "@/lib/signUp/signUpAccount";
-import { signUpAccountSchema } from "@/lib/signUp/signUpAccountSchema";
-import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
-import { Input } from "@/comp/input/Input";
+import { SignInForm } from "@/lib/signIn/signInForm";
+import { SignInFormSchema } from "@/lib/signIn/signInSchema";
 import { Layout } from "@/comp/layout/Layout";
-import { Button } from "@/comp/button/button";
+import { Input } from "@/comp/input/Input";
+import { NowMenuImg } from "@/comp/img/NowMenuImg";
 
-export default function SignUpAccountPage(): ReactNode {
+export default function SignInPage() {
     const router = useRouter();
-    const { setAccountForm } = useSignUpStore();
-    const { register, handleSubmit } = useForm<SignUpAccount>({
-        resolver: zodResolver(signUpAccountSchema),
+    const { register, handleSubmit } = useForm<SignInForm>({
+        resolver: zodResolver(SignInFormSchema),
     });
 
-    function handleOnSubmit(form: SignUpAccount) {
-        setAccountForm(form);
-        router.push("/signup/success");
+    function handleOnSubmit(form: SignInForm) {
+        //router.push("/signup/account");
     }
 
     return (
@@ -37,7 +33,9 @@ export default function SignUpAccountPage(): ReactNode {
                     </button>
                 </div>
             </div>
-            <Layout.Title label="Acesso da conta" />
+            <div className="h-40 flex justify-center">
+                <NowMenuImg />
+            </div>
             <div className="py-2">
                 <form
                     className="flex flex-col"
@@ -51,19 +49,24 @@ export default function SignUpAccountPage(): ReactNode {
                     </div>
                     <div className="flex flex-col py-2">
                         <span className="text-typography text-sm">
-                            Senha
+                            Password
                         </span>
                         <Input.Text {...register("password")} />
                     </div>
                     <div className="pt-4">
-                        <Button.Submit label="CONTINUAR" />
+                        <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
+                            ACESSAR
+                        </button>
                     </div>
                 </form>
             </div>
             <div className="flex justify-center">
-                <span>Possui uma conta?</span>
-                <button className="text-main font-bold px-1">
-                    Entrar
+                <span>Novo por aqui?</span>
+                <button
+                    className="text-main font-bold px-1"
+                    onClick={() => router.push("/signup/info")}
+                >
+                    Crie uma conta
                 </button>
             </div>
         </Layout.Container>

@@ -5,8 +5,8 @@ export function ChefTasteImg(): ReactNode {
     return (
         <Image
             src="/chefTaste.svg"
-            width={250}
-            height={250}
+            width={500}
+            height={500}
             alt=""
         />
     );

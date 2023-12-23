@@ -9,6 +9,8 @@ import { signUpInfoSchema } from "@/lib/signUp/signUpInfoSchema";
 import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
 import { NowMenuImg } from "@/comp/img/NowMenuImg";
 import { Input } from "@/comp/input/Input";
+import { Layout } from "@/comp/layout/Layout";
+import { Button } from "@/comp/button/button";
 
 export default function SignUpInfoPage(): ReactNode {
     const router = useRouter();
@@ -23,51 +25,45 @@ export default function SignUpInfoPage(): ReactNode {
     }
 
     return (
-        <div className="flex flex-col w-full h-full items-center">
-            <div className="flex flex-col w-4/5 h-full">
-                <div className="h-40 flex justify-center">
-                    <NowMenuImg />
-                </div>
-                <h3 className="text-typography text-3xl font-bold">
-                    Cadastre o seu restaurante
-                </h3>
-                <div className="py-2">
-                    <form
-                        className="flex flex-col"
-                        onSubmit={handleSubmit(handleOnSubmit)}
-                    >
-                        <div className="flex flex-col py-2">
-                            <span className="text-typography text-sm">
-                                CNPJ
-                            </span>
-                            <Input.Text {...register("cnpj")} />
-                        </div>
-                        <div className="flex flex-col py-2">
-                            <span className="text-typography text-sm">
-                                Nome do estabelecimento
-                            </span>
-                            <Input.Text {...register("name")} />
-                        </div>
-                        <div className="flex flex-col py-2">
-                            <span className="text-typography text-sm">
-                                Telefone
-                            </span>
-                            <Input.Text {...register("telephone")} />
-                        </div>
-                        <div className="pt-4">
-                            <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
-                                CONTINUAR
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div className="flex justify-center">
-                    <span>Possui uma conta?</span>
-                    <button className="text-main font-bold px-1">
-                        Entrar
-                    </button>
-                </div>
+        <Layout.Container>
+            <div className="h-40 flex justify-center">
+                <NowMenuImg />
             </div>
-        </div>
+            <div className="py-2">
+                <form
+                    className="flex flex-col"
+                    onSubmit={handleSubmit(handleOnSubmit)}
+                >
+                    <div className="flex flex-col py-2">
+                        <span className="text-typography text-sm">
+                            CNPJ
+                        </span>
+                        <Input.Text {...register("cnpj")} />
+                    </div>
+                    <div className="flex flex-col py-2">
+                        <span className="text-typography text-sm">
+                            Nome do estabelecimento
+                        </span>
+                        <Input.Text {...register("name")} />
+                    </div>
+                    <div className="flex flex-col py-2">
+                        <span className="text-typography text-sm">
+                            Telefone
+                        </span>
+                        <Input.Text {...register("telephone")} />
+                    </div>
+                    <div className="pt-4">
+                        <Button.Submit label="CADASTRAR" />
+                    </div>
+                </form>
+            </div>
+            <div className="flex justify-center">
+                <span>Possui uma conta?</span>
+
+                <button className="text-main font-bold px-1" onClick={() => router.push("/signin")}>
+                    Entrar
+                </button>
+            </div>
+        </Layout.Container>
     );
 }
