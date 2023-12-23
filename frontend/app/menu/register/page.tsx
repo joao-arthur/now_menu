@@ -54,7 +54,7 @@ export default function MenuRegisterPage(): ReactNode {
                                 router.push(`/menu/${category.name}/new`);
                             }}
                             onEditItem={(id) => {
-                                router.push(`/menu/edit/${id}`);
+                                router.push(`/menu/${category.name}/${id}`);
                             }}
                         />
                     </div>

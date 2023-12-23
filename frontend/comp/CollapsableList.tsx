@@ -44,13 +44,13 @@ export function CollapsableList({
                             <div className="p-1 mx-1 cursor-pointer">
                                 <Icon
                                     name="pencil"
-                                    onClick={() => {}}
+                                    onClick={() => onEditItem(item.id)}
                                 />
                             </div>
                             <div className="p-1 mx-1 cursor-pointer">
                                 <Icon
                                     name="trash"
-                                    onClick={() => {}}
+                                    onClick={() => onDeleteItem(item.id)}
                                 />
                             </div>
                         </div>
