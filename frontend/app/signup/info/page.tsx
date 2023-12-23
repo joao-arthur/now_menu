@@ -51,7 +51,6 @@ export default function SignUpInfoPage(): ReactNode {
             </div>
             <div className="flex justify-center">
                 <span>Possui uma conta?</span>
-
                 <button className="text-main font-bold px-1" onClick={() => router.push("/signin")}>
                     Entrar
                 </button>

@@ -8,6 +8,7 @@ import { TableItem } from "@/feats/tables/tableItem";
 import { TableAPI } from "@/lib/table/table";
 import { Layout } from "@/comp/layout/Layout";
 import { Form } from "@/comp/form/form";
+import { Button } from "@/comp/button/button";
 
 type form = {
     numberoftables: string;
@@ -31,23 +32,10 @@ export default function TablesRegisterPage(): ReactNode {
                     updatedAt: String(i),
                 })),
         );
-        // router.push("/signup/success");
     }
 
     return (
         <Layout.Container>
-            <div className="h-32">
-                <div className="h-16 flex items-center justify-end">
-                    <button
-                        className="text-typography py-1"
-                        onClick={() => {
-                            //router.back();
-                        }}
-                    >
-                        pular
-                    </button>
-                </div>
-            </div>
             <Layout.Title label="Gerar QR Code" />
             {currentTables && currentTables.length
                 ? (
@@ -71,11 +59,15 @@ export default function TablesRegisterPage(): ReactNode {
                         <Input.Number {...register("numberoftables")} />
                     </Form.FieldContainer>
                     <div className="pt-4">
-                        <button className="w-full text-white font-bold bg-main rounded-lg cursor-pointer p-4 text-lg">
-                            GERAR
-                        </button>
+                        <Button.Submit label="GERAR" />
                     </div>
                 </Form.Container>
+                <Button.Primary
+                    label="CONFIRMAR"
+                    onClick={() => {
+                        router.push("/qrcode");
+                    }}
+                />
             </div>
         </Layout.Container>
     );

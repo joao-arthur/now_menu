@@ -22,18 +22,6 @@ export default function SignInPage() {
 
     return (
         <Layout.Container>
-            <div className="h-32">
-                <div className="h-16 flex items-center">
-                    <button
-                        className="text-typography py-1"
-                        onClick={() => {
-                            router.back();
-                        }}
-                    >
-                        voltar
-                    </button>
-                </div>
-            </div>
             <div className="h-40 flex justify-center">
                 <NowMenuImg />
             </div>

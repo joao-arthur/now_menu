@@ -10,6 +10,9 @@ export default function MenuSuccessPage() {
 
     return (
         <Layout.Container>
+            <Layout.Header
+                right={{ label: "pular", href: "/pular" }}
+            />
             <div className="h-32">
                 <div className="h-16 flex items-center justify-end">
                     <button className="text-typography py-1">pular</button>
@@ -26,7 +29,7 @@ export default function MenuSuccessPage() {
                 <Button.Primary
                     label="GERAR QR CODES"
                     onClick={() => {
-                        router.push("/qrcode");
+                        router.push("/tables/register");
                     }}
                 />
             </div>

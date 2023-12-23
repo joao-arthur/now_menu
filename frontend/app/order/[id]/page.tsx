@@ -12,6 +12,10 @@ export default function OrderIdPage() {
     if (!order) {
         return (
             <Layout.Container>
+                <Layout.Header
+                    left={{ label: "voltar", href: "/signup/info" }}
+                    right={{ label: "pular", href: "/signup/info" }}
+                />
                 <div className="h-32">
                     <div className="h-16 flex items-center">
                         <button

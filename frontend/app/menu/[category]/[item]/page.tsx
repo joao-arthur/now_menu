@@ -53,18 +53,9 @@ export default function MenuCategoryItemEditPage() {
 
     return (
         <Layout.Container>
-            <div className="h-32">
-                <div className="h-16 flex items-center">
-                    <button
-                        className="text-typography py-1"
-                        onClick={() => {
-                            router.back();
-                        }}
-                    >
-                        voltar
-                    </button>
-                </div>
-            </div>
+            <Layout.Header
+                left={{ label: "voltar", href: "/menu/register" }}
+            />
             <Layout.Title label="Editar produto" />
             <div className="py-2">
                 <Form.Container onSubmit={handleSubmit(handleOnSubmit)}>

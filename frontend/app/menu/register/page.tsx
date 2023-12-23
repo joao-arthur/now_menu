@@ -19,18 +19,6 @@ export default function MenuRegisterPage(): ReactNode {
 
     return (
         <Layout.Container>
-            <div className="h-32">
-                <div className="h-16 flex items-center justify-end">
-                    <button
-                        className="text-typography py-1"
-                        onClick={() => {
-                            router.push("");
-                        }}
-                    >
-                        pular
-                    </button>
-                </div>
-            </div>
             <Layout.Title label="Cadastre seu cardápio" />
             {categories.map((category) => (
                 <div className="py-2" key={category.name}>
