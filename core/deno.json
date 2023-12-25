@@ -1,0 +1,13 @@
+{
+    "fmt": {
+        "include": ["src/"],
+        "lineWidth": 100,
+        "indentWidth": 4
+    },
+    "lint": {
+        "include": ["src/"],
+        "rules": {
+            "include": ["explicit-function-return-type"]
+        }
+    }
+}
