@@ -26,23 +26,20 @@ export type Account = {
     readonly login: AccountLogin;
 };
 
-export type AccountCreate = Pick<
-    Account,
-    | "general"
-    | "address"
-    | "login"
->;
+export type AccountCreate = {
+    readonly general: Account["general"];
+    readonly address: Account["address"];
+    readonly login: Account["login"];
+};
 
-export type AccountRead = Pick<
-    Account,
-    | "id"
-    | "general"
-    | "address"
->;
+export type AccountUpdate = {
+    readonly general: Account["general"];
+    readonly address: Account["address"];
+    readonly login: Account["login"];
+};
 
-export type AccountUpdate = Pick<
-    Account,
-    | "general"
-    | "address"
-    | "login"
->;
+export type AccountRead = {
+    readonly id: Account["id"];
+    readonly general: Account["general"];
+    readonly address: Account["address"];
+};
