@@ -19,12 +19,11 @@ export default function RootLayout({ children }: Props) {
             <body>
                 <QueryClientProvider client={queryClient}>
                     <Toaster />
-                    <div
-                        className="flex"
+                    <main
                         style={{ height: windowSize.height || undefined }}
                     >
                         {children}
-                    </div>
+                    </main>
                 </QueryClientProvider>
             </body>
         </html>

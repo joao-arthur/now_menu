@@ -1,5 +1,5 @@
-import type { ReqMaker } from "../core/reqMaker";
-import type { MenuItem, MenuItemCreate, MenuItemRead, MenuItemUpdate } from "./types";
+import type { ReqMaker } from "../core/reqMaker.js";
+import type { MenuItem, MenuItemCreate, MenuItemRead, MenuItemUpdate } from "./types.js";
 
 function createMenuItem(
     maker: ReqMaker,

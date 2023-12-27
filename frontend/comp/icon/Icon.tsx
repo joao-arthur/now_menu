@@ -1,7 +1,14 @@
 import type { ReactNode } from "react";
-import { HiPencil, HiTrash } from "react-icons/hi";
+import {
+    HiBuildingStorefront,
+    HiClipboardDocumentList,
+    HiPencil,
+    HiShoppingBag,
+    HiTrash,
+} from "react-icons/hi2";
+import { GiKnifeFork } from "react-icons/gi";
 
-type Names = "trash" | "pencil";
+type Names = "trash" | "pencil" | "clipboard" | "store" | "shopping-bag" | "fork-and-knife";
 
 type Props = {
     readonly name: Names;
@@ -9,10 +16,23 @@ type Props = {
 };
 
 export function Icon({ name, onClick }: Props): ReactNode {
+    const props = {
+        size: 18,
+        onClick,
+    } as const;
+
     switch (name) {
         case "trash":
-            return <HiTrash size={18} onClick={onClick} />;
+            return <HiTrash {...props} />;
         case "pencil":
-            return <HiPencil size={18} onClick={onClick} />;
+            return <HiPencil {...props} />;
+        case "clipboard":
+            return <HiClipboardDocumentList {...props} />;
+        case "store":
+            return <HiBuildingStorefront {...props} />;
+        case "shopping-bag":
+            return <HiShoppingBag {...props} />;
+        case "fork-and-knife":
+            return <GiKnifeFork {...props} />;
     }
 }

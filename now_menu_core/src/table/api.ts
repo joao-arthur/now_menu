@@ -1,5 +1,5 @@
-import type { ReqMaker } from "../core/reqMaker";
-import type { TableCreate, TableRead } from "./types";
+import type { ReqMaker } from "../core/reqMaker.js";
+import type { TableCreate, TableRead } from "./types.js";
 
 function createTable(
     maker: ReqMaker,

@@ -1,11 +1,11 @@
-import type { ReqMaker } from "../core/reqMaker";
+import type { ReqMaker } from "../core/reqMaker.js";
 import type {
     AccountAddress,
     AccountCreate,
     AccountGeneral,
     AccountLogin,
     AccountRead,
-} from "./types";
+} from "./types.js";
 
 function createAccount(
     maker: ReqMaker,

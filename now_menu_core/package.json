@@ -1,9 +1,16 @@
 {
   "name": "now_menu_core",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "tsc"
+  },
+  "type": "module",
+  "exports": {
+      ".": {
+          "import": "./dist/mod.js",
+          "types": "./dist/mod.js"
+      }
   },
   "dependencies": {
     "nanoid": "5.0.4",

@@ -1,6 +1,6 @@
-import type { ReqMaker } from "../core/reqMaker";
-import type { AccountLogin } from "../account/types";
-import type { Session } from "./types";
+import type { ReqMaker } from "../core/reqMaker.js";
+import type { AccountLogin } from "../account/types.js";
+import type { Session } from "./types.js";
 
 function createSession(
     maker: ReqMaker,

@@ -1,5 +1,5 @@
-import type { MenuItem } from "../menuItem/types";
-import type { Table } from "../table/types";
+import type { MenuItem } from "../menuItem/types.js";
+import type { Table } from "../table/types.js";
 
 export type OrderItem = {
     readonly id: MenuItem["id"];
