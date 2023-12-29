@@ -5,7 +5,7 @@ import { ChefTasteImg } from "@/comp/img/ChefTasteImg";
 import { Layout } from "@/comp/layout/Layout";
 import { Button } from "@/comp/button/button";
 
-export default function SignUpSuccessPage() {
+export default function PageAccountCreateSuccess() {
     const router = useRouter();
 
     return (

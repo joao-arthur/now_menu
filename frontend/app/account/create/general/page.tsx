@@ -4,25 +4,24 @@ import type { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import type { SignUpInfo } from "@/lib/signUp/signUpInfo";
-import { signUpInfoSchema } from "@/lib/signUp/signUpInfoSchema";
-import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
 import { NowMenuImg } from "@/comp/img/NowMenuImg";
+import { useCreateAccountStore } from "@/lib/account/useCreateAccountStore";
+import { type AccountGeneral, accountSchema } from "now_menu_core";
 import { Input } from "@/comp/input/Input";
 import { Layout } from "@/comp/layout/Layout";
 import { Button } from "@/comp/button/button";
 import { Form } from "@/comp/form/form";
 
-export default function SignUpInfoPage(): ReactNode {
+export default function PageAccountCreateGeneral(): ReactNode {
     const router = useRouter();
-    const { setInfoForm } = useSignUpStore();
-    const { register, handleSubmit } = useForm<SignUpInfo>({
-        resolver: zodResolver(signUpInfoSchema),
+    const { setGeneral } = useCreateAccountStore();
+    const { register, handleSubmit } = useForm<AccountGeneral>({
+        resolver: zodResolver(accountSchema.general),
     });
 
-    function handleOnSubmit(form: SignUpInfo) {
-        setInfoForm(form);
-        router.push("/signup/address");
+    function handleOnSubmit(form: AccountGeneral) {
+        setGeneral(form);
+        router.push("/account/create/address");
     }
 
     return (

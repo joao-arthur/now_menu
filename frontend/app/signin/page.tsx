@@ -46,7 +46,7 @@ export default function SignInPage() {
                 <span>Novo por aqui?</span>
                 <button
                     className="text-main font-bold px-1"
-                    onClick={() => router.push("/signup/info")}
+                    onClick={() => router.push("account/create/info")}
                 >
                     Crie uma conta
                 </button>

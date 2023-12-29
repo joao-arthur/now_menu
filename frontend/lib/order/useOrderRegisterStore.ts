@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { OrderItem } from "./orderItem";
+import type { OrderItem } from "now_menu_core";
 
 type ItemAmount = {
     readonly item: string;

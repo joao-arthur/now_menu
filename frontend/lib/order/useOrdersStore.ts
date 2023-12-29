@@ -1,27 +1,12 @@
 import { create } from "zustand";
-
-type OrderItem = {
-    readonly itemId: string;
-    readonly itemName: string;
-    readonly amount: number;
-    readonly observation: string;
-    readonly prepareTime: number;
-};
-
-export type Order = {
-    readonly id: string;
-    readonly createdAt: string;
-    readonly customer: string;
-    readonly tableName: string;
-    readonly items: readonly OrderItem[];
-};
+import type { OrderRead } from "now_menu_core";
 
 type OrdersStore = {
-    readonly orders: readonly Order[];
-    readonly setOrders: (orders: readonly Order[]) => void;
+    readonly orders: readonly OrderRead[];
+    readonly setOrders: (orders: readonly OrderRead[]) => void;
 };
 
 export const useOrdersStore = create<OrdersStore>((set) => ({
     orders: [],
-    setOrders: (orders: readonly Order[]) => set({ orders }),
+    setOrders: (orders: readonly OrderRead[]) => set({ orders }),
 }));

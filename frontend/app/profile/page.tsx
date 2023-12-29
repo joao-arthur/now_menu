@@ -20,7 +20,7 @@ export default function ProfilePage() {
                         <AppLink href="/profile/info">
                             <span className="cursor-pointer">Informações - Geral</span>
                         </AppLink>
-                        <AppLink href="/profile/account">
+                        <AppLink href="/profile/login">
                             <span className="cursor-pointer">Informações - Conta</span>
                         </AppLink>
                         <AppLink href="/profile/address">

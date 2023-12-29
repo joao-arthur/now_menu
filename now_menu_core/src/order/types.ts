@@ -27,7 +27,6 @@ export type OrderRead = {
 };
 
 export type OrderCreate = {
-    readonly id: string;
     readonly items: readonly OrderItem[];
     readonly tableId: string;
     readonly customer: string;

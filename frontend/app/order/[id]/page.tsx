@@ -13,8 +13,8 @@ export default function OrderIdPage() {
         return (
             <Layout.Container>
                 <Layout.Header
-                    left={{ label: "voltar", href: "/signup/info" }}
-                    right={{ label: "pular", href: "/signup/info" }}
+                    left={{ label: "voltar", href: "/account/create/general" }}
+                    right={{ label: "pular", href: "/account/create/general" }}
                 />
                 <div className="h-32">
                     <div className="h-16 flex items-center">

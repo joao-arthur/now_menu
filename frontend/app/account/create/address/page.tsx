@@ -4,30 +4,29 @@ import type { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import type { SignUpAddress } from "@/lib/signUp/signUpAddress";
-import { signUpAddressSchema } from "@/lib/signUp/signUpAddressSchema";
-import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
+import { useCreateAccountStore } from "@/lib/account/useCreateAccountStore";
+import { type AccountAddress, accountSchema } from "now_menu_core";
 import { Input } from "@/comp/input/Input";
 import { Layout } from "@/comp/layout/Layout";
 import { Button } from "@/comp/button/button";
 import { Form } from "@/comp/form/form";
 
-export default function SignUpAddressPage(): ReactNode {
+export default function PageAccountCreateAddress(): ReactNode {
     const router = useRouter();
-    const { setAddressForm } = useSignUpStore();
-    const { register, handleSubmit } = useForm<SignUpAddress>({
-        resolver: zodResolver(signUpAddressSchema),
+    const { setAddress } = useCreateAccountStore();
+    const { register, handleSubmit } = useForm<AccountAddress>({
+        resolver: zodResolver(accountSchema.address),
     });
 
-    function handleOnSubmit(form: SignUpAddress) {
-        setAddressForm(form);
-        router.push("/signup/account");
+    function handleOnSubmit(form: AccountAddress) {
+        setAddress(form);
+        router.push("/account/create/login");
     }
 
     return (
         <Layout.Container>
             <Layout.Header
-                left={{ label: "voltar", href: "/signup/info" }}
+                left={{ label: "voltar", href: "/account/create/info" }}
             />
             <Layout.Title label="Endereço do estabelecimento" />
             <div className="py-2">

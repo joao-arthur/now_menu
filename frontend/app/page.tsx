@@ -8,7 +8,7 @@ export default function AppPage() {
 
     useEffect(() => {
         window.setTimeout(() => {
-            router.push("/signup/info");
+            router.push("/account/create/info");
         }, 1000);
     }, [router]);
 
