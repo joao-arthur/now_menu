@@ -4,22 +4,23 @@ import type { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import type { SignUpAddress } from "@/lib/signUp/signUpAddress";
-import { signUpAddressSchema } from "@/lib/signUp/signUpAddressSchema";
-import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
+import { useCreateAccountStore } from "@/lib/account/useCreateAccountStore";
+import { type AccountAddress, accountSchema } from "now_menu_core";
 import { Input } from "@/comp/input/Input";
 import { Layout } from "@/comp/layout/Layout";
 import { Button } from "@/comp/button/button";
 import { Form } from "@/comp/form/form";
 
-export default function ProfileAddressPage(): ReactNode {
+export default function PageAccountEditAddress(): ReactNode {
     const router = useRouter();
-    const { register, handleSubmit } = useForm<SignUpAddress>({
-        resolver: zodResolver(signUpAddressSchema),
+    const { setAddress } = useCreateAccountStore();
+    const { register, handleSubmit } = useForm<AccountAddress>({
+        resolver: zodResolver(accountSchema.address),
     });
 
-    function handleOnSubmit(form: SignUpAddress) {
-        console.log(form);
+    function handleOnSubmit(form: AccountAddress) {
+        setAddress(form);
+        router.push("/profile");
     }
 
     return (
@@ -51,7 +52,7 @@ export default function ProfileAddressPage(): ReactNode {
                         <Input.Text {...register("state")} />
                     </Form.FieldContainer>
                     <div className="pt-4">
-                        <Button.Submit label="SALVAR" />
+                        <Button.Submit label="CONTINUAR" />
                     </div>
                 </Form.Container>
             </div>

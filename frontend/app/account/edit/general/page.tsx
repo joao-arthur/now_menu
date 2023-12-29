@@ -4,30 +4,32 @@ import type { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import type { SignUpInfo } from "@/lib/signUp/signUpInfo";
-import { signUpInfoSchema } from "@/lib/signUp/signUpInfoSchema";
-import { useSignUpStore } from "@/lib/signUp/useSignUpStore";
 import { NowMenuImg } from "@/comp/img/NowMenuImg";
+import { useCreateAccountStore } from "@/lib/account/useCreateAccountStore";
+import { type AccountGeneral, accountSchema } from "now_menu_core";
 import { Input } from "@/comp/input/Input";
 import { Layout } from "@/comp/layout/Layout";
 import { Button } from "@/comp/button/button";
 import { Form } from "@/comp/form/form";
 
-export default function ProfileInfoPage(): ReactNode {
+export default function PageAccountEditGeneral(): ReactNode {
     const router = useRouter();
-    const { register, handleSubmit } = useForm<SignUpInfo>({
-        resolver: zodResolver(signUpInfoSchema),
+    const { setGeneral } = useCreateAccountStore();
+    const { register, handleSubmit } = useForm<AccountGeneral>({
+        resolver: zodResolver(accountSchema.general),
     });
 
-    function handleOnSubmit(form: SignUpInfo) {
-        console.log(form);
+    function handleOnSubmit(form: AccountGeneral) {
+        setGeneral(form);
+        router.push("/profile");
     }
 
     return (
         <Layout.Container>
-            <div className="h-40 flex justify-center">
-                <NowMenuImg />
-            </div>
+            <Layout.Header
+                left={{ label: "voltar", href: "/profile" }}
+            />
+            <Layout.Title label="Informações gerais" />
             <div className="py-2">
                 <Form.Container onSubmit={handleSubmit(handleOnSubmit)}>
                     <Form.FieldContainer>
@@ -46,12 +48,6 @@ export default function ProfileInfoPage(): ReactNode {
                         <Button.Submit label="CADASTRAR" />
                     </div>
                 </Form.Container>
-            </div>
-            <div className="flex justify-center">
-                <span>Possui uma conta?</span>
-                <button className="text-main font-bold px-1" onClick={() => router.push("/signin")}>
-                    Entrar
-                </button>
             </div>
         </Layout.Container>
     );

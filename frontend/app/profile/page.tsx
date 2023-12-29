@@ -17,14 +17,14 @@ export default function ProfilePage() {
                     </div>
 
                     <nav className="flex flex-col gap-y-8">
-                        <AppLink href="/profile/info">
-                            <span className="cursor-pointer">Informações - Geral</span>
+                        <AppLink href="/account/edit/general">
+                            <span className="cursor-pointer">Conta - Geral</span>
                         </AppLink>
-                        <AppLink href="/profile/login">
-                            <span className="cursor-pointer">Informações - Conta</span>
+                        <AppLink href="/account/edit/address">
+                            <span className="cursor-pointer">Conta - Endereço</span>
                         </AppLink>
-                        <AppLink href="/profile/address">
-                            <span className="cursor-pointer">Informações - Endereço</span>
+                        <AppLink href="/account/edit/login">
+                            <span className="cursor-pointer">Conta - Login</span>
                         </AppLink>
                         <AppLink href="/tables/edit">
                             <span className="cursor-pointer">Mesas</span>
