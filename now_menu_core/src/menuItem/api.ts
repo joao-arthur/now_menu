@@ -1,37 +1,22 @@
-import type { ReqMaker } from "../core/reqMaker.js";
+import type { HTTPProvider } from "../httpProvider.js";
 import type { MenuItem, MenuItemCreate, MenuItemRead, MenuItemUpdate } from "./types.js";
 
-function createMenuItem(
-    maker: ReqMaker,
-    menuItem: MenuItemCreate,
-): Promise<MenuItemRead> {
-    return maker.post("menu-item", menuItem);
+export function menuItemCreate(p: HTTPProvider, menuItem: MenuItemCreate): Promise<MenuItemRead> {
+    return p.post("menu-item", menuItem);
 }
 
-function readMenuItem(
-    maker: ReqMaker,
-): Promise<MenuItemRead> {
-    return maker.get("menu-item");
+export function menuItemRead(p: HTTPProvider): Promise<MenuItemRead> {
+    return p.get("menu-item");
 }
 
-function updateMenuItem(
-    maker: ReqMaker,
+export function menuItemUpdate(
+    p: HTTPProvider,
     id: MenuItem["id"],
     menuItem: MenuItemUpdate,
 ): Promise<MenuItemRead> {
-    return maker.put(`menu-item/${id}`, menuItem);
+    return p.put(`menu-item/${id}`, menuItem);
 }
 
-function deleteMenuItem(
-    maker: ReqMaker,
-    id: MenuItemRead["id"],
-): Promise<void> {
-    return maker.delete(`menu-item/${id}`);
+export function menuItemDelete(p: HTTPProvider, id: MenuItemRead["id"]): Promise<void> {
+    return p.delete(`menu-item/${id}`);
 }
-
-export const menuItemAPI = {
-    create: createMenuItem,
-    read: readMenuItem,
-    update: updateMenuItem,
-    delete: deleteMenuItem,
-} as const;

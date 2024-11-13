@@ -1,20 +1,15 @@
 import { z } from "zod";
 
-const create = z.object({
+export const menuItemCreate = z.object({
     name: z.string().min(2).max(50).readonly(),
     description: z.string().optional().readonly(),
     prepareTime: z.number().readonly(),
     price: z.number().readonly(),
 }).readonly();
 
-const update = z.object({
+export const menuItemUpdate = z.object({
     name: z.string().min(2).max(50).readonly(),
     description: z.string().optional().readonly(),
     prepareTime: z.number().readonly(),
     price: z.number().readonly(),
 }).readonly();
-
-export const menuItemSchema = {
-    create,
-    update,
-} as const;

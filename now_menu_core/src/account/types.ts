@@ -1,4 +1,4 @@
-export type AccountGeneral = {
+export type AccountGeneralInfo = {
     readonly cnpj: string;
     readonly name: string;
     readonly telephone: string;
@@ -21,7 +21,7 @@ export type Account = {
     readonly id: string;
     readonly createdAt: string;
     readonly updatedAt: string;
-    readonly general: AccountGeneral;
+    readonly general: AccountGeneralInfo;
     readonly address: AccountAddress;
     readonly login: AccountLogin;
 };

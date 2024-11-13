@@ -1,57 +1,38 @@
-import type { ReqMaker } from "../core/reqMaker.js";
+import type { HTTPProvider } from "../httpProvider.js";
 import type {
     AccountAddress,
     AccountCreate,
-    AccountGeneral,
+    AccountGeneralInfo,
     AccountLogin,
     AccountRead,
 } from "./types.js";
 
-function createAccount(
-    maker: ReqMaker,
-    account: AccountCreate,
-): Promise<AccountRead> {
-    return maker.post("account", account);
+export function accountCreate(p: HTTPProvider, account: AccountCreate): Promise<AccountRead> {
+    return p.post("account", account);
 }
 
-function readAccount(
-    maker: ReqMaker,
-): Promise<AccountRead> {
-    return maker.get("account");
+export function accountRead(p: HTTPProvider): Promise<AccountRead> {
+    return p.get("account");
 }
 
-function updateGeneral(
-    maker: ReqMaker,
-    general: AccountGeneral,
+export function accountUpdateGeneralInfo(
+    p: HTTPProvider,
+    general: AccountGeneralInfo,
 ): Promise<AccountRead> {
-    return maker.put("account/general", general);
+    return p.put("account/general", general);
 }
 
-function updateAddress(
-    maker: ReqMaker,
+export function accountUpdateAddress(
+    p: HTTPProvider,
     address: AccountAddress,
 ): Promise<AccountRead> {
-    return maker.put("account/address", address);
+    return p.put("account/address", address);
 }
 
-function updateLogin(
-    maker: ReqMaker,
-    login: AccountLogin,
-): Promise<AccountRead> {
-    return maker.put("account/login", login);
+export function accountUpdateLogin(p: HTTPProvider, login: AccountLogin): Promise<AccountRead> {
+    return p.put("account/login", login);
 }
 
-function deleteAccount(
-    maker: ReqMaker,
-): Promise<void> {
-    return maker.delete("account");
+export function accountDeleteAccount(p: HTTPProvider): Promise<void> {
+    return p.delete("account");
 }
-
-export const accountAPI = {
-    create: createAccount,
-    read: readAccount,
-    updateGeneral: updateGeneral,
-    updateAddress: updateAddress,
-    updateLogin: updateLogin,
-    delete: deleteAccount,
-} as const;

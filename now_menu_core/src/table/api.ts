@@ -1,28 +1,17 @@
-import type { ReqMaker } from "../core/reqMaker.js";
+import type { HTTPProvider } from "../httpProvider.js";
 import type { TableCreate, TableRead } from "./types.js";
 
-function createTable(
-    maker: ReqMaker,
+export function tableCreate(
+    p: HTTPProvider,
     tables: readonly TableCreate[],
 ): Promise<readonly TableRead[]> {
-    return maker.post("table", tables);
+    return p.post("table", tables);
 }
 
-function readTable(
-    maker: ReqMaker,
-): Promise<TableRead> {
-    return maker.get("table");
+export function tableRead(p: HTTPProvider): Promise<TableRead> {
+    return p.get("table");
 }
 
-function deleteTable(
-    maker: ReqMaker,
-    id: string,
-): Promise<void> {
-    return maker.delete(`table/${id}`);
+export function tableDelete(p: HTTPProvider, id: string): Promise<void> {
+    return p.delete(`table/${id}`);
 }
-
-export const tableAPI = {
-    create: createTable,
-    read: readTable,
-    delete: deleteTable,
-} as const;

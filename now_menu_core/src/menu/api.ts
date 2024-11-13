@@ -1,12 +1,6 @@
-import type { ReqMaker } from "../core/reqMaker.js";
+import type { HTTPProvider } from "../httpProvider.js";
 import type { Menu } from "./types.js";
 
-function readMenuItem(
-    maker: ReqMaker,
-): Promise<Menu> {
-    return maker.get("menu");
+export function menuRead(p: HTTPProvider): Promise<Menu> {
+    return p.get("menu");
 }
-
-export const menuAPI = {
-    read: readMenuItem,
-} as const;
