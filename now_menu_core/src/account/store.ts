@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import type { AccountAddress, AccountCreate, AccountGeneral, AccountLogin } from "now_menu_core";
+import type { AccountAddress, AccountCreate, AccountGeneralInfo, AccountLogin } from "./types.js";
 
 type CreateAccountStore = {
     readonly account: Partial<AccountCreate>;
-    readonly setGeneral: (general: AccountGeneral) => void;
+    readonly setGeneral: (general: AccountGeneralInfo) => void;
     readonly setAddress: (address: AccountAddress) => void;
     readonly setLogin: (login: AccountLogin) => void;
     readonly clear: () => void;
@@ -11,10 +11,8 @@ type CreateAccountStore = {
 
 export const useCreateAccountStore = create<CreateAccountStore>((set) => ({
     account: {},
-    setGeneral: (general: AccountGeneral) =>
-        set(({ account }) => ({ account: { ...account, general } })),
-    setAddress: (address: AccountAddress) =>
-        set(({ account }) => ({ account: { ...account, address } })),
+    setGeneral: (general: AccountGeneralInfo) => set(({ account }) => ({ account: { ...account, general } })),
+    setAddress: (address: AccountAddress) => set(({ account }) => ({ account: { ...account, address } })),
     setLogin: (login: AccountLogin) => set(({ account }) => ({ account: { ...account, login } })),
     clear: () => set({ account: {} }),
 }));
