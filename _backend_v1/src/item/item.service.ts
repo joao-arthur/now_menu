@@ -27,15 +27,9 @@ type updateItemType = {
 @Injectable()
 export class ItemService {
     constructor(
-        @InjectModel(Item.name) private itemModel: Model<
-            ItemDocument
-        >,
-        @InjectModel(Table.name) private tableModel: Model<
-            TableDocument
-        >,
-        @InjectModel(User.name) private userModel: Model<
-            UserDocument
-        >,
+        @InjectModel(Item.name) private itemModel: Model<ItemDocument>,
+        @InjectModel(Table.name) private tableModel: Model<TableDocument>,
+        @InjectModel(User.name) private userModel: Model<UserDocument>,
     ) {}
 
     async createMenu({ items, payload }: createMenuType) {
